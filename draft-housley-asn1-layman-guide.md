@@ -235,6 +235,8 @@ The following meta-syntax is used for in describing ASN.1 notation:
 
 TODO: This does not quite work in markdown...
 
+{::boilerplate bcp14-tagged}
+
 #Abstract Syntax Notation One  {#section-2}
 
 Abstract Syntax Notation One, abbreviated ASN.1, is a
