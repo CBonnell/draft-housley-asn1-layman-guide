@@ -1,8 +1,8 @@
 <!-- regenerate: on (set to off if you edit this file) -->
 
-# TODO - Your title
+# A Layman's Guide to a Subset of ASN.1, BER, and DER
 
-This is the working area for the individual Internet-Draft, "TODO - Your title".
+This is the working area for the individual Internet-Draft, "A Layman's Guide to a Subset of ASN.1, BER, and DER".
 
 * [Editor's Copy](https://CBonnell.github.io/draft-housley-asn1-layman-guide/#go.draft-housley-asn1-layman-guide.html)
 * [Datatracker Page](https://datatracker.ietf.org/doc/draft-housley-asn1-layman-guide)
