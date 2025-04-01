@@ -2229,4 +2229,16 @@ be presented with a definite-length encoding instead, special care must be taken
 any signatures or MACs based on the name using the DER encoding, rather than the definite-length encoding,
 otherwise recipients will not be able to verify the data.
 
+# IANA Considerations
+
+This document has no IANA actions.
+
+# Security Considerations
+
+TODO Security
+
+# Acknowledgments
+
+{:numbered="false"}
+
 TODO acknowledge.
