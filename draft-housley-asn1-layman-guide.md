@@ -80,7 +80,7 @@ informative:
     date: 2008-11
     seriesinfo:
       ITU-T Recommendation: X.500
-      
+
 normative:
   X680:
     target: https://www.itu.int/rec/T-REC-X.680
@@ -552,7 +552,7 @@ encode simply as:
 ```
 the first byte indicating the length is in the following 2 octets and
 the next two being the value of the length.
- 
+
 Contents octets.
 : These give a concrete representation of the
 value (or the value of the underlying type, if the type is
@@ -632,7 +632,7 @@ BER encoding might be expected (e.g., in the contents octets
 of a sequence value), the 00 and 00 appear as identifier and
 length octets, respectively. Thus the end-of-contents octets
 is really the primitive, definite-length encoding of a value
-with universal class, tag number 0, and length 0. 
+with universal class, tag number 0, and length 0.
 
 Considering our previous example of an 8 byte OCTET STRING in constructed form with 4 byte elements, the indefinite length
 encoding would produce:
@@ -768,7 +768,7 @@ with underlying type ANY throughout in many protocols, including
 the version component of the Certificate type {{RFC5280}}.
 
 Implicit tagging is used for optional SEQUENCE components
-with underlying type other than ANY 
+with underlying type other than ANY
 ASN.1 notation:
 
 ~~~
@@ -1926,7 +1926,7 @@ has the following DER encodings, among others:
 
 This section gives an example of ASN.1 notation and DER
 encoding: the Name type {{RFC5280}}.
-                 
+
 TODO: add another choice example, perhaps ML-DSA pivate key?
 
 ##Abstract notation
@@ -2011,7 +2011,7 @@ attributeType OBJECT IDENTIFIER ::= { joint-iso-ccitt(2) ds(5) 4 }
 countryName OBJECT IDENTIFIER ::= { attributeType 6 }
 
 organizationName OBJECT IDENTIFIER ::= { attributeType 10 }
-  
+
 commonUnitName OBJECT IDENTIFIER ::= { attributeType 3 }
 ~~~
 
@@ -2173,43 +2173,43 @@ Occasionally, just occasionally you will also come across a '+' syntax in X.500 
 ```
 countryName=US,organizationName=Example Organization+commonName=Test User 1
 ```
-This case is interesting, the reason for this being that the '+' means the last two attribute value pairs 
+This case is interesting, the reason for this being that the '+' means the last two attribute value pairs
 end up in the same RDN, or more specifically the same SET as can be seen in
 the encoding below.
 ```
-30 40 
-   31 0b 
+30 40
+   31 0b
       30 09
       06 03 55 04 06
-      13 02 55 53 
-   31 31 
+      13 02 55 53
+   31 31
       30 1b
-         06 03 55 04 0a 
-         0c 14 
-            45 78 61 6d 70 6c 65 20 4f 72 67 61 6e 69 7a 61 
+         06 03 55 04 0a
+         0c 14
+            45 78 61 6d 70 6c 65 20 4f 72 67 61 6e 69 7a 61
             74 69 6f 6e
       30 12
-         06 03 55 04 03 
-         0c 0b 
-            54 65 73 74 20 55 73 65 72 20 31 
+         06 03 55 04 03
+         0c 0b
+            54 65 73 74 20 55 73 65 72 20 31
 ```
 That said, while the above is a correct definite-length encoding for the X.500 name we are looking at, it is not the correct DER encoding for
 the X.500 name we are looking at as the correct DER encoding looks like:
 ```
-30 40 
-   31 0b 
+30 40
+   31 0b
       30 09
       06 03 55 04 06
-      13 02 55 53 
-   31 31 
+      13 02 55 53
+   31 31
       30 12
-         06 03 55 04 03 
-         0c 0b 
-            54 65 73 74 20 55 73 65 72 20 31 
+         06 03 55 04 03
+         0c 0b
+            54 65 73 74 20 55 73 65 72 20 31
       30 1b
-         06 03 55 04 0a 
-         0c 14 
-            45 78 61 6d 70 6c 65 20 4f 72 67 61 6e 69 7a 61 
+         06 03 55 04 0a
+         0c 14
+            45 78 61 6d 70 6c 65 20 4f 72 67 61 6e 69 7a 61
             74 69 6f 6e
 ```
 which, if pretty-printed directly, would give:
@@ -2224,9 +2224,9 @@ avoided as sometimes people forget about the sorting or insist on definte-length
 requiring DER encoding to be done everytime for signature generation and verification. Ideally if you have to include a '+' (it really does happen) it
 is also better to write out the X.500 name in DER format at the start, so anyone else trying to verify
 a signature that might be associated with the use of the name will always get a correct result. Where it
-is not possible to write out the X.500 name in DER format, so anyone checking the subsequent encoding will 
+is not possible to write out the X.500 name in DER format, so anyone checking the subsequent encoding will
 be presented with a definite-length encoding instead, special care must be taken to calculate and evaluate
-any signatures or MACs based on the name using the DER encoding, rather than the definite-length encoding, 
-otherwise recipients will not be able to verify the data. 
+any signatures or MACs based on the name using the DER encoding, rather than the definite-length encoding,
+otherwise recipients will not be able to verify the data.
 
 TODO acknowledge.
