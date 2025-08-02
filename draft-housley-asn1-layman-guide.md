@@ -1530,7 +1530,7 @@ be present in the SEQUENCE OF:
 Extensions  ::=  SEQUENCE SIZE (1..MAX) OF Extension
 ~~~
 
-## SET  {#section-5-14}
+##SET  {#section-5-14}
 
 The SET type denotes an unordered collection of one or more
 types.  The SET type is not used in the ESSSecurityLabel {{RFC5035}}.
@@ -1648,7 +1648,7 @@ For SET-OF (see below), this is unimportant. All elements have the same tag and 
       
 For SET, the elements will have distinct tags, and each will be in constructed or primitive form accordingly. Failing to ignore the CONSTRUCTED bit could therefore lead to ordering inversions, so in general it is best to make sure it is not present in the encoding of the tag.
 
-## SET OF  {#section-5-15}
+##SET OF  {#section-5-15}
 
 The SET OF type denotes an unordered collection of zero or
 more occurrences of a given type.
@@ -1693,7 +1693,7 @@ until a difference is found. The smaller-valued BER encoding
 is the one with the smaller-valued octet at the point of
 difference.
 
-## T61String  {#section-5-16}
+##T61String  {#section-5-16}
 
 The T61String type denotes an arbtrary string of T.61
 characters. T.61 is an eight-bit extension to the ASCII
@@ -1754,7 +1754,7 @@ publiques" is
 14 0f 63 6c c2 65 73 20 70 75 62 6c 69 71 75 65 73
 ~~~
 
-## UTCTime  {#section-5-17}
+##UTCTime  {#section-5-17}
 
 The UTCTime type denotes a "coordinated universal time" or
 Greenwich Mean Time (GMT) value. A UTCTime value includes
@@ -1845,7 +1845,7 @@ These values have the following BER encodings, among others:
 DER encoding. Primitive. Contents octets are as for a
 primitive BER encoding.
 
-## GeneralizedTime  {#section-5-18}
+##GeneralizedTime  {#section-5-18}
 
 The GeneralizedTime type consists of a calendar date and time.
 A GeneralizedTime value includes the local time precise to fractions
