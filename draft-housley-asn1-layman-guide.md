@@ -1530,7 +1530,7 @@ be present in the SEQUENCE OF:
 Extensions  ::=  SEQUENCE SIZE (1..MAX) OF Extension
 ~~~
 
-##SET  {#section-5-14}
+## SET  {#section-5-14}
 
 The SET type denotes an unordered collection of one or more
 types.  The SET type is not used in the ESSSecurityLabel {{RFC5035}}.
@@ -1597,14 +1597,58 @@ qualifier is the default value, the encoding of
 that component is not included.
 
 2. There is an order to the components, namely
-ascending order by tag. By ascending order, imagine every set element's encoding is padded with zeroes so that every encoding is the same length and then each padded encoding is treated as an INTEGER with the smallest encodings sorted to the start of the SET.
+ascending order by tag (care: the CONSTRUCTED bit is not part of the tag value, see below). By ascending order, imagine every set element's encoding is padded with zeroes so that every encoding is the same length and then each padded encoding is treated as an INTEGER with the smallest encodings sorted to the start of the SET.
 
 A simple psuedo-code version of the sort would look like:
 ```
-Insert psuedo code here.
-```
+    private static void sort(ASN1Object[] elements)
+    {
+        boolean swapped = true;
+        while (swapped)
+        {
+            swapped = false;
+            for (var i = 0; i != Length(elements) - 1; i++)
+            {
+                if (!LessThanOrEqual(DER(elements[i]), DER(elements[i+1])))
+                {
+                    swapped = true;
+                    var ei = elements[i];
+                    elements[i] = elements[i + 1];
+                    elements[i+1] = ei;
+                }
+            }
+        }
+    }
 
-##SET OF  {#section-5-15}
+    LessThanOrEqual(byte[] encA, byte[] encB)
+    {
+        // clear CONSTRUCTED bit in tag byte if set
+        var a0 = encA[0] & ~CONSTRUCTED
+        var b0 = encB[0] & ~CONSTRUCTED
+        if (a0 != b0)
+        {
+            return a0 < b0;
+        }
+
+        var last = Min(Length(encA), Length(encB)) - 1;
+
+        for (var i = 1; i < last; ++i) {
+            if (encA[i] != encB[i])
+                return encA[i] < encB[i]
+        }
+
+        return encA[last] <= encB[last]
+    }
+```
+Where Length() returns the length of an array, Min returns the mathematical minimum of two values and DER() returns the DER encoding of the ASN1Object passed to it, and the ~ operator provides the ones compliment of a value, as it does in languages like C, Java, and C#. Likewise for & - the bitwise AND.
+
+NOTE: As you can see from the LessThanOrEqual function, Set elements in DER encodings are ordered first according to their tags (class and number), but the CONSTRUCTED bit is not part of the tag.
+       
+For SET-OF (see below), this is unimportant. All elements have the same tag and DER requires them to either all be in constructed form or all in primitive form, according to that tag. The elements are effectively ordered according to their content octets.
+      
+For SET, the elements will have distinct tags, and each will be in constructed or primitive form accordingly. Failing to ignore the CONSTRUCTED bit could therefore lead to ordering inversions, so in general it is best to make sure it is not present in the encoding of the tag.
+
+## SET OF  {#section-5-15}
 
 The SET OF type denotes an unordered collection of zero or
 more occurrences of a given type.
@@ -1649,7 +1693,7 @@ until a difference is found. The smaller-valued BER encoding
 is the one with the smaller-valued octet at the point of
 difference.
 
-##T61String  {#section-5-16}
+## T61String  {#section-5-16}
 
 The T61String type denotes an arbtrary string of T.61
 characters. T.61 is an eight-bit extension to the ASCII
@@ -1710,7 +1754,7 @@ publiques" is
 14 0f 63 6c c2 65 73 20 70 75 62 6c 69 71 75 65 73
 ~~~
 
-##UTCTime  {#section-5-17}
+## UTCTime  {#section-5-17}
 
 The UTCTime type denotes a "coordinated universal time" or
 Greenwich Mean Time (GMT) value. A UTCTime value includes
@@ -1801,7 +1845,7 @@ These values have the following BER encodings, among others:
 DER encoding. Primitive. Contents octets are as for a
 primitive BER encoding.
 
-##GeneralizedTime  {#section-5-18}
+## GeneralizedTime  {#section-5-18}
 
 The GeneralizedTime type consists of a calendar date and time.
 A GeneralizedTime value includes the local time precise to fractions
