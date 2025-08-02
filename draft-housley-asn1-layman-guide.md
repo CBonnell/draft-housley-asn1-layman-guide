@@ -1599,9 +1599,9 @@ that component is not included.
 2. There is an order to the components, namely
 ascending order by tag (care: the CONSTRUCTED bit is not part of the tag value, see below). By ascending order, imagine every set element's encoding is padded with zeroes so that every encoding is the same length and then each padded encoding is treated as an INTEGER with the smallest encodings sorted to the start of the SET.
 
-A simple psuedo-code version of the sort would look like:
+A simple psuedo-code version of the sort (in-place) would look like:
 ```
-    private static void sort(ASN1Object[] elements)
+    Sort(ASN1Object[] elements)
     {
         boolean swapped = true;
         while (swapped)
