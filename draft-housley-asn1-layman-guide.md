@@ -673,7 +673,7 @@ constructed, definite-length method must be
 employed.
 
 Other restrictions are defined for particular types (such as
-BIT STRING, SEQUENCE, SET, and SET OF), and can be found in
+BOOLEAN, BIT STRING, SEQUENCE, SET, and SET OF), and can be found in
 {{section-5}}.
 
 #Notation and encodings for some types  {#section-5}
@@ -1002,7 +1002,20 @@ Example: The DER encoding of the BIT STRING value
 03 04 06 6e 5d c0
 ~~~
 
-##CHOICE  {#section-5-5}
+##BOOLEAN {#section-5-5}
+
+BER encoding. Primitive. A single octet in length, for FALSE the octet is set to zero, for TRUE, the octet is non-zero.
+
+DER encoding. Primitive. A single octet in length, for FALSE the octet is set to zero, for TRUE, the octet is set to 0xFF.
+
+Example: The DER encoding of the BOOLEAN value
+TRUE is:
+
+~~~
+01 01 FF
+~~~
+
+##CHOICE  {#section-5-6}
 
 The CHOICE type denotes a union of one or more alternatives.
 
@@ -1054,7 +1067,7 @@ chosen alternative is extendedCertificate.
 DER encoding. Same as the DER encoding of the chosen
 alternative.
 
-##IA5String  {#section-5-6}
+##IA5String  {#section-5-7}
 
 The IA5String type denotes an arbtrary string of IA5
 characters. IA5 stands for International Alphabet 5, which
@@ -1105,7 +1118,7 @@ Example: The DER encoding of the IA5String value
 16 0d 74 65 73 74 31 40 72 73 61 2e 63 6f 6d
 ~~~
 
-##INTEGER  {#section-5-7}
+##INTEGER  {#section-5-8}
 
 The INTEGER type denotes an arbitrary integer. INTEGER
 values can be positive, negative, or zero, and can have any
@@ -1195,7 +1208,7 @@ the length octets:
 DER encoding. Primitive. Contents octets are empty; the DER
 encoding of a NULL value is always 05 00.
 
-##OBJECT IDENTIFIER  {#section-5-9}
+##OBJECT IDENTIFIER  {#section-5-10}
 
 The OBJECT IDENTIFIER type denotes an object identifier, a
 sequence of integer components that identifies an object
@@ -1297,7 +1310,7 @@ encoding of 113549 = 6 * 1282 + 7716 * 128 + d16 is 86 f7
 DER encoding. Primitive. Contents octets are as for a
 primitive BER encoding.
 
-##OCTET STRING  {#section-5-10}
+##OCTET STRING  {#section-5-11}
 
 The OCTET STRING type denotes an arbitrary string of octets
 (eight-bit values). An OCTET STRING value can have any
@@ -1364,7 +1377,7 @@ Example: The BER encoding of the OCTET STRING value 01 23 45
 04 08 01 23 45 67 89 ab cd ef
 ~~~
 
-##PrintableString  {#section-5-11}
+##PrintableString  {#section-5-12}
 
 The PrintableString type denotes an arbitrary string of
 printable characters from the following character set:
@@ -1419,7 +1432,7 @@ Example: The DER encoding of the PrintableString value "Test User 1" is
 13 0b 54 65 73 74 20 55 73 65 72 20 31
 ~~~
 
-##SEQUENCE  {#section-5-12}
+##SEQUENCE  {#section-5-13}
 
 The SEQUENCE type denotes an ordered collection of one or
 more types.
@@ -1489,7 +1502,7 @@ with the DEFAULT qualifier is the default value, the
 encoding of that component is not included in the contents
 octets.
 
-##SEQUENCE OF  {#section-5-13}
+##SEQUENCE OF  {#section-5-14}
 
 The SEQUENCE OF type denotes an ordered collection of zero
 or more occurrences of a given type.
@@ -1530,7 +1543,7 @@ be present in the SEQUENCE OF:
 Extensions  ::=  SEQUENCE SIZE (1..MAX) OF Extension
 ~~~
 
-##SET  {#section-5-14}
+##SET  {#section-5-15}
 
 The SET type denotes an unordered collection of one or more
 types.  The SET type is not used in the ESSSecurityLabel {{RFC5035}}.
@@ -1644,11 +1657,13 @@ Where Length() returns the length of an array, Min returns the mathematical mini
 
 NOTE: As you can see from the LessThanOrEqual function, Set elements in DER encodings are ordered first according to their tags (class and number), but the CONSTRUCTED bit is not part of the tag.
 
+Links to examples of different implementations of the DER SET sort can be found in {{section-7}}.
+
 For SET-OF (see below), this is unimportant. All elements have the same tag and DER requires them to either all be in constructed form or all in primitive form, according to that tag. The elements are effectively ordered according to their content octets.
 
 For SET, the elements will have distinct tags, and each will be in constructed or primitive form accordingly. Failing to ignore the CONSTRUCTED bit could therefore lead to ordering inversions, so in general it is best to make sure it is not present in the encoding of the tag.
 
-##SET OF  {#section-5-15}
+##SET OF  {#section-5-16}
 
 The SET OF type denotes an unordered collection of zero or
 more occurrences of a given type.
@@ -1693,7 +1708,7 @@ until a difference is found. The smaller-valued BER encoding
 is the one with the smaller-valued octet at the point of
 difference.
 
-##T61String  {#section-5-16}
+##T61String  {#section-5-17}
 
 The T61String type denotes an arbtrary string of T.61
 characters. T.61 is an eight-bit extension to the ASCII
@@ -1754,7 +1769,7 @@ publiques" is
 14 0f 63 6c c2 65 73 20 70 75 62 6c 69 71 75 65 73
 ~~~
 
-##UTCTime  {#section-5-17}
+##UTCTime  {#section-5-18}
 
 The UTCTime type denotes a "coordinated universal time" or
 Greenwich Mean Time (GMT) value. A UTCTime value includes
@@ -1845,7 +1860,7 @@ These values have the following BER encodings, among others:
 DER encoding. Primitive. Contents octets are as for a
 primitive BER encoding.
 
-##GeneralizedTime  {#section-5-18}
+##GeneralizedTime  {#section-5-19}
 
 The GeneralizedTime type consists of a calendar date and time.
 A GeneralizedTime value includes the local time precise to fractions
@@ -1940,7 +1955,7 @@ primitive BER encoding.
 18 0f 39 39 39 39 31 32 33 31 32 33 35 39 35 39 5a
 ~~~
 
-##UTF8String  {#section-5-19}
+##UTF8String  {#section-5-20}
 
 The UTF8String type supports the encoding of character sets which
 covers most of the world's writing systems; see {{RFC3629}}.  This
@@ -2274,6 +2289,20 @@ is not possible to write out the X.500 name in DER format, so anyone checking th
 be presented with a definite-length encoding instead, special care must be taken to calculate and evaluate
 any signatures or MACs based on the name using the DER encoding, rather than the definite-length encoding,
 otherwise recipients will not be able to verify the data.
+
+#Useful Links  {#section-7}
+
+The following table provides alternate implementations of the DER SET sort
+for a variety of languages.
+
+|Language                |Project        | Link                                 |
+|------------------------|---------------|--------------------------------------------|
+|C | OpenSSL | https://github.com/openssl/openssl/blob/3206bb708246a97b281133009a419fb7421971d9/crypto/asn1/tasn_enc.c#L399 |
+|C# | Bouncy Castle | https://github.com/bcgit/bc-csharp/blob/0c87b54b4b78e95eb80db716e1ac57f2e7875d21/crypto/src/asn1/Asn1Set.cs#L277C38-L277C44 |
+|Java | Bouncy Castle | https://github.com/bcgit/bc-java/blob/126ac9e14a0f56fae088973a777f1f90a521fd82/core/src/main/java/org/bouncycastle/asn1/ASN1Set.java#L500 |
+|Rust | Rust Crypto | https://github.com/RustCrypto/formats/blob/master/der/src/asn1/set_of.rs#L456 
+{: title="Examples Implementations of DER SET Sorting."}
+
 
 # IANA Considerations
 
