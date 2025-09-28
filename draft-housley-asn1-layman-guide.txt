@@ -72,21 +72,22 @@ Table of Contents
      5.2.  Explicitly tagged types
      5.3.  ANY
      5.4.  BIT STRING
-     5.5.  CHOICE
-     5.6.  IA5String
-     5.7.  INTEGER
-     5.8.  NULL
-     5.9.  OBJECT IDENTIFIER
-     5.10. OCTET STRING
-     5.11. PrintableString
-     5.12. SEQUENCE
-     5.13. SEQUENCE OF
-     5.14. SET
-     5.15. SET OF
-     5.16. T61String
-     5.17. UTCTime
-     5.18. GeneralizedTime
-     5.19. UTF8String
+     5.5.  BOOLEAN
+     5.6.  CHOICE
+     5.7.  IA5String
+     5.8.  INTEGER
+     5.9.  NULL
+     5.10. OBJECT IDENTIFIER
+     5.11. OCTET STRING
+     5.12. PrintableString
+     5.13. SEQUENCE
+     5.14. SEQUENCE OF
+     5.15. SET
+     5.16. SET OF
+     5.17. T61String
+     5.18. UTCTime
+     5.19. GeneralizedTime
+     5.20. UTF8String
    6.  An example
      6.1.  Abstract notation
      6.2.  DER encoding
@@ -96,11 +97,12 @@ Table of Contents
        6.2.4.  RelativeDistinguishedName
        6.2.5.  RDNSequence
        6.2.6.  Name
-   7.  IANA Considerations
-   8.  Security Considerations
-   9.  References
-     9.1.  Normative References
-     9.2.  Informative References
+   7.  Useful Links
+   8.  IANA Considerations
+   9.  Security Considerations
+   10. References
+     10.1.  Normative References
+     10.2.  Informative References
    Acknowledgments
    Authors' Addresses
 
@@ -606,8 +608,9 @@ Table of Contents
        anything, the constructed, definite-length method must be
        employed.
 
-   Other restrictions are defined for particular types (such as BIT
-   STRING, SEQUENCE, SET, and SET OF), and can be found in Section 5.
+   Other restrictions are defined for particular types (such as BOOLEAN,
+   BIT STRING, SEQUENCE, SET, and SET OF), and can be found in
+   Section 5.
 
 5.  Notation and encodings for some types
 
@@ -891,7 +894,19 @@ Table of Contents
 
    03 04 06 6e 5d c0
 
-5.5.  CHOICE
+5.5.  BOOLEAN
+
+   BER encoding.  Primitive.  A single octet in length, for FALSE the
+   octet is set to zero, for TRUE, the octet is non-zero.
+
+   DER encoding.  Primitive.  A single octet in length, for FALSE the
+   octet is set to zero, for TRUE, the octet is set to 0xFF.
+
+   Example: The DER encoding of the BOOLEAN value TRUE is:
+
+   01 01 FF
+
+5.6.  CHOICE
 
    The CHOICE type denotes a union of one or more alternatives.
 
@@ -937,7 +952,7 @@ Table of Contents
 
    DER encoding.  Same as the DER encoding of the chosen alternative.
 
-5.6.  IA5String
+5.7.  IA5String
 
    The IA5String type denotes an arbtrary string of IA5 characters.  IA5
    stands for International Alphabet 5, which is the same as ASCII.  The
@@ -979,7 +994,7 @@ Table of Contents
 
    16 0d 74 65 73 74 31 40 72 73 61 2e 63 6f 6d
 
-5.7.  INTEGER
+5.8.  INTEGER
 
    The INTEGER type denotes an arbitrary integer.  INTEGER values can be
    positive, negative, or zero, and can have any magnitude.
@@ -1043,7 +1058,7 @@ Table of Contents
    DER encoding.  Primitive.  Contents octets are as for a primitive BER
    encoding.
 
-5.8.  NULL
+5.9.  NULL
 
    The NULL type denotes a null value.
 
@@ -1067,7 +1082,7 @@ Table of Contents
    DER encoding.  Primitive.  Contents octets are empty; the DER
    encoding of a NULL value is always 05 00.
 
-5.9.  OBJECT IDENTIFIER
+5.10.  OBJECT IDENTIFIER
 
    The OBJECT IDENTIFIER type denotes an object identifier, a sequence
    of integer components that identifies an object such as an algorithm,
@@ -1163,7 +1178,7 @@ Table of Contents
    DER encoding.  Primitive.  Contents octets are as for a primitive BER
    encoding.
 
-5.10.  OCTET STRING
+5.11.  OCTET STRING
 
    The OCTET STRING type denotes an arbitrary string of octets (eight-
    bit values).  An OCTET STRING value can have any length, including
@@ -1221,7 +1236,7 @@ Table of Contents
 
    04 08 01 23 45 67 89 ab cd ef
 
-5.11.  PrintableString
+5.12.  PrintableString
 
    The PrintableString type denotes an arbitrary string of printable
    characters from the following character set:
@@ -1268,7 +1283,7 @@ Table of Contents
 
    13 0b 54 65 73 74 20 55 73 65 72 20 31
 
-5.12.  SEQUENCE
+5.13.  SEQUENCE
 
    The SEQUENCE type denotes an ordered collection of one or more types.
 
@@ -1328,7 +1343,7 @@ Table of Contents
    qualifier is the default value, the encoding of that component is not
    included in the contents octets.
 
-5.13.  SEQUENCE OF
+5.14.  SEQUENCE OF
 
    The SEQUENCE OF type denotes an ordered collection of zero or more
    occurrences of a given type.
@@ -1364,7 +1379,7 @@ Table of Contents
 
    Extensions  ::=  SEQUENCE SIZE (1..MAX) OF Extension
 
-5.14.  SET
+5.15.  SET
 
    The SET type denotes an unordered collection of one or more types.
    The SET type is not used in the ESSSecurityLabel [RFC5035].
@@ -1457,6 +1472,9 @@ LessThanOrEqual(byte[] encA, byte[] encB)
    in DER encodings are ordered first according to their tags (class and
    number), but the CONSTRUCTED bit is not part of the tag.
 
+   Links to examples of different implementations of the DER SET sort
+   can be found in Section 7.
+
    For SET-OF (see below), this is unimportant.  All elements have the
    same tag and DER requires them to either all be in constructed form
    or all in primitive form, according to that tag.  The elements are
@@ -1468,7 +1486,7 @@ LessThanOrEqual(byte[] encA, byte[] encB)
    general it is best to make sure it is not present in the encoding of
    the tag.
 
-5.15.  SET OF
+5.16.  SET OF
 
    The SET OF type denotes an unordered collection of zero or more
    occurrences of a given type.
@@ -1507,7 +1525,7 @@ LessThanOrEqual(byte[] encA, byte[] encB)
    right until a difference is found.  The smaller-valued BER encoding
    is the one with the smaller-valued octet at the point of difference.
 
-5.16.  T61String
+5.17.  T61String
 
    The T61String type denotes an arbtrary string of T.61 characters.
    T.61 is an eight-bit extension to the ASCII character set.  Special
@@ -1559,7 +1577,7 @@ LessThanOrEqual(byte[] encA, byte[] encB)
 
    14 0f 63 6c c2 65 73 20 70 75 62 6c 69 71 75 65 73
 
-5.17.  UTCTime
+5.18.  UTCTime
 
    The UTCTime type denotes a "coordinated universal time" or Greenwich
    Mean Time (GMT) value.  A UTCTime value includes the local time
@@ -1630,7 +1648,7 @@ LessThanOrEqual(byte[] encA, byte[] encB)
    DER encoding.  Primitive.  Contents octets are as for a primitive BER
    encoding.
 
-5.18.  GeneralizedTime
+5.19.  GeneralizedTime
 
    The GeneralizedTime type consists of a calendar date and time.  A
    GeneralizedTime value includes the local time precise to fractions of
@@ -1719,7 +1737,7 @@ LessThanOrEqual(byte[] encA, byte[] encB)
 
    18 0f 39 39 39 39 31 32 33 31 32 33 35 39 35 39 5a
 
-5.19.  UTF8String
+5.20.  UTF8String
 
    The UTF8String type supports the encoding of character sets which
    covers most of the world's writing systems; see [RFC3629].  This type
@@ -1992,17 +2010,42 @@ LessThanOrEqual(byte[] encA, byte[] encB)
    the name using the DER encoding, rather than the definite-length
    encoding, otherwise recipients will not be able to verify the data.
 
-7.  IANA Considerations
+7.  Useful Links
+
+   The following table provides alternate implementations of the DER SET
+   sort for a variety of languages.
+
+   +========+=======+=============================================================================================+
+   |Language|Project|Link                                                                                         |
+   +========+=======+=============================================================================================+
+   |C       |OpenSSL|https://github.com/openssl/openssl/blob/3206bb708246a97b281133009a419fb7421971d9/crypto/asn1/|
+   |        |       |tasn_enc.c#L399                                                                              |
+   +--------+-------+---------------------------------------------------------------------------------------------+
+   |C#      |Bouncy |https://github.com/bcgit/bc-                                                                 |
+   |        |Castle |csharp/blob/0c87b54b4b78e95eb80db716e1ac57f2e7875d21/crypto/src/asn1/                        |
+   |        |       |Asn1Set.cs#L277C38-L277C44                                                                   |
+   +--------+-------+---------------------------------------------------------------------------------------------+
+   |Java    |Bouncy |https://github.com/bcgit/bc-                                                                 |
+   |        |Castle |java/blob/126ac9e14a0f56fae088973a777f1f90a521fd82/core/src/main/java/org/bouncycastle/asn1/ |
+   |        |       |ASN1Set.java#L500                                                                            |
+   +--------+-------+---------------------------------------------------------------------------------------------+
+   |Rust    |Rust   |https://github.com/RustCrypto/formats/blob/master/der/src/asn1/set_of.rs#L456                |
+   |        |Crypto |                                                                                             |
+   +--------+-------+---------------------------------------------------------------------------------------------+
+
+           Table 5: Examples Implementations of DER SET Sorting.
+
+8.  IANA Considerations
 
    This document has no IANA actions.
 
-8.  Security Considerations
+9.  Security Considerations
 
    TODO Security
 
-9.  References
+10.  References
 
-9.1.  Normative References
+10.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -2024,7 +2067,7 @@ LessThanOrEqual(byte[] encA, byte[] encB)
               (DER)", ITU-T Recommendation X.690, ISO/IEC 8825-1-2021,
               February 2021, <https://www.itu.int/rec/T-REC-X.690>.
 
-9.2.  Informative References
+10.2.  Informative References
 
    [NIST92]   NIST, "Stable Implementation Agreements for Open Systems
               Interconnection Protocols. Part 11 (Directory Services
