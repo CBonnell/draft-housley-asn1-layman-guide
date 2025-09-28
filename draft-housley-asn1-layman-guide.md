@@ -2300,7 +2300,7 @@ for a variety of languages.
 |C | OpenSSL | https://github.com/openssl/openssl/blob/3206bb708246a97b281133009a419fb7421971d9/crypto/asn1/tasn_enc.c#L399 |
 |C# | Bouncy Castle | https://github.com/bcgit/bc-csharp/blob/0c87b54b4b78e95eb80db716e1ac57f2e7875d21/crypto/src/asn1/Asn1Set.cs#L277C38-L277C44 |
 |Java | Bouncy Castle | https://github.com/bcgit/bc-java/blob/126ac9e14a0f56fae088973a777f1f90a521fd82/core/src/main/java/org/bouncycastle/asn1/ASN1Set.java#L500 |
-|Rust | Rust Crypto | https://github.com/RustCrypto/formats/blob/master/der/src/asn1/set_of.rs#L456 
+|Rust | Rust Crypto | https://github.com/RustCrypto/formats/blob/master/der/src/asn1/set_of.rs#L456 |
 {: title="Examples Implementations of DER SET Sorting."}
 
 
