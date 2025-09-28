@@ -1180,7 +1180,7 @@ encodings) are given in Table 3.
 DER encoding. Primitive. Contents octets are as for a
 primitive BER encoding.
 
-##NULL  {#section-5-8}
+##NULL  {#section-5-9}
 
 The NULL type denotes a null value.
 
@@ -1208,7 +1208,7 @@ the length octets:
 DER encoding. Primitive. Contents octets are empty; the DER
 encoding of a NULL value is always 05 00.
 
-##OBJECT IDENTIFIER  {#section-5-9}
+##OBJECT IDENTIFIER  {#section-5-10}
 
 The OBJECT IDENTIFIER type denotes an object identifier, a
 sequence of integer components that identifies an object
@@ -1310,7 +1310,7 @@ encoding of 113549 = 6 * 1282 + 7716 * 128 + d16 is 86 f7
 DER encoding. Primitive. Contents octets are as for a
 primitive BER encoding.
 
-##OCTET STRING  {#section-5-10}
+##OCTET STRING  {#section-5-11}
 
 The OCTET STRING type denotes an arbitrary string of octets
 (eight-bit values). An OCTET STRING value can have any
@@ -1377,7 +1377,7 @@ Example: The BER encoding of the OCTET STRING value 01 23 45
 04 08 01 23 45 67 89 ab cd ef
 ~~~
 
-##PrintableString  {#section-5-11}
+##PrintableString  {#section-5-12}
 
 The PrintableString type denotes an arbitrary string of
 printable characters from the following character set:
@@ -1432,7 +1432,7 @@ Example: The DER encoding of the PrintableString value "Test User 1" is
 13 0b 54 65 73 74 20 55 73 65 72 20 31
 ~~~
 
-##SEQUENCE  {#section-5-12}
+##SEQUENCE  {#section-5-13}
 
 The SEQUENCE type denotes an ordered collection of one or
 more types.
@@ -1502,7 +1502,7 @@ with the DEFAULT qualifier is the default value, the
 encoding of that component is not included in the contents
 octets.
 
-##SEQUENCE OF  {#section-5-13}
+##SEQUENCE OF  {#section-5-14}
 
 The SEQUENCE OF type denotes an ordered collection of zero
 or more occurrences of a given type.
@@ -1543,7 +1543,7 @@ be present in the SEQUENCE OF:
 Extensions  ::=  SEQUENCE SIZE (1..MAX) OF Extension
 ~~~
 
-##SET  {#section-5-14}
+##SET  {#section-5-15}
 
 The SET type denotes an unordered collection of one or more
 types.  The SET type is not used in the ESSSecurityLabel {{RFC5035}}.
@@ -1663,7 +1663,7 @@ For SET-OF (see below), this is unimportant. All elements have the same tag and 
 
 For SET, the elements will have distinct tags, and each will be in constructed or primitive form accordingly. Failing to ignore the CONSTRUCTED bit could therefore lead to ordering inversions, so in general it is best to make sure it is not present in the encoding of the tag.
 
-##SET OF  {#section-5-15}
+##SET OF  {#section-5-16}
 
 The SET OF type denotes an unordered collection of zero or
 more occurrences of a given type.
@@ -1708,7 +1708,7 @@ until a difference is found. The smaller-valued BER encoding
 is the one with the smaller-valued octet at the point of
 difference.
 
-##T61String  {#section-5-16}
+##T61String  {#section-5-17}
 
 The T61String type denotes an arbtrary string of T.61
 characters. T.61 is an eight-bit extension to the ASCII
@@ -1769,7 +1769,7 @@ publiques" is
 14 0f 63 6c c2 65 73 20 70 75 62 6c 69 71 75 65 73
 ~~~
 
-##UTCTime  {#section-5-17}
+##UTCTime  {#section-5-18}
 
 The UTCTime type denotes a "coordinated universal time" or
 Greenwich Mean Time (GMT) value. A UTCTime value includes
@@ -1860,7 +1860,7 @@ These values have the following BER encodings, among others:
 DER encoding. Primitive. Contents octets are as for a
 primitive BER encoding.
 
-##GeneralizedTime  {#section-5-18}
+##GeneralizedTime  {#section-5-19}
 
 The GeneralizedTime type consists of a calendar date and time.
 A GeneralizedTime value includes the local time precise to fractions
@@ -1955,7 +1955,7 @@ primitive BER encoding.
 18 0f 39 39 39 39 31 32 33 31 32 33 35 39 35 39 5a
 ~~~
 
-##UTF8String  {#section-5-19}
+##UTF8String  {#section-5-20}
 
 The UTF8String type supports the encoding of character sets which
 covers most of the world's writing systems; see {{RFC3629}}.  This
