@@ -953,9 +953,12 @@ BER encoding. Primitive or constructed. In a primitive
 encoding, the first contents octet gives the number of bits
 by which the length of the bit string is less than the next
 multiple of eight (this is called the "number of unused
-bits"). The second and following contents octets give the
-value of the bit string, converted to an octet string. The
-conversion process is as follows:
+bits"). The first contents octet is always encoded; if
+the length of the bit string is 0 bits, then the first
+contents octet will have the value 0 and there not be any
+subsequent contents octets. The second and following contents
+octets give the value of the bit string, converted to an octet string.
+The conversion process is as follows:
 
 1. The bit string is padded after the last bit with
 zero to seven bits of any value to make the length
@@ -993,13 +996,23 @@ constructed:
 
 DER encoding. Primitive. The contents octects are as for a
 primitive BER encoding, except that the bit string is padded
-with zero-valued bits.
+with zero-valued bits. Additionally, BIT STRINGs that represent
+named bit lists, such as the value of the Key Usage certificate
+extension {{RFC5280}}, have all trailing 0 bits removed
+before it is encoded.
 
 Example: The DER encoding of the BIT STRING value
 "011011100101110111" is:
 
 ~~~
 03 04 06 6e 5d c0
+~~~
+
+Example: The DER encoding of a Key Usage certificate extension value,
+asserting only the `digitalSignature` bit:
+
+~~~
+03 02 07 80
 ~~~
 
 ##BOOLEAN {#section-5-5}
