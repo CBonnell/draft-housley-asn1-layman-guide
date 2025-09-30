@@ -1556,6 +1556,12 @@ be present in the SEQUENCE OF:
 Extensions  ::=  SEQUENCE SIZE (1..MAX) OF Extension
 ~~~
 
+There are some widely used ASN.1 specifications that define an OPTIONAL SEQUENCE OF
+component without a size constraint. In this case, the sender can encode either
+an empty SEQUENCE, or it can elect to not encode the SEQUENCE. Absent some
+requirement established in the prose of the specification, it is preferable to
+not encode the empty SEQUENCE OF, as it minimizes the size of the message.
+
 ##SET  {#section-5-15}
 
 The SET type denotes an unordered collection of one or more
@@ -1720,6 +1726,12 @@ any normal octet. Scan the BER encodings from left to right
 until a difference is found. The smaller-valued BER encoding
 is the one with the smaller-valued octet at the point of
 difference.
+
+There are some widely used ASN.1 specifications that define an OPTIONAL SET OF
+component without a size constraint. In this case, the sender can encode either
+an empty SET, or it can elect to not encode the SET. Absent some
+requirement established in the prose of the specification, it is preferable to
+not encode the empty SET OF, as it minimizes the size of the message.
 
 ##T61String  {#section-5-17}
 
