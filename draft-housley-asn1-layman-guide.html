@@ -3117,6 +3117,11 @@ be present in the SEQUENCE OF:<a href="#section-5.14-10" class="pilcrow">¶</a><
 Extensions  ::=  SEQUENCE SIZE (1..MAX) OF Extension
 </pre><a href="#section-5.14-11" class="pilcrow">¶</a>
 </div>
+<p id="section-5.14-12">There are some widely used ASN.1 specifications that define an <span class="bcp14">OPTIONAL</span> SEQUENCE OF
+component without a size constraint. In this case, the sender can encode either
+an empty SEQUENCE, or it can elect to not encode the SEQUENCE. Absent some
+requirement established in the prose of the specification, it is preferable to
+not encode the empty SEQUENCE OF, as it minimizes the size of the message.<a href="#section-5.14-12" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="_section-5-15">
@@ -3293,6 +3298,11 @@ any normal octet. Scan the BER encodings from left to right
 until a difference is found. The smaller-valued BER encoding
 is the one with the smaller-valued octet at the point of
 difference.<a href="#section-5.16-9" class="pilcrow">¶</a></p>
+<p id="section-5.16-10">There are some widely used ASN.1 specifications that define an <span class="bcp14">OPTIONAL</span> SET OF
+component without a size constraint. In this case, the sender can encode either
+an empty SET, or it can elect to not encode the SET. Absent some
+requirement established in the prose of the specification, it is preferable to
+not encode the empty SET OF, as it minimizes the size of the message.<a href="#section-5.16-10" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="_section-5-17">
