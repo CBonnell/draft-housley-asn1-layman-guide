@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-09-30T01:23:10.140326+00:00",
+  "timestamp": "2025-10-02T01:21:02.338336+00:00",
   "repo": "CBonnell/draft-housley-asn1-layman-guide",
   "labels": [
     {
@@ -56,24 +56,26 @@
       "id": "PR_kwDOOSVefs6rI10U",
       "title": "Add blurb about named bit list BIT STRINGs",
       "url": "https://github.com/CBonnell/draft-housley-asn1-layman-guide/pull/1",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "CBonnell",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-09-29T16:03:44Z",
-      "updatedAt": "2025-09-29T22:11:22Z",
+      "updatedAt": "2025-09-30T14:46:52Z",
       "baseRepository": "CBonnell/draft-housley-asn1-layman-guide",
       "baseRefName": "main",
       "baseRefOid": "f28025aff2332056c70ae5d3bd5df43ad1205256",
       "headRepository": "CBonnell/draft-housley-asn1-layman-guide",
       "headRefName": "key-usage-der",
       "headRefOid": "91e56520da1071312f67c4b9f6804ad9debb3671",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-09-30T14:46:49Z",
+      "mergedAt": "2025-09-30T14:46:49Z",
+      "mergedBy": "CBonnell",
+      "mergeCommit": {
+        "oid": "24eaeea7893a06bca59b33cf2b75a48dc9478266"
+      },
       "comments": [
         {
           "author": "russhousley",
@@ -97,25 +99,35 @@
       "id": "PR_kwDOOSVefs6rLTAq",
       "title": "Add opinion about empty OPTIONAL SET OF/SEQUENCE OF encoding",
       "url": "https://github.com/CBonnell/draft-housley-asn1-layman-guide/pull/2",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "CBonnell",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-09-29T19:50:24Z",
-      "updatedAt": "2025-09-29T19:50:24Z",
+      "updatedAt": "2025-09-30T15:33:39Z",
       "baseRepository": "CBonnell/draft-housley-asn1-layman-guide",
       "baseRefName": "main",
       "baseRefOid": "f28025aff2332056c70ae5d3bd5df43ad1205256",
       "headRepository": "CBonnell/draft-housley-asn1-layman-guide",
       "headRefName": "optional-empty-setof-sequenceof",
       "headRefOid": "3bacb2f1f9bba6e13b253423b1953ea21f0b421b",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "closedAt": "2025-09-30T15:33:36Z",
+      "mergedAt": "2025-09-30T15:33:36Z",
+      "mergedBy": "CBonnell",
+      "mergeCommit": {
+        "oid": "f1828b651bfedc4258ddf50aa486f83bf123ea74"
+      },
+      "comments": [
+        {
+          "author": "russhousley",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Looks good to me.",
+          "createdAt": "2025-09-30T15:22:25Z",
+          "updatedAt": "2025-09-30T15:22:25Z"
+        }
+      ],
       "reviews": []
     }
   ]
