@@ -561,6 +561,36 @@ value (or the value of the underlying type, if the type is
 derived by implicit tagging). Details for particular types
 are given in {{section-5}}.
 
+###Prefixes and Magic Numbers {#section-3-1-1}
+
+It is worth noting that definite-length encodings, by their nature, are simple enough to parse without the need for a complete ASN.1 decoder and prefixes to the value octets can often be treated like magic numbers in order to recognise the value octets that are following.
+
+For example, the private key field of an encoded ML-DSA-44 private key, which is defined as a CHOICE item with the following structure:
+
+```
+ML-DSA-44-PrivateKey ::= CHOICE {
+     seed [0] OCTET STRING (SIZE (32)),
+     expandedKey OCTET STRING (SIZE (2560)),
+     both SEQUENCE {
+         seed OCTET STRING (SIZE (32)),
+         expandedKey OCTET STRING (SIZE (2560))
+         }
+     }
+```
+can be recomposed as a series of value octets with the following prefixes and
+breakdowns:
+
+| Prefix        | CHOICE Item  | Breakdown                                |
+|---------------|--------------|------------------------------------------|
+| 80 20         | seed         | tag byte 80, length 1 octet, value 32    |
+| 04 82 0a 00   | expandedKey  | tag byte 04, length 3 octets, value 2560 |
+| 30 82 0a 26   | both         | tag byte 30, length 3 octets, value 2598 |
+{: title="Prefixes for an ML-DSA private key CHOICE item."}
+
+As can be seen from the table, the first byte of each prefix can be used to distinguish the CHOICE item that has been used to describe the ML-DSA-44 private key value.
+
+As mentioned early, both the 3 octet lengths, as they start with 0x82, indicate that the real length of the value octets is 2 octets long and in the case of the ```both``` CHOICE item, the value octets will contain the the prefixes given in the first two rows, as they appear at the start of the encodings of the elements of the ```both``` SEQUENCE.
+
 ##Constructed, definite-length method  {#section-3-2}
 
 This method applies to simple string types, structured
