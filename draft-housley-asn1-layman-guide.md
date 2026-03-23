@@ -1112,7 +1112,7 @@ alternative.
 
 ##IA5String  {#section-5-7}
 
-The IA5String type denotes an arbtrary string of IA5
+The IA5String type denotes an arbitrary string of IA5
 characters. IA5 stands for International Alphabet 5, which
 is the same as ASCII. The character set includes non-printing
 control characters. An IA5String value can have any
@@ -1435,7 +1435,7 @@ printable characters from the following character set:
 This type is a string type.
 
 The PrintableString type is used in PKCS #9 {{RFC2985}}
-challenge-password and unstructuerd-address attributes, and in several
+challenge-password and unstructured-address attributes, and in several
 distinguished names attributes {{RFC5280}}.
 
 ASN.1 notation:
@@ -1573,11 +1573,11 @@ RDNSequence ::= SEQUENCE OF RelativeDistinguishedName
 
 BER encoding. Constructed. Contents octets are the
 concatenation of the BER encodings of the values of the
-occurrences in the collection, in order of occurence.
+occurrences in the collection, in order of occurrence.
 
 DER encoding. Constructed. Contents octets are the
 concatenation of the DER encodings of the values of the
-occurrences in the collection, in order of occurence.
+occurrences in the collection, in order of occurrence.
 
 Example:  The Extensions type in {{RFC5280}} requires that at least one item
 be present in the SEQUENCE OF:
@@ -1661,7 +1661,7 @@ that component is not included.
 2. There is an order to the components, namely
 ascending order by tag (care: the CONSTRUCTED bit is not part of the tag value, see below). By ascending order, imagine every set element's encoding is padded with zeroes so that every encoding is the same length and then each padded encoding is treated as an INTEGER with the smallest encodings sorted to the start of the SET.
 
-A simple psuedo-code version of the sort (in-place) would look like:
+A simple pseudo-code version of the sort (in-place) would look like:
 ```
     Sort(ASN1Object[] elements)
     {
@@ -1765,14 +1765,14 @@ not encode the empty SET OF, as it minimizes the size of the message.
 
 ##T61String  {#section-5-17}
 
-The T61String type denotes an arbtrary string of T.61
+The T61String type denotes an arbitrary string of T.61
 characters. T.61 is an eight-bit extension to the ASCII
 character set. Special "escape" sequences specify the
 interpretation of subsequent character values as, for
 example, Japanese; the initial interpretation is Latin. The
 character set includes non-printing control characters. The
 T61String type allows only the Latin and Japanese character
-interepretations, and implementors' agreements for directory
+interpretations, and implementors' agreements for directory
 names exclude control characters {{NIST92}}. A T61String value
 can have any length, including zero. This type is a string
 type.
@@ -2336,8 +2336,8 @@ The difference between the two encodings being that the SET has been correctly s
 in the final encoding.
 
 There are a few morals to this particular tale. As you can imagine '+' in an X.500 name is best
-avoided as sometimes people forget about the sorting or insist on definte-length encoding to preserver order
-requiring DER encoding to be done everytime for signature generation and verification. Ideally if you have to include a '+' (it really does happen) it
+avoided as sometimes people forget about the sorting or insist on definite-length encoding to preserver order
+requiring DER encoding to be done every time for signature generation and verification. Ideally if you have to include a '+' (it really does happen) it
 is also better to write out the X.500 name in DER format at the start, so anyone else trying to verify
 a signature that might be associated with the use of the name will always get a correct result. Where it
 is not possible to write out the X.500 name in DER format, so anyone checking the subsequent encoding will
