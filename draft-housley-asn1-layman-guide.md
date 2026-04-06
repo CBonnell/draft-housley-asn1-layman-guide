@@ -456,7 +456,7 @@ the choice of which depends on the type of value and whether
 the length of the value is known. The three methods are
 primitive, definite-length encoding; constructed, definite-length
 encoding; and constructed, indefinite-length encoding. Simple
-non-string types (such as BOOLEAN, INTEGER, NULL, and 
+non-string types (such as BOOLEAN, INTEGER, NULL, and
 OBJECT IDENTIFIER) employ the primitive,
 definite-length method; structured types employ either of
 the constructed methods; and simple string types employ any
