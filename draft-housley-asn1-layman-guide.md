@@ -456,7 +456,7 @@ the choice of which depends on the type of value and whether
 the length of the value is known. The three methods are
 primitive, definite-length encoding; constructed, definite-length
 encoding; and constructed, indefinite-length encoding. Simple
-non-string types (such as BOOLEAN, INTEGER, NULL, and 
+non-string types (such as BOOLEAN, INTEGER, NULL, and
 OBJECT IDENTIFIER) employ the primitive,
 definite-length method; structured types employ either of
 the constructed methods; and simple string types employ any
@@ -1432,7 +1432,7 @@ printable characters from the following character set:
 This type is a string type.
 
 The PrintableString type is used in PKCS #9 {{RFC2985}}
-challenge-password and unstructuerd-address attributes, and in several
+challenge-password and unstructured-address attributes, and in several
 distinguished names attributes {{RFC5280}}.
 
 ASN.1 notation:
@@ -1658,7 +1658,7 @@ that component is not included.
 2. There is an order to the components, namely
 ascending order by tag (care: the CONSTRUCTED bit is not part of the tag value, see below). By ascending order, imagine every set element's encoding is padded with zeroes so that every encoding is the same length and then each padded encoding is treated as an INTEGER with the smallest encodings sorted to the start of the SET.
 
-A simple psuedo-code version of the sort (in-place) would look like:
+A simple pseudo-code version of the sort (in-place) would look like:
 ```
     Sort(ASN1Object[] elements)
     {
@@ -2332,8 +2332,8 @@ The difference between the two encodings being that the SET has been correctly s
 in the final encoding.
 
 There are a few morals to this particular tale. As you can imagine '+' in an X.500 name is best
-avoided as sometimes people forget about the sorting or insist on definte-length encoding to preserver order
-requiring DER encoding to be done everytime for signature generation and verification. Ideally if you have to include a '+' (it really does happen) it
+avoided as sometimes people forget about the sorting or insist on definite-length encoding to preserver order
+requiring DER encoding to be done every time for signature generation and verification. Ideally if you have to include a '+' (it really does happen) it
 is also better to write out the X.500 name in DER format at the start, so anyone else trying to verify
 a signature that might be associated with the use of the name will always get a correct result. Where it
 is not possible to write out the X.500 name in DER format, so anyone checking the subsequent encoding will
