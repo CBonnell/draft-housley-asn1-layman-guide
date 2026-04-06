@@ -214,26 +214,20 @@ octet is the most significant and bit 1 is the least significant.
 The following meta-syntax is used for in describing ASN.1 notation:
 
 ~~~
-     BIT  monospace denotes literal characters in the type
-          and value notation; in examples, it generally
-          denotes an octet value in hexadecimal
+     n1   denotes a variable
 
-     n1   bold italics denotes a variable
-
-     []   bold square brackets indicate that a term is
+     []   square brackets indicate that a term is
           optional
 
-     {}   bold braces group related terms
+     {}   braces group related terms
 
-     |    bold vertical bar delimits alternatives with a
+     |    vertical bar delimits alternatives with a
           group
 
-     ...  bold ellipsis indicates repeated occurrences
+     ...  ellipsis indicates repeated occurrences
 
-     =    bold equals sign expresses terms as subterms
+     =    equals sign expresses terms as subterms
 ~~~
-
-TODO: This does not quite work in markdown...
 
 {::boilerplate bcp14-tagged}
 
@@ -262,7 +256,8 @@ does. There are four classes of tag:
 
 {: vspace="0"}
 Universal:
-: for types whose meaning is the same in all applications.
+: for types whose meaning is the same in all applications;
+these types are specified in {{X680}}.
 
 Application:
 : for types whose meaning is specific to an application, such as X.500
@@ -309,7 +304,7 @@ special rules:
 
 * Layout is not significant; multiple spaces and line breaks can be considered as a single space.
 
-* Comments are delimited by pairs of hyphens (--), or a pair of hyphens and a line break.
+* Comments are delimited by pairs of hyphens ('--'), or a pair of hyphens and a line break.
 
 * Identifiers (names of values and fields) and type references (names of types) consist of upper- and
 lower-case letters, digits, hyphens, and spaces;
@@ -459,9 +454,10 @@ values in OSI.)
 There are three methods to encode an ASN.1 value under BER,
 the choice of which depends on the type of value and whether
 the length of the value is known. The three methods are
-primitive, definite-length encoding; constructed, definite-
-length encoding; and constructed, indefinite-length
-encoding. Simple non-string types (such as BOOLEAN, INTEGER, NULL, and OBJECT IDENTIFIER) employ the primitive,
+primitive, definite-length encoding; constructed, definite-length
+encoding; and constructed, indefinite-length encoding. Simple
+non-string types (such as BOOLEAN, INTEGER, NULL, and 
+OBJECT IDENTIFIER) employ the primitive,
 definite-length method; structured types employ either of
 the constructed methods; and simple string types employ any
 of the methods, depending on whether the length of the value
@@ -471,23 +467,24 @@ tagging employ the constructed methods.
 
 In each method, the BER encoding has three or four parts:
 
-Identifier octets: These identify the class and tag
+Identifier octets. These identify the class and tag
 number of the ASN.1 value, and indicate whether
 the method is primitive or constructed.
 
-Length octets: For the definite-length methods, these
+Length octets. For the definite-length methods, these
 give the number of contents octets. For the
 constructed, indefinite-length method, these
 indicate that the length is indefinite.
 
-Contents octets: For the primitive, definite-length
+Contents octets. For the primitive, definite-length
 method, these give a concrete representation of
 the  value. For the constructed methods, these
 give the concatenation of the BER encodings of the
 components of the value.
 
-End-of-contents octets: For the constructed, indefinite-length method, these denote the end of the
-contents. For the other methods, these are absent.
+End-of-contents octets. For the constructed, indefinite-length
+method, these denote the end of the contents. For the other
+methods, these are absent.
 
 The three methods of encoding are described in the following
 sections.
@@ -610,7 +607,7 @@ Length octets.
 : As described in {{section-3-1}}.
 
 >
-Contents octets.
+Content octets.
 : The concatenation of the BER encodings of the components of the value:
 
 >
@@ -1024,7 +1021,7 @@ constructed:
    03 02 06 c0
 ~~~
 
-DER encoding. Primitive. The contents octects are as for a
+DER encoding. Primitive. The contents octets are as for a
 primitive BER encoding, except that the bit string is padded
 with zero-valued bits. Additionally, BIT STRINGs that represent
 named bit lists, such as the value of the Key Usage certificate
@@ -1342,8 +1339,8 @@ to "1."
 
 Example: The first octet of the BER encoding of RSA Data
 Security, Inc.'s object identifier is 40 * 1 + 2 = 42 =
-2a16. The encoding of 840 = 6 * 128 + 4816 is 86 48 and the
-encoding of 113549 = 6 * 1282 + 7716 * 128 + d16 is 86 f7
+2a (hexadecimal). The encoding of 840 = 6 * 128 + 48 (hexadecimal) is 86 48 and the
+encoding of 113549 = 6 * 1282 + 77 (hexadecimal) * 128 + d (hexadecimal) is 86 f7
 0d. This leads to the following BER encoding:
 
 ~~~
@@ -1564,7 +1561,7 @@ form, the SEQUENCE must have between size1 and size2 items present. In
 the SEQUENCE OF form, the SEQUENCE can have any number of items, including zero.
 
 Example: The RDNSequence type {{RFC5280}} consists of zero or more
-occurences of the RelativeDistinguishedName type, most
+occurrences of the RelativeDistinguishedName type, most
 significant occurrence first:
 
 ~~~
@@ -1793,7 +1790,7 @@ T.61 string, encoded in ASCII. In a constructed encoding,
 the contents octets give the concatenation of the BER
 encodings of consecutive substrings of the T.61 string.
 
-Example: The BER encoding of the T61String value "cl'es
+Example: The BER encoding of the T61String value "clés
 publiques" (French for "public keys") can be any of the
 following, among others, depending on the form of length
 octets and whether the encoding is primitive or constructed:
@@ -1805,7 +1802,7 @@ octets and whether the encoding is primitive or constructed:
 14 81 0f                          long form of length octets
    63 6c c2 65 73 20 70 75 62 6c 69 71 75 65 73
 
-34 15      constructed encoding: "cl'es" + " " + "publiques"
+34 15      constructed encoding: "clés" + " " + "publiques"
    14 05 63 6c c2 65 73
    14 01 20
    14 09 70 75 62 6c 69 71 75 65 73
@@ -2074,8 +2071,7 @@ alternatives.)
 
 The RDNSequence type gives a path through an X.500 directory
 tree starting at the root. RDNSequence is a SEQUENCE OF type
-consisting of zero or more occurences of
-RelativeDistinguishedName.
+consisting of zero or more occurrences of RelativeDistinguishedName.
 
 The RelativeDistinguishedName type gives a unique name to an
 object relative to the object superior to it in the
@@ -2153,7 +2149,7 @@ indicating universal class, and bit 6 has value "0,"
 indicating that the encoding is primitive. The length octets
 follow the short form. The contents octets are the
 concatenation of three octet strings derived from
-subidentifiers (in decimal): 40 * 2 + 5 = 85 = 5516; 4; and
+subidentifiers: 40 * 2 + 5 = 85 = 55 (hexadecimal); 4; and
 6, 10, or 3.
 
 ###AttributeValue
