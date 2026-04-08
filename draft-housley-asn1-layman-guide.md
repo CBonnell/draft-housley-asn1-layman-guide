@@ -2361,7 +2361,9 @@ This document has no IANA actions.
 
 # Security Considerations
 
-TODO Security
+Security considerations are discussed throughout this memo.  Implementations that employ ASN.1 need to take care when parsing
+and decoding data to avoid buffer overflows, denial of service through resource exhaustion, and arbitrary code execution. These
+considerations are not unique to ASN.1; they need to be considered by all data parsers and decoders.
 
 --- back
 
