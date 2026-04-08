@@ -2040,8 +2040,6 @@ has the following DER encodings, among others:
 This section gives an example of ASN.1 notation and DER
 encoding: the Name type {{RFC5280}}.
 
-TODO: add another choice example, perhaps ML-DSA pivate key?
-
 ##Abstract notation
 
 This section gives the ASN.1 notation for the Name type {{RFC5280}}.
@@ -2340,6 +2338,8 @@ is not possible to write out the X.500 name in DER format, so anyone checking th
 be presented with a definite-length encoding instead, special care must be taken to calculate and evaluate
 any signatures or MACs based on the name using the DER encoding, rather than the definite-length encoding,
 otherwise recipients will not be able to verify the data.
+
+One final note, as Name is of type CHOICE, whenever it is tagged it will always encode as explicitly tagged, even if it's in a module with which starts with a definitions block reading "DEFINITIONS IMPLICIT TAGS ::=". This convention is followed as CHOICE encodings need to maintain the original encoding of the ASN.1 primitive, or structure, making up the CHOICE. Overwriting the tag by following the implicit tagging rule could change the meaning of the CHOICE item completely!
 
 #Useful Links  {#section-7}
 
