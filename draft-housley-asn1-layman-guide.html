@@ -3670,7 +3670,6 @@ has the following DER encodings, among others:<a href="#section-5.20-6" class="p
       </h2>
 <p id="section-6-1">This section gives an example of ASN.1 notation and DER
 encoding: the Name type <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>.<a href="#section-6-1" class="pilcrow">¶</a></p>
-<p id="section-6-2">TODO: add another choice example, perhaps ML-DSA pivate key?<a href="#section-6-2" class="pilcrow">¶</a></p>
 <div id="abstract-notation">
 <section id="section-6.1">
         <h3 id="name-abstract-notation">
@@ -3992,6 +3991,7 @@ is not possible to write out the X.500 name in DER format, so anyone checking th
 be presented with a definite-length encoding instead, special care must be taken to calculate and evaluate
 any signatures or MACs based on the name using the DER encoding, rather than the definite-length encoding,
 otherwise recipients will not be able to verify the data.<a href="#section-6.2.6-4" class="pilcrow">¶</a></p>
+<p id="section-6.2.6-5">One final note, as Name is of type CHOICE, whenever it is tagged it will always encode as explicitly tagged, even if it's in a module with which starts with a definitions block reading "DEFINITIONS IMPLICIT TAGS ::=". This convention is followed as CHOICE encodings need to maintain the original encoding of the ASN.1 primitive, or structure, making up the CHOICE. Overwriting the tag by following the implicit tagging rule could change the meaning of the CHOICE item completely!<a href="#section-6.2.6-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
