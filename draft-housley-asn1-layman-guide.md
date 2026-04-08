@@ -2365,6 +2365,10 @@ Security considerations are discussed throughout this memo.  Implementations tha
 and decoding data to avoid buffer overflows, denial of service through resource exhaustion, and arbitrary code execution. These
 considerations are not unique to ASN.1; they need to be considered by all data parsers and decoders.
 
+In relation to resource exhaustion, while ASN.1 allows for arbitrary nesting of constructed objects and very large lengths of individual data objects, we recommend that limits for both these are enforced appropriate for the use-case the parser, or decoder, is used for. Such limits can provide a useful early warning of corrupted data while also (usually) providing a recoverable situation for the parser, or decoder, encountering the issue.
+
+Implementers of ASN.1 parsers and decoders are encouraged to use fuzz testing to identify security vulnerabilities and other flaws.
+
 --- back
 
 # Acknowledgments
