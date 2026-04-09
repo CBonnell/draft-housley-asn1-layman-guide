@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-04-07T02:28:05.074740+00:00",
+  "timestamp": "2026-04-09T02:24:24.960475+00:00",
   "repo": "CBonnell/draft-housley-asn1-layman-guide",
   "labels": [
     {
@@ -231,6 +231,48 @@
               "updatedAt": "2026-04-03T13:50:58Z"
             }
           ]
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "id": "PR_kwDOOSVefs7QiYiV",
+      "title": "Add Security Considerations",
+      "url": "https://github.com/CBonnell/draft-housley-asn1-layman-guide/pull/5",
+      "state": "MERGED",
+      "author": "russhousley",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "First cut at a paragraph for implementers.",
+      "createdAt": "2026-04-07T15:18:16Z",
+      "updatedAt": "2026-04-08T14:15:35Z",
+      "baseRepository": "CBonnell/draft-housley-asn1-layman-guide",
+      "baseRefName": "main",
+      "baseRefOid": "3f5bd1b95feae50725f8a08baf7d45a79c3a6844",
+      "headRepository": "russhousley/draft-housley-asn1-layman-guide",
+      "headRefName": "add-sec-cons",
+      "headRefOid": "05130ec15efc9e741ebb7bec433739daa24b77ab",
+      "closedAt": "2026-04-08T14:15:35Z",
+      "mergedAt": "2026-04-08T14:15:35Z",
+      "mergedBy": "CBonnell",
+      "mergeCommit": {
+        "oid": "e31aa6d1ca7a1764914bb43c8df1114eb520fbc6"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOOSVefs7ykIRP",
+          "commit": {
+            "abbreviatedOid": "05130ec"
+          },
+          "author": "CBonnell",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-04-07T16:04:30Z",
+          "updatedAt": "2026-04-07T16:04:30Z",
+          "comments": []
         }
       ]
     }
