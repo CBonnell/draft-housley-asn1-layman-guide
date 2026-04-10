@@ -5,12 +5,12 @@
 Network Working Group                                         B. Kaliski
 Internet-Draft                                                  Verisign
 Intended status: Informational                                C. Bonnell
-Expires: 6 September 2025                                 DigiCert, Inc.
+Expires: 12 October 2026                                  DigiCert, Inc.
                                                                  D. Hook
                                                                Keyfactor
                                                               R. Housley
                                                           Vigil Security
-                                                            5 March 2025
+                                                           10 April 2026
 
 
           A Layman's Guide to a Subset of ASN.1, BER, and DER
@@ -39,11 +39,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 September 2025.
+   This Internet-Draft will expire on 12 October 2026.
 
 Copyright Notice
 
-   Copyright (c) 2025 IETF Trust and the persons identified as the
+   Copyright (c) 2026 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
