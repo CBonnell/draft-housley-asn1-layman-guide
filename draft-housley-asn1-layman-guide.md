@@ -15,8 +15,8 @@ pi: [toc, sortrefs, symrefs]
 author:
  -  name: Burton S. Kaliski Jr.
     ins: B. Kaliski
-    org: Verisign, Inc
-    abbrev: Verisign
+    org: Verisign
+    abbrev: Verisign Labs
     country: US
     email: bkaliski@verisign.com
  -  name: Corey Bonnell
@@ -180,38 +180,42 @@ features, and for more detail generally, the reader is referred to
 
 ##Background
 
-The first version of this document was published on June 3, 1991, which
-was also published as NIST/OSI Implementors' Workshop document SEC-SIG-91-17.
+The first version of this document was published on June 3, 1991 as
+part of the initial public release of PKCS.  It was published as
+NIST/OSI Implementors' Workshop document SEC-SIG-91-17.
 
-The second version of this document was published on November 1, 1993 as
-An RSA Laboratories Technical Note.  It included the following notice:
+The second version of this document was published on November 1, 1993
+as a RSA Laboratories Technical Note.
 
-~~~
-Copyright (C) 1991-1993 RSA Laboratories, a division of RSA
-Data Security, Inc. License to copy this document is granted
-provided that it is identified as "RSA Data Security, Inc.
-Public-Key Cryptography Standards (PKCS)" in all material
-mentioning or referencing this document.
-003-903015-110-000-000
-~~~
+The third version of this document is the Internet-Draft
+{{draft-kaliski-asn1-layman-guide}}, which is a republication of the
+second version.  It includes the following notice:
 
-That notice clearly allows the work that lead to this
-document, which is the third version.
+> This document represents a republication of A Layman's Guide to a
+> Subset of ASN.1, BER, and DER, originally authored and published by
+> RSA Security USA LLC.  This document is submitted with permission
+> from, and on behalf of RSA Security USA LLC.  By publishing this
+> document, change control is transferred to the IETF and the Internet
+> technical community in full conformance with the provisions of BCP 78
+> and BCP 79.
 
-Discussion of CLASS was added as the replacement for ANY in the
-modern ASN.1 specification.
+This document is the fourth version, and the first under the transfer
+of change control.  The changes from the third version include:
 
-Discussion of UTF8String and GeneralizedTime are added.
+Discussion of CLASS was added as the replacement for ANY following
+the modern ASN.1 specification.
 
-References were updated. PKCS documents are now referenced by
-their RFC numer.
+Discussion of UTF8String and GeneralizedTime were added.
+
+References were updated.  PKCS documents are now referenced by
+their RFC number.
 
 ##Terminology and notation
 
 In this note, an octet is an eight-bit unsigned integer. Bit 8 of the
 octet is the most significant and bit 1 is the least significant.
 
-The following meta-syntax is used for in describing ASN.1 notation:
+The following meta-syntax is used for describing ASN.1 notation:
 
 ~~~
      n1   denotes a variable
@@ -367,7 +371,7 @@ UTCTime,
 >
 GeneralizedTimeTime,
 : a time value in the local time
-zone, GMT, or the gifference between local and GMT.
+zone, GMT, or the difference between local and GMT.
 
 Simple types fall into two categories: string types and non-
 string types. BIT STRING, IA5String, OCTET STRING,
@@ -532,7 +536,7 @@ and 2^1008 -1).
 <br/>
 <br/>
 Short form. One octet. Bit 8 has value "0" and bits 7-1
-give the length. For example the length for an encoding that has 32 value octets would
+give the length. For example the length for an encoding that has 32 contents octets would
 encode simply as:
 ```
 20
@@ -543,14 +547,15 @@ Long form. Two to 127 octets. Bit 8 of first octet has
 value "1" and bits 7-1 give the number of
 additional length octets. Second and following
 octets give the length, base 256, most significant
-digit first. For example the length for an encoding that has 3200 value octets would
+digit first. For example the length for an encoding that has 3200 contents octets would
 encode simply as:
 
 ```
 82 0c 80
 ```
-the first byte indicating the length is in the following 2 octets and
-the next two being the value of the length.
+the first octet indicating that the length is in the
+following 2 octets and the next two octets give the value of the
+length.
 
 Contents octets.
 : These give a concrete representation of the
@@ -560,7 +565,10 @@ are given in {{section-5}}.
 
 ###Prefixes and Magic Numbers {#section-3-1-1}
 
-It is worth noting that definite-length encodings, by their nature, are simple enough to parse without the need for a complete ASN.1 decoder and prefixes to the value octets can often be treated like magic numbers in order to recognise the value octets that are following.
+It is worth noting that definite-length encodings, by their nature, are
+simple enough to parse without the need for a complete ASN.1 decoder
+and prefixes to the contents octets can often be treated like magic
+numbers in order to recognise the contents octets that are following.
 
 For example, the private key field of an encoded ML-DSA-44 private key, which is defined as a CHOICE item with the following structure:
 
@@ -574,24 +582,32 @@ ML-DSA-44-PrivateKey ::= CHOICE {
          }
      }
 ```
-can be recomposed as a series of value octets with the following prefixes and
+can be recomposed as a series of contents octets preceeded by one of
+the following prefixes and
 breakdowns:
 
 | Prefix        | CHOICE Item  | Breakdown                                |
 |---------------|--------------|------------------------------------------|
-| 80 20         | seed         | tag byte 80, length 1 octet, value 32    |
-| 04 82 0a 00   | expandedKey  | tag byte 04, length 3 octets, value 2560 |
-| 30 82 0a 26   | both         | tag byte 30, length 3 octets, value 2598 |
+| 80 20         | seed         | tag 0x80, short form, length 1 octet, value 32 |
+| 04 82 0a 00   | expandedKey  | tag 0x04, long form, length 3 octets, value 2560 |
+| 30 82 0a 26   | both         | tag 0x30, long form, length 3 octets, value 2598 |
 {: title="Prefixes for an ML-DSA private key CHOICE item."}
 
-As can be seen from the table, the first byte of each prefix can be used to distinguish the CHOICE item that has been used to describe the ML-DSA-44 private key value.
+As can be seen from the table, the first octet of each prefix can be
+used to distinguish the CHOICE item that has been used to describe the
+ML-DSA-44 private key value.
 
-As mentioned early, both the 3 octet lengths, as they start with 0x82, indicate that the real length of the value octets is 2 octets long and in the case of the ```both``` CHOICE item, the value octets will contain the the prefixes given in the first two rows, as they appear at the start of the encodings of the elements of the ```both``` SEQUENCE.
+The three-octet lengths for "expandedKey" and "both" start with 0x82
+and indicate that the real length of the contents octets is two
+octets long.  In the case "both" CHOICE item, the contents octets
+will contain the the prefixes given in the first two rows, as they
+appear at the start of the encodings of each of the elements in the
+SEQUENCE.
 
 ##Constructed, definite-length method  {#section-3-2}
 
 This method applies to simple string types, structured
-types, types derived simple string types and structured
+types, types derived from simple string types and structured
 types by implicit tagging, and types derived from anything
 by explicit tagging. It requires that the length of the
 value be known in advance. The parts of the BER encoding are
@@ -607,7 +623,7 @@ Length octets.
 : As described in {{section-3-1}}.
 
 >
-Content octets.
+Contents octets.
 : The concatenation of the BER encodings of the components of the value:
 
 >
@@ -1132,7 +1148,7 @@ contents octets give the concatenation of the BER encodings
 of consecutive substrings of the IA5 string.
 
 Example: The BER encoding of the IA5String value
-"test1@rsa.com" can be any of the following, among others,
+"test1@example.com" can be any of the following, among others,
 depending on the form of length octets and whether the
 encoding is primitive or constructed:
 
@@ -1142,7 +1158,7 @@ encoding is primitive or constructed:
 16 81 0d                       long form of length octets
    74 65 73 74 31 40 72 73 61 2e 63 6f 6d
 
-36 13     constructed encoding: "test1" + "@" + "rsa.com"
+36 13     constructed encoding: "test1" + "@" + "example.com"
    16 05 74 65 73 74 31
    16 01 40
    16 07 72 73 61 2e 63 6f 6d
@@ -1152,7 +1168,7 @@ DER encoding. Primitive. Contents octets are as for a
 primitive BER encoding.
 
 Example: The DER encoding of the IA5String value
-"test1@rsa.com" is
+"test1@example.com" is
 
 ~~~
 16 0d 74 65 73 74 31 40 72 73 61 2e 63 6f 6d
@@ -1701,11 +1717,11 @@ A simple pseudo-code version of the sort (in-place) would look like:
 ```
 Where Length() returns the length of an array, Min returns the mathematical minimum of two values and DER() returns the DER encoding of the ASN1Object passed to it, and the ~ operator provides the ones compliment of a value, as it does in languages like C, Java, and C#. Likewise for & - the bitwise AND.
 
-NOTE: As you can see from the LessThanOrEqual function, Set elements in DER encodings are ordered first according to their tags (class and number), but the CONSTRUCTED bit is not part of the tag.
+NOTE: As you can see from the LessThanOrEqual function, SET elements in DER encodings are ordered first according to their tags (class and number), but the CONSTRUCTED bit is not part of the tag.
 
 Links to examples of different implementations of the DER SET sort can be found in {{section-7}}.
 
-For SET-OF (see below), this is unimportant. All elements have the same tag and DER requires them to either all be in constructed form or all in primitive form, according to that tag. The elements are effectively ordered according to their content octets.
+For SET-OF (see below), this is unimportant. All elements have the same tag and DER requires them to either all be in constructed form or all in primitive form, according to that tag. The elements are effectively ordered according to their contents octets.
 
 For SET, the elements will have distinct tags, and each will be in constructed or primitive form accordingly. Failing to ignore the CONSTRUCTED bit could therefore lead to ordering inversions, so in general it is best to make sure it is not present in the encoding of the tag.
 
@@ -2352,7 +2368,7 @@ for a variety of languages.
 |C# | Bouncy Castle | https://github.com/bcgit/bc-csharp/blob/0c87b54b4b78e95eb80db716e1ac57f2e7875d21/crypto/src/asn1/Asn1Set.cs#L277C38-L277C44 |
 |Java | Bouncy Castle | https://github.com/bcgit/bc-java/blob/126ac9e14a0f56fae088973a777f1f90a521fd82/core/src/main/java/org/bouncycastle/asn1/ASN1Set.java#L500 |
 |Rust | Rust Crypto | https://github.com/RustCrypto/formats/blob/master/der/src/asn1/set_of.rs#L456 |
-{: title="Examples Implementations of DER SET Sorting."}
+{: title="Example Implementations of DER SET Sorting."}
 
 
 # IANA Considerations
