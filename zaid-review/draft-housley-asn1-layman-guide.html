@@ -2688,15 +2688,15 @@ depending on the form of length octets and whether the
 encoding is primitive or constructed:<a href="#section-5.7-6" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5.7-7">
 <pre>
-16 0d 74 65 73 74 31 40 72 73 61 2e 63 6f 6d DER encoding
+16 11 74 65 73 74 31 40 65 78 61 6d 70 6c 65 2e 63 6f 6d DER encoding
 
-16 81 0d                       long form of length octets
-   74 65 73 74 31 40 72 73 61 2e 63 6f 6d
+16 81 11                       long form of length octets
+   74 65 73 74 31 40 65 78 61 6d 70 6c 65 2e 63 6f 6d
 
-36 13     constructed encoding: "test1" + "@" + "example.com"
+36 17     constructed encoding: "test1" + "@" + "example.com"
    16 05 74 65 73 74 31
    16 01 40
-   16 07 72 73 61 2e 63 6f 6d
+   16 0B 65 78 61 6d 70 6c 65 2e 63 6f 6d
 </pre><a href="#section-5.7-7" class="pilcrow">¶</a>
 </div>
 <p id="section-5.7-8">DER encoding. Primitive. Contents octets are as for a
@@ -2705,7 +2705,7 @@ primitive BER encoding.<a href="#section-5.7-8" class="pilcrow">¶</a></p>
 "test1@example.com" is<a href="#section-5.7-9" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5.7-10">
 <pre>
-16 0d 74 65 73 74 31 40 72 73 61 2e 63 6f 6d
+16 11 74 65 73 74 31 40 65 78 61 6d 70 6c 65 2e 63 6f 6d
 </pre><a href="#section-5.7-10" class="pilcrow">¶</a>
 </div>
 </section>
