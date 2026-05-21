@@ -1166,15 +1166,15 @@ depending on the form of length octets and whether the
 encoding is primitive or constructed:
 
 ~~~
-16 0d 74 65 73 74 31 40 72 73 61 2e 63 6f 6d DER encoding
+16 11 74 65 73 74 31 40 65 78 61 6d 70 6c 65 2e 63 6f 6d DER encoding
 
-16 81 0d                       long form of length octets
-   74 65 73 74 31 40 72 73 61 2e 63 6f 6d
+16 81 11                       long form of length octets
+   74 65 73 74 31 40 65 78 61 6d 70 6c 65 2e 63 6f 6d
 
-36 13     constructed encoding: "test1" + "@" + "example.com"
+36 17     constructed encoding: "test1" + "@" + "example.com"
    16 05 74 65 73 74 31
    16 01 40
-   16 07 72 73 61 2e 63 6f 6d
+   16 0B 65 78 61 6d 70 6c 65 2e 63 6f 6d
 ~~~
 
 DER encoding. Primitive. Contents octets are as for a
@@ -1184,7 +1184,7 @@ Example: The DER encoding of the IA5String value
 "test1@example.com" is
 
 ~~~
-16 0d 74 65 73 74 31 40 72 73 61 2e 63 6f 6d
+16 11 74 65 73 74 31 40 65 78 61 6d 70 6c 65 2e 63 6f 6d
 ~~~
 
 ##INTEGER  {#section-5-8}
