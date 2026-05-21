@@ -17,8 +17,13 @@ author:
     ins: B. Kaliski
     org: Verisign
     abbrev: Verisign Labs
+    street: 12061 Bluemont Way
+    city: Reston
+    region: VA
+    code: "20190"
     country: US
     email: bkaliski@verisign.com
+    uri: https://www.verisignlabs.com/
  -  name: Corey Bonnell
     ins: C. Bonnell
     org: DigiCert, Inc.
@@ -81,6 +86,13 @@ informative:
     seriesinfo:
       ITU-T Recommendation: X.500
   draft-kaliski-asn1-layman-guide:
+      target: https://datatracker.ietf.org/doc/html/draft-kaliski-asn1-layman-guide
+      title: A Layman's Guide to a Subset of ASN.1, BER, and DER
+      author:
+      - ins: B. Kaliski
+         surname: Kaliski
+         fullname: Burton S. Kaliski Jr.
+         org: Verisign, Inc.
 
 normative:
   X680:
