@@ -90,9 +90,9 @@ informative:
       title: A Layman's Guide to a Subset of ASN.1, BER, and DER
       author:
       - ins: B. Kaliski
-         surname: Kaliski
-         fullname: Burton S. Kaliski Jr.
-         org: Verisign, Inc.
+        surname: Kaliski
+        fullname: Burton S. Kaliski Jr.
+        org: Verisign, Inc.
 
 normative:
   X680:
