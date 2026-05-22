@@ -3,7 +3,7 @@
 
 
 Network Working Group                                         B. Kaliski
-Internet-Draft                                                  Verisign
+Internet-Draft                                             Verisign Labs
 Intended status: Informational                                C. Bonnell
 Expires: 12 October 2026                                  DigiCert, Inc.
                                                                  D. Hook
@@ -164,38 +164,42 @@ Table of Contents
 
 1.1.  Background
 
-   The first version of this document was published on June 3, 1991,
-   which was also published as NIST/OSI Implementors' Workshop document
-   SEC-SIG-91-17.
+   The first version of this document was published on June 3, 1991 as
+   part of the initial public release of PKCS.  It was published as
+   NIST/OSI Implementors' Workshop document SEC-SIG-91-17.
 
    The second version of this document was published on November 1, 1993
-   as An RSA Laboratories Technical Note.  It included the following
-   notice:
+   as a RSA Laboratories Technical Note.
 
-   Copyright (C) 1991-1993 RSA Laboratories, a division of RSA
-   Data Security, Inc. License to copy this document is granted
-   provided that it is identified as "RSA Data Security, Inc.
-   Public-Key Cryptography Standards (PKCS)" in all material
-   mentioning or referencing this document.
-   003-903015-110-000-000
+   The third version of this document is the Internet-Draft
+   [draft-kaliski-asn1-layman-guide], which is a republication of the
+   second version.  It includes the following notice:
 
-   That notice clearly allows the work that lead to this document, which
-   is the third version.
+      This document represents a republication of A Layman's Guide to a
+      Subset of ASN.1, BER, and DER, originally authored and published
+      by RSA Security USA LLC.  This document is submitted with
+      permission from, and on behalf of RSA Security USA LLC.  By
+      publishing this document, change control is transferred to the
+      IETF and the Internet technical community in full conformance with
+      the provisions of BCP 78 and BCP 79.
 
-   Discussion of CLASS was added as the replacement for ANY in the
-   modern ASN.1 specification.
+   This document is the fourth version, and the first under the transfer
+   of change control.  The changes from the third version include:
 
-   Discussion of UTF8String and GeneralizedTime are added.
+   Discussion of CLASS was added as the replacement for ANY following
+   the modern ASN.1 specification.
+
+   Discussion of UTF8String and GeneralizedTime were added.
 
    References were updated.  PKCS documents are now referenced by their
-   RFC numer.
+   RFC number.
 
 1.2.  Terminology and notation
 
    In this note, an octet is an eight-bit unsigned integer.  Bit 8 of
    the octet is the most significant and bit 1 is the least significant.
 
-   The following meta-syntax is used for in describing ASN.1 notation:
+   The following meta-syntax is used for describing ASN.1 notation:
 
         n1   denotes a variable
 
@@ -345,7 +349,7 @@ Table of Contents
          (GMT) value.
 
       GeneralizedTimeTime,  a time value in the local time zone, GMT, or
-         the gifference between local and GMT.
+         the difference between local and GMT.
 
    Simple types fall into two categories: string types and non- string
    types.  BIT STRING, IA5String, OCTET STRING, PrintableString,
@@ -502,16 +506,17 @@ Table of Contents
 
          Short form.  One octet.  Bit 8 has value "0" and bits 7-1 give
          the length.  For example the length for an encoding that has 32
-         value octets would encode simply as: 20
+         contents octets would encode simply as: 20
 
          Long form.  Two to 127 octets.  Bit 8 of first octet has value
          "1" and bits 7-1 give the number of additional length octets.
          Second and following octets give the length, base 256, most
          significant digit first.  For example the length for an
-         encoding that has 3200 value octets would encode simply as:
+         encoding that has 3200 contents octets would encode simply as:
 
-   82 0c 80 the first byte indicating the length is in the following 2
-   octets and the next two being the value of the length.
+   82 0c 80 the first octet indicating that the length is in the
+   following 2 octets and the next two octets give the value of the
+   length.
 
    Contents octets.  These give a concrete representation of the value
       (or the value of the underlying type, if the type is derived by
@@ -522,8 +527,8 @@ Table of Contents
 
    It is worth noting that definite-length encodings, by their nature,
    are simple enough to parse without the need for a complete ASN.1
-   decoder and prefixes to the value octets can often be treated like
-   magic numbers in order to recognise the value octets that are
+   decoder and prefixes to the contents octets can often be treated like
+   magic numbers in order to recognise the contents octets that are
    following.
 
    For example, the private key field of an encoded ML-DSA-44 private
@@ -532,47 +537,50 @@ Table of Contents
    ML-DSA-44-PrivateKey ::= CHOICE { seed [0] OCTET STRING (SIZE (32)),
    expandedKey OCTET STRING (SIZE (2560)), both SEQUENCE { seed OCTET
    STRING (SIZE (32)), expandedKey OCTET STRING (SIZE (2560)) } } can be
-   recomposed as a series of value octets with the following prefixes
-   and breakdowns:
+   recomposed as a series of contents octets preceeded by one of the
+   following prefixes and breakdowns:
 
-   +=============+=============+=======================================+
-   | Prefix      | CHOICE Item | Breakdown                             |
-   +=============+=============+=======================================+
-   | 80 20       | seed        | tag byte 80, length 1 octet, value 32 |
-   +-------------+-------------+---------------------------------------+
-   | 04 82       | expandedKey | tag byte 04, length 3 octets, value   |
-   | 0a 00       |             | 2560                                  |
-   +-------------+-------------+---------------------------------------+
-   | 30 82       | both        | tag byte 30, length 3 octets, value   |
-   | 0a 26       |             | 2598                                  |
-   +-------------+-------------+---------------------------------------+
+          +========+=============+=============================+
+          | Prefix | CHOICE Item | Breakdown                   |
+          +========+=============+=============================+
+          | 80 20  | seed        | tag 0x80, short form,       |
+          |        |             | length 1 octet, value 32    |
+          +--------+-------------+-----------------------------+
+          | 04 82  | expandedKey | tag 0x04, long form, length |
+          | 0a 00  |             | 3 octets, value 2560        |
+          +--------+-------------+-----------------------------+
+          | 30 82  | both        | tag 0x30, long form, length |
+          | 0a 26  |             | 3 octets, value 2598        |
+          +--------+-------------+-----------------------------+
 
-          Table 3: Prefixes for an ML-DSA private key CHOICE item.
+            Table 3: Prefixes for an ML-DSA private key CHOICE
+                                  item.
 
-   As can be seen from the table, the first byte of each prefix can be
+   As can be seen from the table, the first octet of each prefix can be
    used to distinguish the CHOICE item that has been used to describe
    the ML-DSA-44 private key value.
 
-   As mentioned early, both the 3 octet lengths, as they start with
-   0x82, indicate that the real length of the value octets is 2 octets
-   long and in the case of the both CHOICE item, the value octets will
-   contain the the prefixes given in the first two rows, as they appear
-   at the start of the encodings of the elements of the both SEQUENCE.
+   The three-octet lengths for "expandedKey" and "both" start with 0x82
+   and indicate that the real length of the contents octets is two
+   octets long.  In the case "both" CHOICE item, the contents octets
+   will contain the the prefixes given in the first two rows, as they
+   appear at the start of the encodings of each of the elements in the
+   SEQUENCE.
 
 3.2.  Constructed, definite-length method
 
    This method applies to simple string types, structured types, types
-   derived simple string types and structured types by implicit tagging,
-   and types derived from anything by explicit tagging.  It requires
-   that the length of the value be known in advance.  The parts of the
-   BER encoding are as follows:
+   derived from simple string types and structured types by implicit
+   tagging, and types derived from anything by explicit tagging.  It
+   requires that the length of the value be known in advance.  The parts
+   of the BER encoding are as follows:
 
       Identifier octets.  As described in Section 3.1, except that bit 6
          has value "1", indicating that the encoding is constructed.
 
       Length octets.  As described in Section 3.1.
 
-      Content octets.  The concatenation of the BER encodings of the
+      Contents octets.  The concatenation of the BER encodings of the
          components of the value:
 
       -  For simple string types and types derived from them by implicit
@@ -1020,26 +1028,27 @@ Table of Contents
    concatenation of the BER encodings of consecutive substrings of the
    IA5 string.
 
-   Example: The BER encoding of the IA5String value "test1@rsa.com" can
-   be any of the following, among others, depending on the form of
+   Example: The BER encoding of the IA5String value "test1@example.com"
+   can be any of the following, among others, depending on the form of
    length octets and whether the encoding is primitive or constructed:
 
-   16 0d 74 65 73 74 31 40 72 73 61 2e 63 6f 6d DER encoding
+   16 11 74 65 73 74 31 40 65 78 61 6d 70 6c 65 2e 63 6f 6d DER encoding
 
-   16 81 0d                       long form of length octets
-      74 65 73 74 31 40 72 73 61 2e 63 6f 6d
+   16 81 11                       long form of length octets
+      74 65 73 74 31 40 65 78 61 6d 70 6c 65 2e 63 6f 6d
 
-   36 13     constructed encoding: "test1" + "@" + "rsa.com"
+   36 17     constructed encoding: "test1" + "@" + "example.com"
       16 05 74 65 73 74 31
       16 01 40
-      16 07 72 73 61 2e 63 6f 6d
+      16 0B 65 78 61 6d 70 6c 65 2e 63 6f 6d
 
    DER encoding.  Primitive.  Contents octets are as for a primitive BER
    encoding.
 
-   Example: The DER encoding of the IA5String value "test1@rsa.com" is
+   Example: The DER encoding of the IA5String value "test1@example.com"
+   is
 
-   16 0d 74 65 73 74 31 40 72 73 61 2e 63 6f 6d
+   16 11 74 65 73 74 31 40 65 78 61 6d 70 6c 65 2e 63 6f 6d
 
 5.8.  INTEGER
 
@@ -1522,7 +1531,7 @@ LessThanOrEqual(byte[] encA, byte[] encB)
     return encA[last] <= encB[last]
 } ``` Where Length() returns the length of an array, Min returns the mathematical minimum of two values and DER() returns the DER encoding of the ASN1Object passed to it, and the ~ operator provides the ones compliment of a value, as it does in languages like C, Java, and C#. Likewise for & - the bitwise AND.
 
-   NOTE: As you can see from the LessThanOrEqual function, Set elements
+   NOTE: As you can see from the LessThanOrEqual function, SET elements
    in DER encodings are ordered first according to their tags (class and
    number), but the CONSTRUCTED bit is not part of the tag.
 
@@ -1532,7 +1541,7 @@ LessThanOrEqual(byte[] encA, byte[] encB)
    For SET-OF (see below), this is unimportant.  All elements have the
    same tag and DER requires them to either all be in constructed form
    or all in primitive form, according to that tag.  The elements are
-   effectively ordered according to their content octets.
+   effectively ordered according to their contents octets.
 
    For SET, the elements will have distinct tags, and each will be in
    constructed or primitive form accordingly.  Failing to ignore the
@@ -2101,7 +2110,7 @@ LessThanOrEqual(byte[] encA, byte[] encB)
    |        |Crypto |                                                                                             |
    +--------+-------+---------------------------------------------------------------------------------------------+
 
-           Table 6: Examples Implementations of DER SET Sorting.
+            Table 6: Example Implementations of DER SET Sorting.
 
 8.  IANA Considerations
 
@@ -2152,6 +2161,11 @@ LessThanOrEqual(byte[] encA, byte[] encB)
               February 2021, <https://www.itu.int/rec/T-REC-X.690>.
 
 10.2.  Informative References
+
+   [draft-kaliski-asn1-layman-guide]
+              Kaliski, B., "A Layman's Guide to a Subset of ASN.1, BER,
+              and DER", n.d., <https://datatracker.ietf.org/doc/html/
+              draft-kaliski-asn1-layman-guide>.
 
    [NIST92]   NIST, "Stable Implementation Agreements for Open Systems
               Interconnection Protocols. Part 11 (Directory Services
@@ -2224,9 +2238,12 @@ Acknowledgments
 Authors' Addresses
 
    Burton S. Kaliski Jr.
-   Verisign, Inc
+   Verisign
+   12061 Bluemont Way
+   Reston, VA 20190
    United States of America
    Email: bkaliski@verisign.com
+   URI:   https://www.verisignlabs.com/
 
 
    Corey Bonnell

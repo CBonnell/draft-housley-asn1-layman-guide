@@ -17,22 +17,22 @@ Encoding Rules (BER), and Distinguished Encoding Rules
 background material sufficient for understanding and
 implementing standards that make use of ASN.1. 
     " name="description">
-<meta content="xml2rfc 3.32.0" name="generator">
+<meta content="xml2rfc 3.33.0" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="draft-housley-asn1-layman-guide-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.32.0
-    Python 3.12.12
+  xml2rfc 3.33.0
+    Python 3.12.13
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.2.1
     Jinja2 3.1.6
     lxml 6.0.2
-    platformdirs 4.9.4
+    platformdirs 4.9.6
     pycountry 24.6.1
     PyYAML 6.0.3
-    requests 2.32.5
-    wcwidth 0.6.0
+    requests 2.33.1
+    wcwidth 0.7.0
 -->
 <link href="draft-housley-asn1-layman-guide.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1080,7 +1080,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="authors">
 <div class="author">
       <div class="author-name">B. Kaliski</div>
-<div class="org">Verisign</div>
+<div class="org">Verisign Labs</div>
 </div>
 <div class="author">
       <div class="author-name">C. Bonnell</div>
@@ -1390,27 +1390,32 @@ features, and for more detail generally, the reader is referred to
         <h3 id="name-background">
 <a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-background" class="section-name selfRef">Background</a>
         </h3>
-<p id="section-1.1-1">The first version of this document was published on June 3, 1991, which
-was also published as NIST/OSI Implementors' Workshop document SEC-SIG-91-17.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
-<p id="section-1.1-2">The second version of this document was published on November 1, 1993 as
-An RSA Laboratories Technical Note.  It included the following notice:<a href="#section-1.1-2" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-1.1-3">
-<pre>
-Copyright (C) 1991-1993 RSA Laboratories, a division of RSA
-Data Security, Inc. License to copy this document is granted
-provided that it is identified as "RSA Data Security, Inc.
-Public-Key Cryptography Standards (PKCS)" in all material
-mentioning or referencing this document.
-003-903015-110-000-000
-</pre><a href="#section-1.1-3" class="pilcrow">¶</a>
-</div>
-<p id="section-1.1-4">That notice clearly allows the work that lead to this
-document, which is the third version.<a href="#section-1.1-4" class="pilcrow">¶</a></p>
-<p id="section-1.1-5">Discussion of CLASS was added as the replacement for ANY in the
-modern ASN.1 specification.<a href="#section-1.1-5" class="pilcrow">¶</a></p>
-<p id="section-1.1-6">Discussion of UTF8String and GeneralizedTime are added.<a href="#section-1.1-6" class="pilcrow">¶</a></p>
-<p id="section-1.1-7">References were updated. PKCS documents are now referenced by
-their RFC numer.<a href="#section-1.1-7" class="pilcrow">¶</a></p>
+<p id="section-1.1-1">The first version of this document was published on June 3, 1991 as
+part of the initial public release of PKCS.  It was published as
+NIST/OSI Implementors' Workshop document SEC-SIG-91-17.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
+<p id="section-1.1-2">The second version of this document was published on November 1, 1993
+as a RSA Laboratories Technical Note.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
+<p id="section-1.1-3">The third version of this document is the Internet-Draft
+<span>[<a href="#draft-kaliski-asn1-layman-guide" class="cite xref">draft-kaliski-asn1-layman-guide</a>]</span>, which is a republication of the
+second version.  It includes the following notice:<a href="#section-1.1-3" class="pilcrow">¶</a></p>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-1.1-4.1">
+            <p id="section-1.1-4.1.1">This document represents a republication of A Layman's Guide to a
+Subset of ASN.1, BER, and DER, originally authored and published by
+RSA Security USA LLC.  This document is submitted with permission
+from, and on behalf of RSA Security USA LLC.  By publishing this
+document, change control is transferred to the IETF and the Internet
+technical community in full conformance with the provisions of BCP 78
+and BCP 79.<a href="#section-1.1-4.1.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-1.1-5">This document is the fourth version, and the first under the transfer
+of change control.  The changes from the third version include:<a href="#section-1.1-5" class="pilcrow">¶</a></p>
+<p id="section-1.1-6">Discussion of CLASS was added as the replacement for ANY following
+the modern ASN.1 specification.<a href="#section-1.1-6" class="pilcrow">¶</a></p>
+<p id="section-1.1-7">Discussion of UTF8String and GeneralizedTime were added.<a href="#section-1.1-7" class="pilcrow">¶</a></p>
+<p id="section-1.1-8">References were updated.  PKCS documents are now referenced by
+their RFC number.<a href="#section-1.1-8" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="terminology-and-notation">
@@ -1420,7 +1425,7 @@ their RFC numer.<a href="#section-1.1-7" class="pilcrow">¶</a></p>
         </h3>
 <p id="section-1.2-1">In this note, an octet is an eight-bit unsigned integer. Bit 8 of the
 octet is the most significant and bit 1 is the least significant.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
-<p id="section-1.2-2">The following meta-syntax is used for in describing ASN.1 notation:<a href="#section-1.2-2" class="pilcrow">¶</a></p>
+<p id="section-1.2-2">The following meta-syntax is used for describing ASN.1 notation:<a href="#section-1.2-2" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-1.2-3">
 <pre>
      n1   denotes a variable
@@ -1731,7 +1736,7 @@ object such as an algorithm or attribute type.<a href="#section-2.1-6.1.1.2.1" c
               <dt id="section-2.1-12.1.1.1">GeneralizedTimeTime,</dt>
               <dd style="margin-left: 1.5em" id="section-2.1-12.1.1.2">
                 <p id="section-2.1-12.1.1.2.1">a time value in the local time
-zone, GMT, or the gifference between local and GMT.<a href="#section-2.1-12.1.1.2.1" class="pilcrow">¶</a></p>
+zone, GMT, or the difference between local and GMT.<a href="#section-2.1-12.1.1.2.1" class="pilcrow">¶</a></p>
 </dd>
             <dd class="break"></dd>
 </dl>
@@ -1934,7 +1939,7 @@ and 2^1008 -1).
 <br>
                   <br>
 Short form. One octet. Bit 8 has value "0" and bits 7-1
-give the length. For example the length for an encoding that has 32 value octets would
+give the length. For example the length for an encoding that has 32 contents octets would
 encode simply as:
 <code>
 20
@@ -1945,7 +1950,7 @@ Long form. Two to 127 octets. Bit 8 of first octet has
 value "1" and bits 7-1 give the number of
 additional length octets. Second and following
 octets give the length, base 256, most significant
-digit first. For example the length for an encoding that has 3200 value octets would
+digit first. For example the length for an encoding that has 3200 contents octets would
 encode simply as:<a href="#section-3.1-4.1.1.2.1" class="pilcrow">¶</a></p>
 </dd>
             <dd class="break"></dd>
@@ -1955,8 +1960,9 @@ encode simply as:<a href="#section-3.1-4.1.1.2.1" class="pilcrow">¶</a></p>
 <p id="section-3.1-5"><code>
 82 0c 80
 </code>
-the first byte indicating the length is in the following 2 octets and
-the next two being the value of the length.<a href="#section-3.1-5" class="pilcrow">¶</a></p>
+the first octet indicating that the length is in the
+following 2 octets and the next two octets give the value of the
+length.<a href="#section-3.1-5" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="section-3.1-6">
           <dt id="section-3.1-6.1">Contents octets.</dt>
           <dd style="margin-left: 1.5em" id="section-3.1-6.2">
@@ -1972,7 +1978,10 @@ are given in <a href="#_section-5" class="auto internal xref">Section 5</a>.<a h
           <h4 id="name-prefixes-and-magic-numbers">
 <a href="#section-3.1.1" class="section-number selfRef">3.1.1. </a><a href="#name-prefixes-and-magic-numbers" class="section-name selfRef">Prefixes and Magic Numbers</a>
           </h4>
-<p id="section-3.1.1-1">It is worth noting that definite-length encodings, by their nature, are simple enough to parse without the need for a complete ASN.1 decoder and prefixes to the value octets can often be treated like magic numbers in order to recognise the value octets that are following.<a href="#section-3.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.1.1-1">It is worth noting that definite-length encodings, by their nature, are
+simple enough to parse without the need for a complete ASN.1 decoder
+and prefixes to the contents octets can often be treated like magic
+numbers in order to recognise the contents octets that are following.<a href="#section-3.1.1-1" class="pilcrow">¶</a></p>
 <p id="section-3.1.1-2">For example, the private key field of an encoded ML-DSA-44 private key, which is defined as a CHOICE item with the following structure:<a href="#section-3.1.1-2" class="pilcrow">¶</a></p>
 <p id="section-3.1.1-3"><code>
 ML-DSA-44-PrivateKey ::= CHOICE {
@@ -1984,7 +1993,8 @@ ML-DSA-44-PrivateKey ::= CHOICE {
          }
      }
 </code>
-can be recomposed as a series of value octets with the following prefixes and
+can be recomposed as a series of contents octets preceeded by one of
+the following prefixes and
 breakdowns:<a href="#section-3.1.1-3" class="pilcrow">¶</a></p>
 <span id="name-prefixes-for-an-ml-dsa-priv"></span><table class="center" id="table-3">
             <caption>
@@ -2002,22 +2012,29 @@ breakdowns:<a href="#section-3.1.1-3" class="pilcrow">¶</a></p>
               <tr>
                 <td class="text-left" rowspan="1" colspan="1">80 20</td>
                 <td class="text-left" rowspan="1" colspan="1">seed</td>
-                <td class="text-left" rowspan="1" colspan="1">tag byte 80, length 1 octet, value 32</td>
+                <td class="text-left" rowspan="1" colspan="1">tag 0x80, short form, length 1 octet, value 32</td>
               </tr>
               <tr>
                 <td class="text-left" rowspan="1" colspan="1">04 82 0a 00</td>
                 <td class="text-left" rowspan="1" colspan="1">expandedKey</td>
-                <td class="text-left" rowspan="1" colspan="1">tag byte 04, length 3 octets, value 2560</td>
+                <td class="text-left" rowspan="1" colspan="1">tag 0x04, long form, length 3 octets, value 2560</td>
               </tr>
               <tr>
                 <td class="text-left" rowspan="1" colspan="1">30 82 0a 26</td>
                 <td class="text-left" rowspan="1" colspan="1">both</td>
-                <td class="text-left" rowspan="1" colspan="1">tag byte 30, length 3 octets, value 2598</td>
+                <td class="text-left" rowspan="1" colspan="1">tag 0x30, long form, length 3 octets, value 2598</td>
               </tr>
             </tbody>
           </table>
-<p id="section-3.1.1-5">As can be seen from the table, the first byte of each prefix can be used to distinguish the CHOICE item that has been used to describe the ML-DSA-44 private key value.<a href="#section-3.1.1-5" class="pilcrow">¶</a></p>
-<p id="section-3.1.1-6">As mentioned early, both the 3 octet lengths, as they start with 0x82, indicate that the real length of the value octets is 2 octets long and in the case of the <code>both</code> CHOICE item, the value octets will contain the the prefixes given in the first two rows, as they appear at the start of the encodings of the elements of the <code>both</code> SEQUENCE.<a href="#section-3.1.1-6" class="pilcrow">¶</a></p>
+<p id="section-3.1.1-5">As can be seen from the table, the first octet of each prefix can be
+used to distinguish the CHOICE item that has been used to describe the
+ML-DSA-44 private key value.<a href="#section-3.1.1-5" class="pilcrow">¶</a></p>
+<p id="section-3.1.1-6">The three-octet lengths for "expandedKey" and "both" start with 0x82
+and indicate that the real length of the contents octets is two
+octets long.  In the case "both" CHOICE item, the contents octets
+will contain the the prefixes given in the first two rows, as they
+appear at the start of the encodings of each of the elements in the
+SEQUENCE.<a href="#section-3.1.1-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2028,7 +2045,7 @@ breakdowns:<a href="#section-3.1.1-3" class="pilcrow">¶</a></p>
 <a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-constructed-definite-length" class="section-name selfRef">Constructed, definite-length method</a>
         </h3>
 <p id="section-3.2-1">This method applies to simple string types, structured
-types, types derived simple string types and structured
+types, types derived from simple string types and structured
 types by implicit tagging, and types derived from anything
 by explicit tagging. It requires that the length of the
 value be known in advance. The parts of the BER encoding are
@@ -2059,7 +2076,7 @@ indicating that the encoding is constructed.<a href="#section-3.2-2.1.1.2.1" cla
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-3.2-4.1">
             <span class="break"></span><dl class="dlParallel" id="section-3.2-4.1.1">
-              <dt id="section-3.2-4.1.1.1">Content octets.</dt>
+              <dt id="section-3.2-4.1.1.1">Contents octets.</dt>
               <dd style="margin-left: 1.5em" id="section-3.2-4.1.1.2">
                 <p id="section-3.2-4.1.1.2.1">The concatenation of the BER encodings of the components of the value:<a href="#section-3.2-4.1.1.2.1" class="pilcrow">¶</a></p>
 </dd>
@@ -2666,29 +2683,29 @@ string, encoded in ASCII. In a constructed encoding, the
 contents octets give the concatenation of the BER encodings
 of consecutive substrings of the IA5 string.<a href="#section-5.7-5" class="pilcrow">¶</a></p>
 <p id="section-5.7-6">Example: The BER encoding of the IA5String value
-"test1@rsa.com" can be any of the following, among others,
+"test1@example.com" can be any of the following, among others,
 depending on the form of length octets and whether the
 encoding is primitive or constructed:<a href="#section-5.7-6" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5.7-7">
 <pre>
-16 0d 74 65 73 74 31 40 72 73 61 2e 63 6f 6d DER encoding
+16 11 74 65 73 74 31 40 65 78 61 6d 70 6c 65 2e 63 6f 6d DER encoding
 
-16 81 0d                       long form of length octets
-   74 65 73 74 31 40 72 73 61 2e 63 6f 6d
+16 81 11                       long form of length octets
+   74 65 73 74 31 40 65 78 61 6d 70 6c 65 2e 63 6f 6d
 
-36 13     constructed encoding: "test1" + "@" + "rsa.com"
+36 17     constructed encoding: "test1" + "@" + "example.com"
    16 05 74 65 73 74 31
    16 01 40
-   16 07 72 73 61 2e 63 6f 6d
+   16 0B 65 78 61 6d 70 6c 65 2e 63 6f 6d
 </pre><a href="#section-5.7-7" class="pilcrow">¶</a>
 </div>
 <p id="section-5.7-8">DER encoding. Primitive. Contents octets are as for a
 primitive BER encoding.<a href="#section-5.7-8" class="pilcrow">¶</a></p>
 <p id="section-5.7-9">Example: The DER encoding of the IA5String value
-"test1@rsa.com" is<a href="#section-5.7-9" class="pilcrow">¶</a></p>
+"test1@example.com" is<a href="#section-5.7-9" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5.7-10">
 <pre>
-16 0d 74 65 73 74 31 40 72 73 61 2e 63 6f 6d
+16 11 74 65 73 74 31 40 65 78 61 6d 70 6c 65 2e 63 6f 6d
 </pre><a href="#section-5.7-10" class="pilcrow">¶</a>
 </div>
 </section>
@@ -3306,9 +3323,9 @@ LessThanOrEqual(byte[] encA, byte[] encB)
 } ``` Where Length() returns the length of an array, Min returns the mathematical minimum of two values and DER() returns the DER encoding of the ASN1Object passed to it, and the ~ operator provides the ones compliment of a value, as it does in languages like C, Java, and C#. Likewise for &amp; - the bitwise AND.
 </pre><a href="#section-5.15-15" class="pilcrow">¶</a>
 </div>
-<p id="section-5.15-16">NOTE: As you can see from the LessThanOrEqual function, Set elements in DER encodings are ordered first according to their tags (class and number), but the CONSTRUCTED bit is not part of the tag.<a href="#section-5.15-16" class="pilcrow">¶</a></p>
+<p id="section-5.15-16">NOTE: As you can see from the LessThanOrEqual function, SET elements in DER encodings are ordered first according to their tags (class and number), but the CONSTRUCTED bit is not part of the tag.<a href="#section-5.15-16" class="pilcrow">¶</a></p>
 <p id="section-5.15-17">Links to examples of different implementations of the DER SET sort can be found in <a href="#_section-7" class="auto internal xref">Section 7</a>.<a href="#section-5.15-17" class="pilcrow">¶</a></p>
-<p id="section-5.15-18">For SET-OF (see below), this is unimportant. All elements have the same tag and DER requires them to either all be in constructed form or all in primitive form, according to that tag. The elements are effectively ordered according to their content octets.<a href="#section-5.15-18" class="pilcrow">¶</a></p>
+<p id="section-5.15-18">For SET-OF (see below), this is unimportant. All elements have the same tag and DER requires them to either all be in constructed form or all in primitive form, according to that tag. The elements are effectively ordered according to their contents octets.<a href="#section-5.15-18" class="pilcrow">¶</a></p>
 <p id="section-5.15-19">For SET, the elements will have distinct tags, and each will be in constructed or primitive form accordingly. Failing to ignore the CONSTRUCTED bit could therefore lead to ordering inversions, so in general it is best to make sure it is not present in the encoding of the tag.<a href="#section-5.15-19" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -4005,10 +4022,10 @@ otherwise recipients will not be able to verify the data.<a href="#section-6.2.6
       </h2>
 <p id="section-7-1">The following table provides alternate implementations of the DER SET sort
 for a variety of languages.<a href="#section-7-1" class="pilcrow">¶</a></p>
-<span id="name-examples-implementations-of"></span><table class="center" id="table-6">
+<span id="name-example-implementations-of-"></span><table class="center" id="table-6">
         <caption>
 <a href="#table-6" class="selfRef">Table 6</a>:
-<a href="#name-examples-implementations-of" class="selfRef">Examples Implementations of DER SET Sorting.</a>
+<a href="#name-example-implementations-of-" class="selfRef">Example Implementations of DER SET Sorting.</a>
         </caption>
 <thead>
           <tr>
@@ -4098,6 +4115,10 @@ considerations are not unique to ASN.1; they need to be considered by all data p
 <a href="#section-10.2" class="section-number selfRef">10.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
         </h3>
 <dl class="references">
+<dt id="draft-kaliski-asn1-layman-guide">[draft-kaliski-asn1-layman-guide]</dt>
+        <dd>
+<span class="refAuthor">Kaliski, B.</span>, <span class="refTitle">"A Layman's Guide to a Subset of ASN.1, BER, and DER"</span>, <span>n.d.</span>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-kaliski-asn1-layman-guide">https://datatracker.ietf.org/doc/html/draft-kaliski-asn1-layman-guide</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="NIST92">[NIST92]</dt>
         <dd>
 <span class="refAuthor">NIST</span>, <span class="refTitle">"Stable Implementation Agreements for Open Systems Interconnection Protocols. Part 11 (Directory Services Protocols)"</span>, <span class="seriesInfo">NIST SP 500-202</span>, <time datetime="1992-12" class="refDate">December 1992</time>. </dd>
@@ -4170,11 +4191,19 @@ considerations are not unique to ASN.1; they need to be considered by all data p
       </h2>
 <address class="vcard">
         <div dir="auto" class="left"><span class="fn nameRole">Burton S. Kaliski Jr.</span></div>
-<div dir="auto" class="left"><span class="org">Verisign, Inc</span></div>
+<div dir="auto" class="left"><span class="org">Verisign</span></div>
+<div dir="auto" class="left"><span class="street-address">12061 Bluemont Way</span></div>
+<div dir="auto" class="left">
+<span class="locality">Reston</span>, <span class="region">VA</span> <span class="postal-code">20190</span>
+</div>
 <div dir="auto" class="left"><span class="country-name">United States of America</span></div>
 <div class="email">
 <span>Email:</span>
 <a href="mailto:bkaliski@verisign.com" class="email">bkaliski@verisign.com</a>
+</div>
+<div class="url">
+<span>URI:</span>
+<a href="https://www.verisignlabs.com/" class="url">https://www.verisignlabs.com/</a>
 </div>
 </address>
 <address class="vcard">
