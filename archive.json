@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-05-21T03:41:50.956369+00:00",
+  "timestamp": "2026-05-24T03:36:53.772888+00:00",
   "repo": "CBonnell/draft-housley-asn1-layman-guide",
   "labels": [
     {
@@ -272,6 +272,70 @@
           "body": "",
           "createdAt": "2026-04-07T16:04:30Z",
           "updatedAt": "2026-04-07T16:04:30Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "id": "PR_kwDOOSVefs7eAs8M",
+      "title": "Zaid review",
+      "url": "https://github.com/CBonnell/draft-housley-asn1-layman-guide/pull/6",
+      "state": "MERGED",
+      "author": "CBonnell",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-05-21T16:00:14Z",
+      "updatedAt": "2026-05-22T15:12:06Z",
+      "baseRepository": "CBonnell/draft-housley-asn1-layman-guide",
+      "baseRefName": "main",
+      "baseRefOid": "b94d9c1b487d8148ecaf54a98416e1ca1aea6080",
+      "headRepository": "CBonnell/draft-housley-asn1-layman-guide",
+      "headRefName": "zaid-review",
+      "headRefOid": "cd50103dc32b29494c3f2687ab57374e52064d02",
+      "closedAt": "2026-05-22T15:12:06Z",
+      "mergedAt": "2026-05-22T15:12:06Z",
+      "mergedBy": "russhousley",
+      "mergeCommit": {
+        "oid": "1c6f78f1fbd348103f75487fe9ee20de1ab6c444"
+      },
+      "comments": [
+        {
+          "author": "russhousley",
+          "authorAssociation": "COLLABORATOR",
+          "body": "If we are going to change the examples from \"rsa.com\" to \"example.com\" (which I am willing to do), then the hex needs to be updated to match.",
+          "createdAt": "2026-05-21T17:19:54Z",
+          "updatedAt": "2026-05-21T17:19:54Z"
+        },
+        {
+          "author": "russhousley",
+          "authorAssociation": "COLLABORATOR",
+          "body": "test1@rsa.com is \"16810d7465737431407273612e636f6d\" (dropping spaces from the document).\r\n\r\ntest1@example.com is \"16117465737431406578616d706c652e636f6d\" (non-constructed)",
+          "createdAt": "2026-05-21T17:37:05Z",
+          "updatedAt": "2026-05-21T17:37:05Z"
+        },
+        {
+          "author": "CBonnell",
+          "authorAssociation": "OWNER",
+          "body": "@russhousley I adjusted the three encodings (DER, BER long form length primitive, BER constructed)",
+          "createdAt": "2026-05-21T20:10:16Z",
+          "updatedAt": "2026-05-21T20:10:16Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOOSVefs8AAAABAxPBeg",
+          "commit": {
+            "abbreviatedOid": "cd50103"
+          },
+          "author": "russhousley",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Thanks for fixing the encoded examples.  Ship it.",
+          "createdAt": "2026-05-22T15:11:51Z",
+          "updatedAt": "2026-05-22T15:11:51Z",
           "comments": []
         }
       ]
