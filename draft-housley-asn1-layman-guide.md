@@ -129,6 +129,14 @@ Encoding Rules (BER), and Distinguished Encoding Rules
 background material sufficient for understanding and
 implementing standards that make use of ASN.1.
 
+This document represents a republication of A Layman's Guide to a
+Subset of ASN.1, BER, and DER, originally authored and published by
+RSA Security USA LLC.  This document is submitted with permission
+from, and on behalf of RSA Security USA LLC.  By publishing this
+document, change control is transferred to the IETF and the Internet
+technical community in full conformance with the provisions of BCP 78
+and BCP 79.
+
 --- middle
 
 #Introduction {#intro}
