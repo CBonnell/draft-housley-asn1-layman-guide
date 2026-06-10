@@ -42,6 +42,7 @@ author:
     email: housley@vigilsec.com
 
 informative:
+  RFC0020:
   RFC2985:
   RFC3629:
   RFC4055:
@@ -52,6 +53,7 @@ informative:
   RFC5912:
   RFC8017:
   RFC8018:
+  I-D.kaliski-asn1-layman-guide:
   NIST92:
     title: >
       Stable Implementation Agreements for Open Systems
@@ -85,14 +87,6 @@ informative:
     date: 2008-11
     seriesinfo:
       ITU-T Recommendation: X.500
-  draft-kaliski-asn1-layman-guide:
-      target: https://datatracker.ietf.org/doc/html/draft-kaliski-asn1-layman-guide
-      title: A Layman's Guide to a Subset of ASN.1, BER, and DER
-      author:
-      - ins: B. Kaliski
-        surname: Kaliski
-        fullname: Burton S. Kaliski Jr.
-        org: Verisign, Inc.
 
 normative:
   X680:
@@ -201,7 +195,7 @@ The second version of this document was published on November 1, 1993
 as a RSA Laboratories Technical Note.
 
 The third version of this document is the Internet-Draft
-{{draft-kaliski-asn1-layman-guide}}, which is a republication of the
+{{I-D.kaliski-asn1-layman-guide}}, which is a republication of the
 second version.  It includes the following notice:
 
 > This document represents a republication of A Layman's Guide to a
@@ -321,7 +315,7 @@ special rules:
 
 * Layout is not significant; multiple spaces and line breaks can be considered as a single space.
 
-* Comments are delimited by pairs of hyphens ('--'), or a pair of hyphens and a line break.
+* Comments begin with a pairs of hyphens ('--'), and comments end with another pair of hyphens or a line break.
 
 * Identifiers (names of values and fields) and type references (names of types) consist of upper- and
 lower-case letters, digits, hyphens, and spaces;
@@ -345,7 +339,7 @@ BIT STRING,
 
 >
 IA5String,
-: an arbitrary string of IA5 (ASCII) characters.
+: an arbitrary string of IA5 (ASCII) characters {{RFC0020}}.
 
 >
 INTEGER,
@@ -371,7 +365,7 @@ UTF8String,
 
 >
 PrintableString,
-: an arbitrary string of printable characters.
+: an arbitrary string of printable characters.  The allowable characters are listed in {{section-5-12}}.
 
 >
 T61String,
@@ -383,8 +377,7 @@ UTCTime,
 
 >
 GeneralizedTimeTime,
-: a time value in the local time
-zone, GMT, or the difference between local and GMT.
+: a time value in the local time zone, GMT, or the difference between local and GMT.
 
 Simple types fall into two categories: string types and non-
 string types. BIT STRING, IA5String, OCTET STRING,
@@ -1793,19 +1786,22 @@ not encode the empty SET OF, as it minimizes the size of the message.
 
 The T61String type denotes an arbitrary string of T.61
 characters. T.61 is an eight-bit extension to the ASCII
-character set. Special "escape" sequences specify the
-interpretation of subsequent character values as, for
-example, Japanese; the initial interpretation is Latin. The
-character set includes non-printing control characters. The
-T61String type allows only the Latin and Japanese character
-interpretations, and implementors' agreements for directory
-names exclude control characters {{NIST92}}. A T61String value
-can have any length, including zero. This type is a string
-type.
+character set. Special "escape" sequences specify shift the
+character interpretation dynamically, where interpretation of
+subsequent character values as, for example, Japanese; the
+initial interpretation is Latin. The character set includes
+non-printing control characters. The T61String type allows only
+the Latin and Japanese character interpretations, and implementors'
+agreements for directory names exclude control characters
+{{NIST92}}. A T61String value can have any length, including
+zero. This type is a string type.
 
 The T61String type is used in PKCS #9 unstructured-address
 and challenge-password attributes {{RFC2985}}, and in several
 attributes documented in {{RFC5280}}.
+
+Note: The use of T61String is generally discouraged, and the use
+of UTF8String is preferred.
 
 ASN.1 notation:
 
