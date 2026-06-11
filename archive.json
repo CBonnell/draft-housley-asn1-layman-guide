@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-06-09T03:31:31.933868+00:00",
+  "timestamp": "2026-06-11T03:59:05.751889+00:00",
   "repo": "CBonnell/draft-housley-asn1-layman-guide",
   "labels": [
     {
@@ -349,6 +349,99 @@
           "body": "Looks fine, no additions.",
           "createdAt": "2026-05-24T06:12:33Z",
           "updatedAt": "2026-05-24T06:12:33Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "id": "PR_kwDOOSVefs7k8LGH",
+      "title": "Resolve comments from Alexey",
+      "url": "https://github.com/CBonnell/draft-housley-asn1-layman-guide/pull/7",
+      "state": "OPEN",
+      "author": "russhousley",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Helpful.  Thanks Alexey.",
+      "createdAt": "2026-06-10T16:23:46Z",
+      "updatedAt": "2026-06-10T19:53:19Z",
+      "baseRepository": "CBonnell/draft-housley-asn1-layman-guide",
+      "baseRefName": "main",
+      "baseRefOid": "1c6f78f1fbd348103f75487fe9ee20de1ab6c444",
+      "headRepository": "CBonnell/draft-housley-asn1-layman-guide",
+      "headRefName": "alexey-review",
+      "headRefOid": "e4b4a6031cd2b081ef49430f2164267203d56875",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOOSVefs8AAAABCoASuA",
+          "commit": {
+            "abbreviatedOid": "e4b4a60"
+          },
+          "author": "CBonnell",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-06-10T19:53:19Z",
+          "updatedAt": "2026-06-10T19:53:19Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "id": "PR_kwDOOSVefs7k_Qad",
+      "title": "Add rights statement",
+      "url": "https://github.com/CBonnell/draft-housley-asn1-layman-guide/pull/8",
+      "state": "OPEN",
+      "author": "russhousley",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "... change control is transferred ...",
+      "createdAt": "2026-06-10T18:32:11Z",
+      "updatedAt": "2026-06-11T00:45:30Z",
+      "baseRepository": "CBonnell/draft-housley-asn1-layman-guide",
+      "baseRefName": "main",
+      "baseRefOid": "1c6f78f1fbd348103f75487fe9ee20de1ab6c444",
+      "headRepository": "CBonnell/draft-housley-asn1-layman-guide",
+      "headRefName": "add-rights-statement",
+      "headRefOid": "4d53dba4cc9de496406d439936a7c35e0b48523c",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOOSVefs8AAAABCn_3NA",
+          "commit": {
+            "abbreviatedOid": "4d53dba"
+          },
+          "author": "CBonnell",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-06-10T19:52:27Z",
+          "updatedAt": "2026-06-10T19:52:27Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOOSVefs8AAAABCpi4zA",
+          "commit": {
+            "abbreviatedOid": "4d53dba"
+          },
+          "author": "dghgit",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-06-11T00:45:30Z",
+          "updatedAt": "2026-06-11T00:45:30Z",
           "comments": []
         }
       ]
