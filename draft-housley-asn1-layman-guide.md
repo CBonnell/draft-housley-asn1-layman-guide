@@ -26,9 +26,9 @@ author:
     uri: https://www.verisignlabs.com/
  -  name: Corey Bonnell
     ins: C. Bonnell
-    org: DigiCert, Inc.
+    org: TurboLight Solutions
     country: US
-    email: Corey.Bonnell@digicert.com
+    email: corey.bonnell@turbolightsolutions.com
  -  name: David Hook
     ins: D. Hook
     org: Keyfactor
