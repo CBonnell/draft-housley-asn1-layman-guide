@@ -5,7 +5,7 @@
 Network Working Group                                         B. Kaliski
 Internet-Draft                                             Verisign Labs
 Intended status: Informational                                C. Bonnell
-Expires: 12 October 2026                                  DigiCert, Inc.
+Expires: 12 October 2026                            TurboLight Solutions
                                                                  D. Hook
                                                                Keyfactor
                                                               R. Housley
@@ -2247,9 +2247,9 @@ Authors' Addresses
 
 
    Corey Bonnell
-   DigiCert, Inc.
+   TurboLight Solutions
    United States of America
-   Email: Corey.Bonnell@digicert.com
+   Email: corey.bonnell@turbolightsolutions.com
 
 
    David Hook
