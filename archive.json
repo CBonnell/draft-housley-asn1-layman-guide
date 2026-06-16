@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-06-14T04:05:25.512870+00:00",
+  "timestamp": "2026-06-16T04:08:09.678592+00:00",
   "repo": "CBonnell/draft-housley-asn1-layman-guide",
   "labels": [
     {
@@ -479,7 +479,7 @@
       "labels": [],
       "body": "Update list of changes from previous version.",
       "createdAt": "2026-06-12T14:35:17Z",
-      "updatedAt": "2026-06-13T18:23:19Z",
+      "updatedAt": "2026-06-14T06:19:40Z",
       "baseRepository": "CBonnell/draft-housley-asn1-layman-guide",
       "baseRefName": "main",
       "baseRefOid": "1c6f78f1fbd348103f75487fe9ee20de1ab6c444",
@@ -491,7 +491,21 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOOSVefs8AAAABC8YbFQ",
+          "commit": {
+            "abbreviatedOid": "aa528e1"
+          },
+          "author": "dghgit",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Approve",
+          "createdAt": "2026-06-14T06:19:40Z",
+          "updatedAt": "2026-06-14T06:19:40Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 10,
@@ -505,7 +519,7 @@
       "labels": [],
       "body": "Documents a nuanced case that is allowed by X.690.",
       "createdAt": "2026-06-13T18:37:56Z",
-      "updatedAt": "2026-06-13T18:38:02Z",
+      "updatedAt": "2026-06-14T06:17:13Z",
       "baseRepository": "CBonnell/draft-housley-asn1-layman-guide",
       "baseRefName": "main",
       "baseRefOid": "1c6f78f1fbd348103f75487fe9ee20de1ab6c444",
@@ -517,33 +531,76 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOOSVefs8AAAABC8YUGA",
+          "commit": {
+            "abbreviatedOid": "fe6018a"
+          },
+          "author": "dghgit",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Agreed",
+          "createdAt": "2026-06-14T06:17:13Z",
+          "updatedAt": "2026-06-14T06:17:13Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 11,
       "id": "PR_kwDOOSVefs7mHoME",
       "title": "Update affilation",
       "url": "https://github.com/CBonnell/draft-housley-asn1-layman-guide/pull/11",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "CBonnell",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2026-06-13T18:53:55Z",
-      "updatedAt": "2026-06-13T18:54:00Z",
+      "updatedAt": "2026-06-14T21:59:52Z",
       "baseRepository": "CBonnell/draft-housley-asn1-layman-guide",
       "baseRefName": "main",
       "baseRefOid": "1c6f78f1fbd348103f75487fe9ee20de1ab6c444",
       "headRepository": "CBonnell/draft-housley-asn1-layman-guide",
       "headRefName": "update-affiliation",
       "headRefOid": "edf566a84c8d7568502f2cb8963a4d9765ee8d0a",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-06-14T21:59:49Z",
+      "mergedAt": "2026-06-14T21:59:49Z",
+      "mergedBy": "CBonnell",
+      "mergeCommit": {
+        "oid": "2b6957c0fcfb7a39f8f982c5670b80915e4128d2"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOOSVefs8AAAABC8YNUQ",
+          "commit": {
+            "abbreviatedOid": "edf566a"
+          },
+          "author": "dghgit",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "I certainly wouldn't argue with this one!",
+          "createdAt": "2026-06-14T06:14:50Z",
+          "updatedAt": "2026-06-14T06:14:50Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOOSVefs8AAAABC8YX1A",
+          "commit": {
+            "abbreviatedOid": "edf566a"
+          },
+          "author": "dghgit",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-06-14T06:18:36Z",
+          "updatedAt": "2026-06-14T06:18:36Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
