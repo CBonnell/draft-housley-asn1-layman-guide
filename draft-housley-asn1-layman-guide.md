@@ -1346,11 +1346,16 @@ BER encoding. Primitive. Contents octets are as follows,
 where value1, ..., valuen denote the integer values of the
 components in the complete object identifier:
 
-1. The first octet has value 40 * value1 + value2.
-(This is unambiguous, since value1 is limited to
-values 0, 1, and 2; value2 is limited to the range
+1. The first two components (value1 and value2) are encoded
+as a single value 40 * value1 + value2, then encoded using
+the same base-128, most-significant-digit-first scheme
+described in step 2. When value1 is 0 or 1, value2 is
+limited to the range 0 to 39, so this combined value fits
+in a single octet (This is unambiguous, since value1 is
+limited to values 0, 1, and 2; value2 is limited to the range
 0 to 39 when value1 is 0 or 1; and, according to
-{{X680}}, n is always at least 2.)
+{{X680}}, n is always at least 2.). When value1 is 2, value2
+is unbounded, so value1 and value2 may require multiple octets.
 
 2. The following octets, if any, encode value3, ...,
 valuen. Each value is encoded base 128, most
