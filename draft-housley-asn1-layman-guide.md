@@ -220,7 +220,7 @@ of change control.  The changes from the third version include:
 * Discussion of UTF8String and GeneralizedTime were added;
 
 * The use of T61String is discouraged;
-* Guidance on the maximum value of the first and second components of OBJECT IDENTIFIERs was clarified; and
+* Clarified the allowable numbers in the first and second values of an OBJECT IDENTIFIER; and
 
 * References were updated, and PKCS documents are now referenced by their RFC number.
 
