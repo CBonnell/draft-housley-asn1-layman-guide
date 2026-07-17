@@ -172,7 +172,7 @@ Table of Contents
    as a RSA Laboratories Technical Note.
 
    The third version of this document is the Internet-Draft
-   [draft-kaliski-asn1-layman-guide], which is a republication of the
+   [I-D.kaliski-asn1-layman-guide], which is a republication of the
    second version.  It includes the following notice:
 
       This document represents a republication of A Layman's Guide to a
@@ -306,8 +306,8 @@ Table of Contents
    *  Layout is not significant; multiple spaces and line breaks can be
       considered as a single space.
 
-   *  Comments are delimited by pairs of hyphens ('--'), or a pair of
-      hyphens and a line break.
+   *  Comments begin with a pairs of hyphens ('--'), and comments end
+      with another pair of hyphens or a line break.
 
    *  Identifiers (names of values and fields) and type references
       (names of types) consist of upper- and lower-case letters, digits,
@@ -326,7 +326,8 @@ Table of Contents
 
       BIT STRING,  an arbitrary string of bits (ones and zeroes).
 
-      IA5String,  an arbitrary string of IA5 (ASCII) characters.
+      IA5String,  an arbitrary string of IA5 (ASCII) characters
+         [RFC0020].
 
       INTEGER,  an arbitrary integer.
 
@@ -342,6 +343,7 @@ Table of Contents
          UTF-8 encoding.
 
       PrintableString,  an arbitrary string of printable characters.
+         The allowable characters are listed in Section 5.12.
 
       T61String,  an arbitrary string of T.61 (eight-bit) characters.
 
@@ -1599,10 +1601,11 @@ LessThanOrEqual(byte[] encA, byte[] encB)
 
    The T61String type denotes an arbitrary string of T.61 characters.
    T.61 is an eight-bit extension to the ASCII character set.  Special
-   "escape" sequences specify the interpretation of subsequent character
-   values as, for example, Japanese; the initial interpretation is
-   Latin.  The character set includes non-printing control characters.
-   The T61String type allows only the Latin and Japanese character
+   "escape" sequences specify shift the character interpretation
+   dynamically, where interpretation of subsequent character values as,
+   for example, Japanese; the initial interpretation is Latin.  The
+   character set includes non-printing control characters.  The
+   T61String type allows only the Latin and Japanese character
    interpretations, and implementors' agreements for directory names
    exclude control characters [NIST92].  A T61String value can have any
    length, including zero.  This type is a string type.
@@ -1610,6 +1613,9 @@ LessThanOrEqual(byte[] encA, byte[] encB)
    The T61String type is used in PKCS #9 unstructured-address and
    challenge-password attributes [RFC2985], and in several attributes
    documented in [RFC5280].
+
+   Note: The use of T61String is generally discouraged, and the use of
+   UTF8String is preferred.
 
    ASN.1 notation:
 
@@ -2162,14 +2168,20 @@ LessThanOrEqual(byte[] encA, byte[] encB)
 
 10.2.  Informative References
 
-   [draft-kaliski-asn1-layman-guide]
+   [I-D.kaliski-asn1-layman-guide]
               Kaliski, B., "A Layman's Guide to a Subset of ASN.1, BER,
-              and DER", n.d., <https://datatracker.ietf.org/doc/html/
-              draft-kaliski-asn1-layman-guide>.
+              and DER", Work in Progress, Internet-Draft, draft-kaliski-
+              asn1-layman-guide-00, 2 April 2026,
+              <https://datatracker.ietf.org/doc/html/draft-kaliski-asn1-
+              layman-guide-00>.
 
    [NIST92]   NIST, "Stable Implementation Agreements for Open Systems
               Interconnection Protocols. Part 11 (Directory Services
               Protocols)", NIST SP 500-202, December 1992.
+
+   [RFC0020]  Cerf, V., "ASCII format for network interchange", STD 80,
+              RFC 20, DOI 10.17487/RFC20, October 1969,
+              <https://www.rfc-editor.org/info/rfc20>.
 
    [RFC2985]  Nystrom, M. and B. Kaliski, "PKCS #9: Selected Object
               Classes and Attribute Types Version 2.0", RFC 2985,

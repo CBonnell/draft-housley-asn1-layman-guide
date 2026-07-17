@@ -17,22 +17,23 @@ Encoding Rules (BER), and Distinguished Encoding Rules
 background material sufficient for understanding and
 implementing standards that make use of ASN.1. 
     " name="description">
-<meta content="xml2rfc 3.33.0" name="generator">
+<meta content="xml2rfc 3.34.0" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="draft-housley-asn1-layman-guide-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.33.0
-    Python 3.12.13
-    ConfigArgParse 1.7
+  xml2rfc 3.34.0
+    Python 3.14.5
+    ConfigArgParse 1.7.5
     google-i18n-address 3.1.1
     intervaltree 3.2.1
     Jinja2 3.1.6
-    lxml 6.0.2
-    platformdirs 4.9.6
+    lxml 6.1.1
+    natsort 8.4.0
+    platformdirs 4.10.0
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.33.1
-    wcwidth 0.7.0
+    wcwidth 0.8.2
 -->
 <link href="draft-housley-asn1-layman-guide.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1394,7 +1395,7 @@ NIST/OSI Implementors' Workshop document SEC-SIG-91-17.<a href="#section-1.1-1" 
 <p id="section-1.1-2">The second version of this document was published on November 1, 1993
 as a RSA Laboratories Technical Note.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
 <p id="section-1.1-3">The third version of this document is the Internet-Draft
-<span>[<a href="#draft-kaliski-asn1-layman-guide" class="cite xref">draft-kaliski-asn1-layman-guide</a>]</span>, which is a republication of the
+<span>[<a href="#I-D.kaliski-asn1-layman-guide" class="cite xref">I-D.kaliski-asn1-layman-guide</a>]</span>, which is a republication of the
 second version.  It includes the following notice:<a href="#section-1.1-3" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-1.1-4.1">
@@ -1595,7 +1596,7 @@ special rules:<a href="#section-2-7" class="pilcrow">¶</a></p>
           <p id="section-2-8.1.1">Layout is not significant; multiple spaces and line breaks can be considered as a single space.<a href="#section-2-8.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-2-8.2">
-          <p id="section-2-8.2.1">Comments are delimited by pairs of hyphens ('--'), or a pair of hyphens and a line break.<a href="#section-2-8.2.1" class="pilcrow">¶</a></p>
+          <p id="section-2-8.2.1">Comments begin with a pairs of hyphens ('--'), and comments end with another pair of hyphens or a line break.<a href="#section-2-8.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-2-8.3">
           <p id="section-2-8.3.1">Identifiers (names of values and fields) and type references (names of types) consist of upper- and
@@ -1632,7 +1633,7 @@ that are relevant to the PKCS standards are the following:<a href="#section-2.1-
             <span class="break"></span><dl class="dlParallel" id="section-2.1-3.1.1">
               <dt id="section-2.1-3.1.1.1">IA5String,</dt>
               <dd style="margin-left: 1.5em" id="section-2.1-3.1.1.2">
-                <p id="section-2.1-3.1.1.2.1">an arbitrary string of IA5 (ASCII) characters.<a href="#section-2.1-3.1.1.2.1" class="pilcrow">¶</a></p>
+                <p id="section-2.1-3.1.1.2.1">an arbitrary string of IA5 (ASCII) characters <span>[<a href="#RFC0020" class="cite xref">RFC0020</a>]</span>.<a href="#section-2.1-3.1.1.2.1" class="pilcrow">¶</a></p>
 </dd>
             <dd class="break"></dd>
 </dl>
@@ -1700,7 +1701,7 @@ object such as an algorithm or attribute type.<a href="#section-2.1-6.1.1.2.1" c
             <span class="break"></span><dl class="dlParallel" id="section-2.1-9.1.1">
               <dt id="section-2.1-9.1.1.1">PrintableString,</dt>
               <dd style="margin-left: 1.5em" id="section-2.1-9.1.1.2">
-                <p id="section-2.1-9.1.1.2.1">an arbitrary string of printable characters.<a href="#section-2.1-9.1.1.2.1" class="pilcrow">¶</a></p>
+                <p id="section-2.1-9.1.1.2.1">an arbitrary string of printable characters.  The allowable characters are listed in <a href="#_section-5-12" class="auto internal xref">Section 5.12</a>.<a href="#section-2.1-9.1.1.2.1" class="pilcrow">¶</a></p>
 </dd>
             <dd class="break"></dd>
 </dl>
@@ -1733,8 +1734,7 @@ object such as an algorithm or attribute type.<a href="#section-2.1-6.1.1.2.1" c
             <span class="break"></span><dl class="dlParallel" id="section-2.1-12.1.1">
               <dt id="section-2.1-12.1.1.1">GeneralizedTimeTime,</dt>
               <dd style="margin-left: 1.5em" id="section-2.1-12.1.1.2">
-                <p id="section-2.1-12.1.1.2.1">a time value in the local time
-zone, GMT, or the difference between local and GMT.<a href="#section-2.1-12.1.1.2.1" class="pilcrow">¶</a></p>
+                <p id="section-2.1-12.1.1.2.1">a time value in the local time zone, GMT, or the difference between local and GMT.<a href="#section-2.1-12.1.1.2.1" class="pilcrow">¶</a></p>
 </dd>
             <dd class="break"></dd>
 </dl>
@@ -3384,34 +3384,36 @@ not encode the empty SET OF, as it minimizes the size of the message.<a href="#s
         </h3>
 <p id="section-5.17-1">The T61String type denotes an arbitrary string of T.61
 characters. T.61 is an eight-bit extension to the ASCII
-character set. Special "escape" sequences specify the
-interpretation of subsequent character values as, for
-example, Japanese; the initial interpretation is Latin. The
-character set includes non-printing control characters. The
-T61String type allows only the Latin and Japanese character
-interpretations, and implementors' agreements for directory
-names exclude control characters <span>[<a href="#NIST92" class="cite xref">NIST92</a>]</span>. A T61String value
-can have any length, including zero. This type is a string
-type.<a href="#section-5.17-1" class="pilcrow">¶</a></p>
+character set. Special "escape" sequences specify shift the
+character interpretation dynamically, where interpretation of
+subsequent character values as, for example, Japanese; the
+initial interpretation is Latin. The character set includes
+non-printing control characters. The T61String type allows only
+the Latin and Japanese character interpretations, and implementors'
+agreements for directory names exclude control characters
+<span>[<a href="#NIST92" class="cite xref">NIST92</a>]</span>. A T61String value can have any length, including
+zero. This type is a string type.<a href="#section-5.17-1" class="pilcrow">¶</a></p>
 <p id="section-5.17-2">The T61String type is used in PKCS #9 unstructured-address
 and challenge-password attributes <span>[<a href="#RFC2985" class="cite xref">RFC2985</a>]</span>, and in several
 attributes documented in <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>.<a href="#section-5.17-2" class="pilcrow">¶</a></p>
-<p id="section-5.17-3">ASN.1 notation:<a href="#section-5.17-3" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-5.17-4">
+<p id="section-5.17-3">Note: The use of T61String is generally discouraged, and the use
+of UTF8String is preferred.<a href="#section-5.17-3" class="pilcrow">¶</a></p>
+<p id="section-5.17-4">ASN.1 notation:<a href="#section-5.17-4" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-5.17-5">
 <pre>
 T61String
-</pre><a href="#section-5.17-4" class="pilcrow">¶</a>
+</pre><a href="#section-5.17-5" class="pilcrow">¶</a>
 </div>
-<p id="section-5.17-5">BER encoding. Primitive or constructed. In a primitive
+<p id="section-5.17-6">BER encoding. Primitive or constructed. In a primitive
 encoding, the contents octets give the characters in the
 T.61 string, encoded in ASCII. In a constructed encoding,
 the contents octets give the concatenation of the BER
-encodings of consecutive substrings of the T.61 string.<a href="#section-5.17-5" class="pilcrow">¶</a></p>
-<p id="section-5.17-6">Example: The BER encoding of the T61String value "clés
+encodings of consecutive substrings of the T.61 string.<a href="#section-5.17-6" class="pilcrow">¶</a></p>
+<p id="section-5.17-7">Example: The BER encoding of the T61String value "clés
 publiques" (French for "public keys") can be any of the
 following, among others, depending on the form of length
-octets and whether the encoding is primitive or constructed:<a href="#section-5.17-6" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-5.17-7">
+octets and whether the encoding is primitive or constructed:<a href="#section-5.17-7" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-5.17-8">
 <pre>
 14 0f                                           DER encoding
    63 6c c2 65 73 20 70 75 62 6c 69 71 75 65 73
@@ -3423,18 +3425,18 @@ octets and whether the encoding is primitive or constructed:<a href="#section-5.
    14 05 63 6c c2 65 73
    14 01 20
    14 09 70 75 62 6c 69 71 75 65 73
-</pre><a href="#section-5.17-7" class="pilcrow">¶</a>
+</pre><a href="#section-5.17-8" class="pilcrow">¶</a>
 </div>
-<p id="section-5.17-8">The eight-bit character c2 is a T.61 prefix that adds an
-acute accent (') to the next character.<a href="#section-5.17-8" class="pilcrow">¶</a></p>
-<p id="section-5.17-9">DER encoding. Primitive. Contents octets are as for a
-primitive BER encoding.<a href="#section-5.17-9" class="pilcrow">¶</a></p>
-<p id="section-5.17-10">Example: The DER encoding of the T61String value "cl'es
-publiques" is<a href="#section-5.17-10" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-5.17-11">
+<p id="section-5.17-9">The eight-bit character c2 is a T.61 prefix that adds an
+acute accent (') to the next character.<a href="#section-5.17-9" class="pilcrow">¶</a></p>
+<p id="section-5.17-10">DER encoding. Primitive. Contents octets are as for a
+primitive BER encoding.<a href="#section-5.17-10" class="pilcrow">¶</a></p>
+<p id="section-5.17-11">Example: The DER encoding of the T61String value "cl'es
+publiques" is<a href="#section-5.17-11" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-5.17-12">
 <pre>
 14 0f 63 6c c2 65 73 20 70 75 62 6c 69 71 75 65 73
-</pre><a href="#section-5.17-11" class="pilcrow">¶</a>
+</pre><a href="#section-5.17-12" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
@@ -4113,13 +4115,17 @@ considerations are not unique to ASN.1; they need to be considered by all data p
 <a href="#section-10.2" class="section-number selfRef">10.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
         </h3>
 <dl class="references">
-<dt id="draft-kaliski-asn1-layman-guide">[draft-kaliski-asn1-layman-guide]</dt>
+<dt id="I-D.kaliski-asn1-layman-guide">[I-D.kaliski-asn1-layman-guide]</dt>
         <dd>
-<span class="refAuthor">Kaliski, B.</span>, <span class="refTitle">"A Layman's Guide to a Subset of ASN.1, BER, and DER"</span>, <span>n.d.</span>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-kaliski-asn1-layman-guide">https://datatracker.ietf.org/doc/html/draft-kaliski-asn1-layman-guide</a>&gt;</span>. </dd>
+<span class="refAuthor">Kaliski, B.</span>, <span class="refTitle">"A Layman's Guide to a Subset of ASN.1, BER, and DER"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-kaliski-asn1-layman-guide-00</span>, <time datetime="2026-04-02" class="refDate">2 April 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-kaliski-asn1-layman-guide-00">https://datatracker.ietf.org/doc/html/draft-kaliski-asn1-layman-guide-00</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="NIST92">[NIST92]</dt>
         <dd>
 <span class="refAuthor">NIST</span>, <span class="refTitle">"Stable Implementation Agreements for Open Systems Interconnection Protocols. Part 11 (Directory Services Protocols)"</span>, <span class="seriesInfo">NIST SP 500-202</span>, <time datetime="1992-12" class="refDate">December 1992</time>. </dd>
+<dd class="break"></dd>
+<dt id="RFC0020">[RFC0020]</dt>
+        <dd>
+<span class="refAuthor">Cerf, V.</span>, <span class="refTitle">"ASCII format for network interchange"</span>, <span class="seriesInfo">STD 80</span>, <span class="seriesInfo">RFC 20</span>, <span class="seriesInfo">DOI 10.17487/RFC20</span>, <time datetime="1969-10" class="refDate">October 1969</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc20">https://www.rfc-editor.org/info/rfc20</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC2985">[RFC2985]</dt>
         <dd>
