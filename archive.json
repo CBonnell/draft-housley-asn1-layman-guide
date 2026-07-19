@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-07-16T02:34:27.446602+00:00",
+  "timestamp": "2026-07-19T02:41:43.525296+00:00",
   "repo": "CBonnell/draft-housley-asn1-layman-guide",
   "labels": [
     {
@@ -358,24 +358,26 @@
       "id": "PR_kwDOOSVefs7k8LGH",
       "title": "Resolve comments from Alexey",
       "url": "https://github.com/CBonnell/draft-housley-asn1-layman-guide/pull/7",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "russhousley",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Helpful.  Thanks Alexey.",
       "createdAt": "2026-06-10T16:23:46Z",
-      "updatedAt": "2026-06-12T02:19:54Z",
+      "updatedAt": "2026-07-17T10:53:19Z",
       "baseRepository": "CBonnell/draft-housley-asn1-layman-guide",
       "baseRefName": "main",
       "baseRefOid": "1c6f78f1fbd348103f75487fe9ee20de1ab6c444",
       "headRepository": "CBonnell/draft-housley-asn1-layman-guide",
       "headRefName": "alexey-review",
       "headRefOid": "e4b4a6031cd2b081ef49430f2164267203d56875",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-07-17T10:53:16Z",
+      "mergedAt": "2026-07-17T10:53:16Z",
+      "mergedBy": "CBonnell",
+      "mergeCommit": {
+        "oid": "4a92b5480c0d6e27e9b18ff128ee6349f85eabe6"
+      },
       "comments": [],
       "reviews": [
         {
@@ -472,24 +474,26 @@
       "id": "PR_kwDOOSVefs7lzMJS",
       "title": "Update list of changes",
       "url": "https://github.com/CBonnell/draft-housley-asn1-layman-guide/pull/9",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "russhousley",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Update list of changes from previous version.",
       "createdAt": "2026-06-12T14:35:17Z",
-      "updatedAt": "2026-06-14T06:19:40Z",
+      "updatedAt": "2026-07-17T14:04:48Z",
       "baseRepository": "CBonnell/draft-housley-asn1-layman-guide",
       "baseRefName": "main",
       "baseRefOid": "1c6f78f1fbd348103f75487fe9ee20de1ab6c444",
       "headRepository": "CBonnell/draft-housley-asn1-layman-guide",
       "headRefName": "list-of-changes",
-      "headRefOid": "aa528e1153724fab79ad3ac2d732281d681c2e99",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "143f44aa082bb0c72c03dfb0a5e0b70bdf189c73",
+      "closedAt": "2026-07-17T14:04:45Z",
+      "mergedAt": "2026-07-17T14:04:45Z",
+      "mergedBy": "CBonnell",
+      "mergeCommit": {
+        "oid": "014969eeafdf72ba290950d98283b487a7274a6f"
+      },
       "comments": [],
       "reviews": [
         {
@@ -504,6 +508,46 @@
           "createdAt": "2026-06-14T06:19:40Z",
           "updatedAt": "2026-06-14T06:19:40Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOOSVefs8AAAABGYcNZQ",
+          "commit": {
+            "abbreviatedOid": "aa528e1"
+          },
+          "author": "CBonnell",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-17T13:49:54Z",
+          "updatedAt": "2026-07-17T13:49:55Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "```suggestion\n* The use of T61String is discouraged;\n* Guidance on the maximum value of the first and second components of OBJECT IDENTIFIERs was clarified; and\n```",
+              "createdAt": "2026-07-17T13:49:55Z",
+              "updatedAt": "2026-07-17T13:49:55Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOOSVefs8AAAABGYjMiA",
+          "commit": {
+            "abbreviatedOid": "6f6c14a"
+          },
+          "author": "CBonnell",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-17T14:03:46Z",
+          "updatedAt": "2026-07-17T14:03:46Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "```suggestion\n* Clarified the allowable numbers in the first and second values of an OBJECT IDENTIFIER; and\n```",
+              "createdAt": "2026-07-17T14:03:46Z",
+              "updatedAt": "2026-07-17T14:03:46Z"
+            }
+          ]
         }
       ]
     },
@@ -512,24 +556,26 @@
       "id": "PR_kwDOOSVefs7mHfUd",
       "title": "Update for OBJECT IDENTIFIER encoding",
       "url": "https://github.com/CBonnell/draft-housley-asn1-layman-guide/pull/10",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "CBonnell",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "Documents a nuanced case that is allowed by X.690.",
       "createdAt": "2026-06-13T18:37:56Z",
-      "updatedAt": "2026-06-14T06:17:13Z",
+      "updatedAt": "2026-07-17T13:50:21Z",
       "baseRepository": "CBonnell/draft-housley-asn1-layman-guide",
       "baseRefName": "main",
       "baseRefOid": "1c6f78f1fbd348103f75487fe9ee20de1ab6c444",
       "headRepository": "CBonnell/draft-housley-asn1-layman-guide",
       "headRefName": "oid-encoding",
       "headRefOid": "fe6018a55b2868976cb11e6a49fc2cb2cd94864e",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-07-17T13:50:18Z",
+      "mergedAt": "2026-07-17T13:50:18Z",
+      "mergedBy": "CBonnell",
+      "mergeCommit": {
+        "oid": "46e297e9143b442cbf9dac778a64c1a4c6a42fd7"
+      },
       "comments": [],
       "reviews": [
         {
