@@ -218,6 +218,8 @@ of change control.  The changes from the third version include:
 
 * References were updated, and PKCS documents are now referenced by their RFC number.
 
+This work is not a product of the IETF, does not represent a standard, and has not achieved community consensus.
+
 ##Terminology and notation
 
 In this note, an octet is an eight-bit unsigned integer. Bit 8 of the
