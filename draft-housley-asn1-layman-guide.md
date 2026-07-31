@@ -210,12 +210,9 @@ This document is the fourth version, and the first under the transfer
 of change control.  The changes from the third version include:
 
 * Discussion of CLASS was added as the replacement for ANY following the modern ASN.1 specification;
-
-* Discussion of UTF8String and GeneralizedTime were added;
-
+* Discussion of UTF8String, GeneralizedTime, and RELATIVE OID were added;
 * The use of T61String is discouraged;
 * Clarified the allowable numbers in the first and second values of an OBJECT IDENTIFIER; and
-
 * References were updated, and PKCS documents are now referenced by their RFC number.
 
 This work is not a product of the IETF, does not represent a standard, and has not achieved community consensus.
@@ -303,6 +300,7 @@ tags.
 |NULL                    |5                  |05                      |
 |OBJECT IDENTIFIER       |6                  |06                      |
 |UTF8String              |12                 |0c                      |
+|RELATIVE-OID            |13                 |0d                      |
 |SEQUENCE and SEQUENCE OF|16                 |10                      |
 |SET and SET OF          |17                 |11                      |
 |PrintableString         |19                 |13                      |
@@ -357,6 +355,12 @@ OBJECT IDENTIFIER,
 : an object identifier, which is a
 sequence of integer components that identify an
 object such as an algorithm or attribute type.
+
+>
+RELATIVE-OID,
+: a relative object identifier, which is a
+sequence of integer components interpreted relative to
+some object identifier established by context.
 
 >
 OCTET STRING,
@@ -1365,7 +1369,9 @@ valuen. Each value is encoded base 128, most
 significant digit first, with as few digits as
 possible, and the most significant bit of each
 octet except the last in the value's encoding set
-to "1."
+to "1." As a consequence of encoding each component with as few
+digits as possible, the first octet of a component's encoding is never
+0x80 (128 decimal).
 
 Example: The first octet of the BER encoding of RSA Data
 Security, Inc.'s object identifier is 40 * 1 + 2 = 42 =
@@ -1502,7 +1508,80 @@ Example: The DER encoding of the PrintableString value "Test User 1" is
 13 0b 54 65 73 74 20 55 73 65 72 20 31
 ~~~
 
-##SEQUENCE  {#section-5-13}
+##RELATIVE-OID  {#section-5-13}
+
+The RELATIVE-OID type denotes a relative object identifier, a
+sequence of integer components that identifies an object
+relative to some object identifier that is established by
+context. A RELATIVE-OID value has at least one component.
+Components can have any nonnegative value.
+
+Unlike the OBJECT IDENTIFIER type, a RELATIVE-OID value is
+not complete on its own. It is meaningful only with respect
+to a base object identifier known from the context in which
+the value appears. A RELATIVE-OID value has at least one
+component; the special encoding of the first two components
+used for OBJECT IDENTIFIER (see {{section-5-10}}) does not
+apply.
+
+ASN.1 notation:
+
+~~~
+RELATIVE-OID
+~~~
+
+The ASN.1 notation for values of the RELATIVE-OID type is
+
+~~~
+{ component1 ... componentN }
+
+componentI = identifierI | identifierI (valueI) | valueI
+~~~
+
+where identifier1, ..., identifierN are identifiers, and
+value1, ..., valueN are optional integer values. As with
+OBJECT IDENTIFIER, the identifiers are intended primarily for
+documentation, but they must correspond to the integer value
+when both are present.
+
+Example: If the base object identifier established by context
+is that assigned to RSA Data Security, Inc.,
+{ 1 2 840 113549 }, then the following RELATIVE-OID value
+identifies { 1 2 840 113549 1 1 }:
+
+~~~
+{ 1 1 }
+~~~
+
+(In this example, which gives ASN.1 value notation, the
+relative object identifier values are decimal, not
+hexadecimal.)
+
+BER encoding. Primitive. The contents octets encode
+value1, ..., valuen, where value1, ..., valuen denote the
+integer values of the components in the relative object
+identifier. Each value is encoded base 128, most significant
+digit first, with as few digits as possible, and the most
+significant bit of each octet except the last in the value's
+encoding set to "1." As a consequence of encoding each component
+with as few digits as possible, the first octet of a component's
+encoding is never 0x80 (128 decimal).Unlike OBJECT IDENTIFIER,
+the first two components are not combined; every component is encoded
+independently.
+
+Example: The BER encoding of the RELATIVE-OID value
+{ 32473 3 2 } encodes 32473 = 1 * 128^2 + 125 * 128 + 89 (decimal) as
+81 fd 59, 3 as 03, and 2 as 02. This leads to the following BER
+encoding:
+
+~~~
+0d 05 81 fd 59 03 02
+~~~
+
+DER encoding. Primitive. Contents octets are as for a
+primitive BER encoding.
+
+##SEQUENCE  {#section-5-14}
 
 The SEQUENCE type denotes an ordered collection of one or
 more types.
@@ -1572,7 +1651,7 @@ with the DEFAULT qualifier is the default value, the
 encoding of that component is not included in the contents
 octets.
 
-##SEQUENCE OF  {#section-5-14}
+##SEQUENCE OF  {#section-5-15}
 
 The SEQUENCE OF type denotes an ordered collection of zero
 or more occurrences of a given type.
@@ -1619,7 +1698,7 @@ an empty SEQUENCE, or it can elect to not encode the SEQUENCE. Absent some
 requirement established in the prose of the specification, it is preferable to
 not encode the empty SEQUENCE OF, as it minimizes the size of the message.
 
-##SET  {#section-5-15}
+##SET  {#section-5-16}
 
 The SET type denotes an unordered collection of one or more
 types.  The SET type is not used in the ESSSecurityLabel {{RFC5035}}.
@@ -1739,7 +1818,7 @@ For SET-OF (see below), this is unimportant. All elements have the same tag and 
 
 For SET, the elements will have distinct tags, and each will be in constructed or primitive form accordingly. Failing to ignore the CONSTRUCTED bit could therefore lead to ordering inversions, so in general it is best to make sure it is not present in the encoding of the tag.
 
-##SET OF  {#section-5-16}
+##SET OF  {#section-5-17}
 
 The SET OF type denotes an unordered collection of zero or
 more occurrences of a given type.
@@ -1790,7 +1869,7 @@ an empty SET, or it can elect to not encode the SET. Absent some
 requirement established in the prose of the specification, it is preferable to
 not encode the empty SET OF, as it minimizes the size of the message.
 
-##T61String  {#section-5-17}
+##T61String  {#section-5-18}
 
 The T61String type denotes an arbitrary string of T.61
 characters. T.61 is an eight-bit extension to the ASCII
@@ -1854,7 +1933,7 @@ publiques" is
 14 0f 63 6c c2 65 73 20 70 75 62 6c 69 71 75 65 73
 ~~~
 
-##UTCTime  {#section-5-18}
+##UTCTime  {#section-5-19}
 
 The UTCTime type denotes a "coordinated universal time" or
 Greenwich Mean Time (GMT) value. A UTCTime value includes
@@ -1945,7 +2024,7 @@ These values have the following BER encodings, among others:
 DER encoding. Primitive. Contents octets are as for a
 primitive BER encoding.
 
-##GeneralizedTime  {#section-5-19}
+##GeneralizedTime  {#section-5-20}
 
 The GeneralizedTime type consists of a calendar date and time.
 A GeneralizedTime value includes the local time precise to fractions
@@ -2040,7 +2119,7 @@ primitive BER encoding.
 18 0f 39 39 39 39 31 32 33 31 32 33 35 39 35 39 5a
 ~~~
 
-##UTF8String  {#section-5-20}
+##UTF8String  {#section-5-21}
 
 The UTF8String type supports the encoding of character sets which
 covers most of the world's writing systems; see {{RFC3629}}.  This
