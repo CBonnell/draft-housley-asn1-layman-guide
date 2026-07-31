@@ -1369,7 +1369,7 @@ valuen. Each value is encoded base 128, most
 significant digit first, with as few digits as
 possible, and the most significant bit of each
 octet except the last in the value's encoding set
-to "1." As a consequence of encoding each component with as few
+to "1". As a consequence of encoding each component with as few
 digits as possible, the first octet of a component's encoding is never
 0x80 (128 decimal).
 
@@ -1563,9 +1563,9 @@ integer values of the components in the relative object
 identifier. Each value is encoded base 128, most significant
 digit first, with as few digits as possible, and the most
 significant bit of each octet except the last in the value's
-encoding set to "1." As a consequence of encoding each component
+encoding set to "1". As a consequence of encoding each component
 with as few digits as possible, the first octet of a component's
-encoding is never 0x80 (128 decimal).Unlike OBJECT IDENTIFIER,
+encoding is never 0x80 (128 decimal). Unlike OBJECT IDENTIFIER,
 the first two components are not combined; every component is encoded
 independently.
 
