@@ -190,7 +190,7 @@ Table of Contents
    *  Discussion of CLASS was added as the replacement for ANY following
       the modern ASN.1 specification;
 
-   *  Discussion of UTF8String, GeneralizedTime, and RELATIVE OID were
+   *  Discussion of UTF8String, GeneralizedTime, and RELATIVE-OID were
       added;
 
    *  The use of T61String is discouraged;
