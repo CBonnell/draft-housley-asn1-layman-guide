@@ -210,7 +210,7 @@ This document is the fourth version, and the first under the transfer
 of change control.  The changes from the third version include:
 
 * Discussion of CLASS was added as the replacement for ANY following the modern ASN.1 specification;
-* Discussion of UTF8String, GeneralizedTime, and RELATIVE OID were added;
+* Discussion of UTF8String, GeneralizedTime, and RELATIVE-OID were added;
 * The use of T61String is discouraged;
 * Clarified the allowable numbers in the first and second values of an OBJECT IDENTIFIER; and
 * References were updated, and PKCS documents are now referenced by their RFC number.
