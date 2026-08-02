@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-07-30T02:23:03.362505+00:00",
+  "timestamp": "2026-08-02T02:45:04.665859+00:00",
   "repo": "CBonnell/draft-housley-asn1-layman-guide",
   "labels": [
     {
@@ -660,7 +660,7 @@
       "labels": [],
       "body": "Claude and DVG wetware-assisted formatting fixes to more closely\r\nmatch the original PKCS technical note (and just look better in general):\r\n\r\n- Fix a code-fence issue in the SET-sort pseudocode block that was causing spurious \"no link definition\" warnings from kramdown-rfc\r\n- Add inline code (backtick) formatting for octet/hex values, ASN.1 type keywords, and field names throughout the document, including table cells\r\n- Fix two content bugs found along the way: a \"commonUnitName\" typo (should be \"commonName\") and a duplicated \"GeneralizedTimeTime\" typo\r\n- Restructure several type descriptions (SEQUENCE, SET, SEQUENCE OF, SET OF, and the BER/DER octet labels) as proper kramdown definition lists instead of plain text, and clean up redundant blockquote markers\r\n- Rewrite the ASN.1 notation meta-syntax legend table: clarify the BIT row, add a row distinguishing types (Type1) from variables (n1), and simplify the bracket/brace/pipe/ellipsis/equals rows from bold styling to plain backticks\r\n- Convert \"BER encoding.\"/\"DER encoding.\" leads into proper subsection headings\r\n- Convert all \"ASN.1 notation:\" displays into numbered, captioned Figures, quoting meta-variables in the surrounding explanatory text with backtick-quoted single quotes (e.g. `'identifier1'`), per the notation legend\r\n- Fix a table that overflowed past the ToC in HTML (and blew past the text-output column width) by moving long GitHub source links into proper bibliography references instead of embedding raw URLs",
       "createdAt": "2026-07-25T09:25:08Z",
-      "updatedAt": "2026-07-28T13:51:09Z",
+      "updatedAt": "2026-08-01T21:08:32Z",
       "baseRepository": "CBonnell/draft-housley-asn1-layman-guide",
       "baseRefName": "main",
       "baseRefOid": "014969eeafdf72ba290950d98283b487a7274a6f",
@@ -685,6 +685,166 @@
           "createdAt": "2026-07-28T13:51:09Z",
           "updatedAt": "2026-07-28T13:51:09Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOOSVefs8AAAABH9xDrw",
+          "commit": {
+            "abbreviatedOid": "28fb133"
+          },
+          "author": "CBonnell",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-31T14:43:08Z",
+          "updatedAt": "2026-07-31T14:43:08Z",
+          "comments": [
+            {
+              "originalPosition": 32,
+              "body": "```suggestion\nAdvanced features of ASN.1 are not\n```",
+              "createdAt": "2026-07-31T14:43:08Z",
+              "updatedAt": "2026-07-31T14:43:08Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOOSVefs8AAAABH90KqQ",
+          "commit": {
+            "abbreviatedOid": "28fb133"
+          },
+          "author": "russhousley",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-31T14:49:15Z",
+          "updatedAt": "2026-07-31T14:49:15Z",
+          "comments": [
+            {
+              "originalPosition": 32,
+              "body": "We do not talk about parameterized types. Should we add them?\r\n\r\nThe point is that we talk about features that are actually used in the RFCs.  Maybe we should not try to say what er are not covering.",
+              "createdAt": "2026-07-31T14:49:15Z",
+              "updatedAt": "2026-07-31T14:49:16Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOOSVefs8AAAABH-F7RA",
+          "commit": {
+            "abbreviatedOid": "28fb133"
+          },
+          "author": "CBonnell",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-31T15:22:31Z",
+          "updatedAt": "2026-07-31T15:22:31Z",
+          "comments": [
+            {
+              "originalPosition": 32,
+              "body": "How about we change \"Advanced features of ASN.1 ...\" to \"Features of ASN.1 which are not used in IETF specifications...\"?",
+              "createdAt": "2026-07-31T15:22:31Z",
+              "updatedAt": "2026-07-31T15:22:31Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOOSVefs8AAAABH-jCuQ",
+          "commit": {
+            "abbreviatedOid": "28fb133"
+          },
+          "author": "russhousley",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-31T16:23:46Z",
+          "updatedAt": "2026-07-31T16:23:46Z",
+          "comments": [
+            {
+              "originalPosition": 32,
+              "body": "Much better, but we do need to talk about parameterized types, like AlgorithmIdentifier{} if we go that way.",
+              "createdAt": "2026-07-31T16:23:46Z",
+              "updatedAt": "2026-07-31T16:23:46Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOOSVefs8AAAABH_HMCQ",
+          "commit": {
+            "abbreviatedOid": "28fb133"
+          },
+          "author": "CBonnell",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-31T17:46:16Z",
+          "updatedAt": "2026-07-31T17:46:17Z",
+          "comments": [
+            {
+              "originalPosition": 32,
+              "body": "None of the tools that I regularly use support parameterized types. Is this something that a reader would find actually useful?",
+              "createdAt": "2026-07-31T17:46:17Z",
+              "updatedAt": "2026-07-31T17:46:17Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOOSVefs8AAAABH_LxRQ",
+          "commit": {
+            "abbreviatedOid": "28fb133"
+          },
+          "author": "russhousley",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-31T17:58:03Z",
+          "updatedAt": "2026-07-31T17:58:03Z",
+          "comments": [
+            {
+              "originalPosition": 32,
+              "body": "The tools that I use do not support it either, but it is helpful when there is a list of things that are supported, and others should throw a decode error.\r\n\r\nI think pycrate supports them fully. See https://github.com/P1sec/pycrate.",
+              "createdAt": "2026-07-31T17:58:03Z",
+              "updatedAt": "2026-07-31T17:58:03Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOOSVefs8AAAABIBEaew",
+          "commit": {
+            "abbreviatedOid": "28fb133"
+          },
+          "author": "dghgit",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-01T00:12:37Z",
+          "updatedAt": "2026-08-01T00:12:37Z",
+          "comments": [
+            {
+              "originalPosition": 32,
+              "body": "I think the other thing is we're really trying to concentrate on encoding with this document - if we start getting into all the features of ASN.1 the language, we'll wind up just writing another copy of the standard (and we already know how that story ends!) I would just leave it as \"Advanced features...\" otherwise all it will take is someone to write \"RFC  <some-suitably-demonic-number>: Insane things I found I could do with ASN.1 while reading in the bathtub\" and we, or someone after us, will also find themselves rewriting the standard. The point is to get people far enough that they're not intimidated by having to use ASN.1 encodings, after that they should be able work things out for themselves. At the moment it seems most people can't even get off the starting block.",
+              "createdAt": "2026-08-01T00:12:37Z",
+              "updatedAt": "2026-08-01T00:12:37Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOOSVefs8AAAABIDvh4w",
+          "commit": {
+            "abbreviatedOid": "28fb133"
+          },
+          "author": "russhousley",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-01T21:08:32Z",
+          "updatedAt": "2026-08-01T21:08:32Z",
+          "comments": [
+            {
+              "originalPosition": 32,
+              "body": "I agree that we are tryng to help implementers.",
+              "createdAt": "2026-08-01T21:08:32Z",
+              "updatedAt": "2026-08-01T21:08:32Z"
+            }
+          ]
         }
       ]
     },
@@ -723,6 +883,154 @@
         }
       ],
       "reviews": []
+    },
+    {
+      "number": 14,
+      "id": "PR_kwDOOSVefs747n6A",
+      "title": "Clarify BER note and add SET sorting guidance to security considerations",
+      "url": "https://github.com/CBonnell/draft-housley-asn1-layman-guide/pull/14",
+      "state": "OPEN",
+      "author": "dghgit",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Note that ASN.1 syntax itself doesn't dictate encoding, and warn that sorting large SETs for DER (e.g. during signature verification) can be a resource-exhaustion vector unless a robust sort algorithm is used.",
+      "createdAt": "2026-07-31T08:53:22Z",
+      "updatedAt": "2026-08-01T21:09:21Z",
+      "baseRepository": "CBonnell/draft-housley-asn1-layman-guide",
+      "baseRefName": "main",
+      "baseRefOid": "97fa509fb08147bf082f45f8a055dffec7a952a6",
+      "headRepository": "CBonnell/draft-housley-asn1-layman-guide",
+      "headRefName": "security-considerations-set-sorting",
+      "headRefOid": "a04b0b0c320c3ca815742f788d680d1a4c62caa4",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOOSVefs8AAAABH8R9Xg",
+          "commit": {
+            "abbreviatedOid": "fbd4bd8"
+          },
+          "author": "CBonnell",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-31T11:10:23Z",
+          "updatedAt": "2026-07-31T11:10:23Z",
+          "comments": [
+            {
+              "originalPosition": 16,
+              "body": "```suggestion\nIn relation to resource exhaustion, while ASN.1 allows for arbitrary nesting of constructed objects and very large lengths of individual data objects, we recommend that limits for both these are enforced appropriate for the use-case the parser, or decoder, is used for. Such limits can provide a useful early warning of corrupted data while also (usually) providing a recoverable situation for the parser, or decoder, encountering the issue. In addition to issues with nesting, the need to sort sets for DER can also cause issues if a large set is presented in a situation where DER encoding is required, such as with a signature verification. In situations where ASN.1 encodings are possibly being accepted from unknown third parties, a more sophisticated algorithm, such as a stable Dual-Pivot Quicksort, should be utilized in order to avoid worse case situations resulting high CPU and/or memory usage in sorting data in SETs.\n```",
+              "createdAt": "2026-07-31T11:10:23Z",
+              "updatedAt": "2026-07-31T11:10:23Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOOSVefs8AAAABH8SW7A",
+          "commit": {
+            "abbreviatedOid": "a04b0b0"
+          },
+          "author": "CBonnell",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-07-31T11:11:33Z",
+          "updatedAt": "2026-07-31T11:11:33Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOOSVefs8AAAABICuckw",
+          "commit": {
+            "abbreviatedOid": "a04b0b0"
+          },
+          "author": "CBonnell",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-01T12:59:00Z",
+          "updatedAt": "2026-08-01T12:59:00Z",
+          "comments": [
+            {
+              "originalPosition": 16,
+              "body": "```suggestion\nIn relation to resource exhaustion, while ASN.1 allows for arbitrary nesting of constructed objects and very large lengths of individual data objects, we recommend that limits for both these are enforced appropriate for the use-case the parser, or decoder, is used for. Such limits can provide a useful early warning of corrupted data while also (usually) providing a recoverable situation for the parser, or decoder, encountering the issue. In addition to issues with nesting, the need to sort sets for DER can also cause issues if a large set is presented in a situation where DER encoding is required, such as with a signature verification. In situations where ASN.1 encodings are possibly being accepted from unknown third parties, a more sophisticated algorithm, such as a stable Dual-Pivot Quicksort, should be utilized. Doing so may avoid worst-case situations resulting in high CPU and/or memory usage when producing or verifying the sorted, distinguished encoded value for a SET type.\n```\n\n@russhousley @dghgit how's this?",
+              "createdAt": "2026-08-01T12:59:00Z",
+              "updatedAt": "2026-08-01T12:59:00Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOOSVefs8AAAABIDvpuw",
+          "commit": {
+            "abbreviatedOid": "a04b0b0"
+          },
+          "author": "russhousley",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-01T21:09:21Z",
+          "updatedAt": "2026-08-01T21:09:21Z",
+          "comments": [
+            {
+              "originalPosition": 16,
+              "body": "works for me",
+              "createdAt": "2026-08-01T21:09:21Z",
+              "updatedAt": "2026-08-01T21:09:21Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 15,
+      "id": "PR_kwDOOSVefs75AO1b",
+      "title": "Add RELATIVE-OID with blurb about leading 0x80 octets",
+      "url": "https://github.com/CBonnell/draft-housley-asn1-layman-guide/pull/15",
+      "state": "OPEN",
+      "author": "CBonnell",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-07-31T12:14:25Z",
+      "updatedAt": "2026-08-01T13:00:31Z",
+      "baseRepository": "CBonnell/draft-housley-asn1-layman-guide",
+      "baseRefName": "main",
+      "baseRefOid": "97fa509fb08147bf082f45f8a055dffec7a952a6",
+      "headRepository": "CBonnell/draft-housley-asn1-layman-guide",
+      "headRefName": "relative-oid",
+      "headRefOid": "0b309072cb48299f18a20c8d4a55ce372cf3ae89",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "CBonnell",
+          "authorAssociation": "OWNER",
+          "body": "Thanks @dghgit, I wrote a RELATIVE-OID implementation just this week so the 0x80 rule was top of mind.",
+          "createdAt": "2026-08-01T13:00:31Z",
+          "updatedAt": "2026-08-01T13:00:31Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOOSVefs8AAAABIBClwQ",
+          "commit": {
+            "abbreviatedOid": "0b30907"
+          },
+          "author": "dghgit",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Good pickup, I think having that missing would have been a little embarrassing!",
+          "createdAt": "2026-08-01T00:04:39Z",
+          "updatedAt": "2026-08-01T00:04:39Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
