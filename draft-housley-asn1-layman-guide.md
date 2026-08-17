@@ -200,7 +200,7 @@ specific encoding rules, examples, and comments about their
 application. Section 6 concludes with an example,
 X.500 {{X500}} distinguished names.
 
-Advanced features of ASN.1, such as `CLASS`, are not
+Advanced features of ASN.1 are not
 described in this note. For information on the other
 features, and for more detail generally, the reader is referred to
 {{X680}} and {{X690}}, which define ASN.1, BER, and DER.
