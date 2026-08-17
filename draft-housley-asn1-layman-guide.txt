@@ -81,14 +81,15 @@ Table of Contents
      5.10. OBJECT IDENTIFIER
      5.11. OCTET STRING
      5.12. PrintableString
-     5.13. SEQUENCE
-     5.14. SEQUENCE OF
-     5.15. SET
-     5.16. SET OF
-     5.17. T61String
-     5.18. UTCTime
-     5.19. GeneralizedTime
-     5.20. UTF8String
+     5.13. RELATIVE-OID
+     5.14. SEQUENCE
+     5.15. SEQUENCE OF
+     5.16. SET
+     5.17. SET OF
+     5.18. T61String
+     5.19. UTCTime
+     5.20. GeneralizedTime
+     5.21. UTF8String
    6.  An example
      6.1.  Abstract notation
      6.2.  DER encoding
@@ -189,7 +190,8 @@ Table of Contents
    *  Discussion of CLASS was added as the replacement for ANY following
       the modern ASN.1 specification;
 
-   *  Discussion of UTF8String and GeneralizedTime were added;
+   *  Discussion of UTF8String, GeneralizedTime, and RELATIVE-OID were
+      added;
 
    *  The use of T61String is discouraged;
 
@@ -290,6 +292,8 @@ Table of Contents
     +-------------------+--------------------+------------------------+
     | UTF8String        | 12                 | 0c                     |
     +-------------------+--------------------+------------------------+
+    | RELATIVE-OID      | 13                 | 0d                     |
+    +-------------------+--------------------+------------------------+
     | SEQUENCE and      | 16                 | 10                     |
     | SEQUENCE OF       |                    |                        |
     +-------------------+--------------------+------------------------+
@@ -344,6 +348,10 @@ Table of Contents
       OBJECT IDENTIFIER,  an object identifier, which is a sequence of
          integer components that identify an object such as an algorithm
          or attribute type.
+
+      RELATIVE-OID,  a relative object identifier, which is a sequence
+         of integer components interpreted relative to some object
+         identifier established by context.
 
       OCTET STRING,  an arbitrary string of octets (eight-bit values).
 
@@ -1237,7 +1245,10 @@ Table of Contents
    2.  The following octets, if any, encode value3, ..., valuen.  Each
        value is encoded base 128, most significant digit first, with as
        few digits as possible, and the most significant bit of each
-       octet except the last in the value's encoding set to "1."
+       octet except the last in the value's encoding set to "1".  As a
+       consequence of encoding each component with as few digits as
+       possible, the first octet of a component's encoding is never 0x80
+       (128 decimal).
 
    Example: The first octet of the BER encoding of RSA Data Security,
    Inc.'s object identifier is 40 * 1 + 2 = 42 = 2a (hexadecimal).  The
@@ -1355,7 +1366,66 @@ Table of Contents
 
    13 0b 54 65 73 74 20 55 73 65 72 20 31
 
-5.13.  SEQUENCE
+5.13.  RELATIVE-OID
+
+   The RELATIVE-OID type denotes a relative object identifier, a
+   sequence of integer components that identifies an object relative to
+   some object identifier that is established by context.  A RELATIVE-
+   OID value has at least one component.  Components can have any
+   nonnegative value.
+
+   Unlike the OBJECT IDENTIFIER type, a RELATIVE-OID value is not
+   complete on its own.  It is meaningful only with respect to a base
+   object identifier known from the context in which the value appears.
+   A RELATIVE-OID value has at least one component; the special encoding
+   of the first two components used for OBJECT IDENTIFIER (see
+   Section 5.10) does not apply.
+
+   ASN.1 notation:
+
+   RELATIVE-OID
+
+   The ASN.1 notation for values of the RELATIVE-OID type is
+
+   { component1 ... componentN }
+
+   componentI = identifierI | identifierI (valueI) | valueI
+
+   where identifier1, ..., identifierN are identifiers, and value1, ...,
+   valueN are optional integer values.  As with OBJECT IDENTIFIER, the
+   identifiers are intended primarily for documentation, but they must
+   correspond to the integer value when both are present.
+
+   Example: If the base object identifier established by context is that
+   assigned to RSA Data Security, Inc., { 1 2 840 113549 }, then the
+   following RELATIVE-OID value identifies { 1 2 840 113549 1 1 }:
+
+   { 1 1 }
+
+   (In this example, which gives ASN.1 value notation, the relative
+   object identifier values are decimal, not hexadecimal.)
+
+   BER encoding.  Primitive.  The contents octets encode value1, ...,
+   valuen, where value1, ..., valuen denote the integer values of the
+   components in the relative object identifier.  Each value is encoded
+   base 128, most significant digit first, with as few digits as
+   possible, and the most significant bit of each octet except the last
+   in the value's encoding set to "1".  As a consequence of encoding
+   each component with as few digits as possible, the first octet of a
+   component's encoding is never 0x80 (128 decimal).  Unlike OBJECT
+   IDENTIFIER, the first two components are not combined; every
+   component is encoded independently.
+
+   Example: The BER encoding of the RELATIVE-OID value { 32473 3 2 }
+   encodes 32473 = 1 * 128^2 + 125 * 128 + 89 (decimal) as 81 fd 59, 3
+   as 03, and 2 as 02.  This leads to the following BER encoding:
+
+   0d 05 81 fd 59 03 02
+
+   DER encoding.  Primitive.  Contents octets are as for a primitive BER
+   encoding.
+
+5.14.  SEQUENCE
 
    The SEQUENCE type denotes an ordered collection of one or more types.
 
@@ -1415,7 +1485,7 @@ Table of Contents
    qualifier is the default value, the encoding of that component is not
    included in the contents octets.
 
-5.14.  SEQUENCE OF
+5.15.  SEQUENCE OF
 
    The SEQUENCE OF type denotes an ordered collection of zero or more
    occurrences of a given type.
@@ -1458,7 +1528,7 @@ Table of Contents
    the prose of the specification, it is preferable to not encode the
    empty SEQUENCE OF, as it minimizes the size of the message.
 
-5.15.  SET
+5.16.  SET
 
    The SET type denotes an unordered collection of one or more types.
    The SET type is not used in the ESSSecurityLabel [RFC5035].
@@ -1565,7 +1635,7 @@ LessThanOrEqual(byte[] encA, byte[] encB)
    general it is best to make sure it is not present in the encoding of
    the tag.
 
-5.16.  SET OF
+5.17.  SET OF
 
    The SET OF type denotes an unordered collection of zero or more
    occurrences of a given type.
@@ -1611,7 +1681,7 @@ LessThanOrEqual(byte[] encA, byte[] encB)
    the specification, it is preferable to not encode the empty SET OF,
    as it minimizes the size of the message.
 
-5.17.  T61String
+5.18.  T61String
 
    The T61String type denotes an arbitrary string of T.61 characters.
    T.61 is an eight-bit extension to the ASCII character set.  Special
@@ -1667,7 +1737,7 @@ LessThanOrEqual(byte[] encA, byte[] encB)
 
    14 0f 63 6c c2 65 73 20 70 75 62 6c 69 71 75 65 73
 
-5.18.  UTCTime
+5.19.  UTCTime
 
    The UTCTime type denotes a "coordinated universal time" or Greenwich
    Mean Time (GMT) value.  A UTCTime value includes the local time
@@ -1738,7 +1808,7 @@ LessThanOrEqual(byte[] encA, byte[] encB)
    DER encoding.  Primitive.  Contents octets are as for a primitive BER
    encoding.
 
-5.19.  GeneralizedTime
+5.20.  GeneralizedTime
 
    The GeneralizedTime type consists of a calendar date and time.  A
    GeneralizedTime value includes the local time precise to fractions of
@@ -1827,7 +1897,7 @@ LessThanOrEqual(byte[] encA, byte[] encB)
 
    18 0f 39 39 39 39 31 32 33 31 32 33 35 39 35 39 5a
 
-5.20.  UTF8String
+5.21.  UTF8String
 
    The UTF8String type supports the encoding of character sets which
    covers most of the world's writing systems; see [RFC3629].  This type
