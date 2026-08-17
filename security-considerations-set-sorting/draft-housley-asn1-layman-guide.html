@@ -29,7 +29,7 @@ implementing standards that make use of ASN.1.
     Jinja2 3.1.6
     lxml 6.1.1
     natsort 8.4.0
-    platformdirs 4.10.1
+    platformdirs 4.11.0
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.33.1
@@ -4090,7 +4090,7 @@ for a variety of languages.<a href="#section-7-1" class="pilcrow">¶</a></p>
 <p id="section-9-1">Security considerations are discussed throughout this memo.  Implementations that employ ASN.1 need to take care when parsing
 and decoding data to avoid buffer overflows, denial of service through resource exhaustion, and arbitrary code execution. These
 considerations are not unique to ASN.1; they need to be considered by all data parsers and decoders.<a href="#section-9-1" class="pilcrow">¶</a></p>
-<p id="section-9-2">In relation to resource exhaustion, while ASN.1 allows for arbitrary nesting of constructed objects and very large lengths of individual data objects, we recommend that limits for both these are enforced appropriate for the use-case the parser, or decoder, is used for. Such limits can provide a useful early warning of corrupted data while also (usually) providing a recoverable situation for the parser, or decoder, encountering the issue. In addition to issues with nesting, the need to sort sets for DER can also cause issues if a large set is presented in a situation where DER encoding is required, such as with a signature verification. In situations where ASN.1 encodings are possibly being accepted from unknown third parties, a more sophisticated algorithm, such as a stable Dual-Pivot Quicksort, should be utilized in order to avoid worse case situations resulting high CPU and/or memory usage in sorting data in SETs.<a href="#section-9-2" class="pilcrow">¶</a></p>
+<p id="section-9-2">In relation to resource exhaustion, while ASN.1 allows for arbitrary nesting of constructed objects and very large lengths of individual data objects, we recommend that limits for both these are enforced appropriate for the use-case the parser, or decoder, is used for. Such limits can provide a useful early warning of corrupted data while also (usually) providing a recoverable situation for the parser, or decoder, encountering the issue. In addition to issues with nesting, the need to sort sets for DER can also cause issues if a large set is presented in a situation where DER encoding is required, such as with a signature verification. In situations where ASN.1 encodings are possibly being accepted from unknown third parties, a more sophisticated algorithm, such as a stable Dual-Pivot Quicksort, should be utilized. Doing so may avoid worst-case situations resulting in high CPU and/or memory usage when producing or verifying the sorted, distinguished encoded value for a SET type.<a href="#section-9-2" class="pilcrow">¶</a></p>
 <p id="section-9-3">Implementers of ASN.1 parsers and decoders are encouraged to use fuzz testing to identify security vulnerabilities and other flaws.<a href="#section-9-3" class="pilcrow">¶</a></p>
 </section>
 </div>

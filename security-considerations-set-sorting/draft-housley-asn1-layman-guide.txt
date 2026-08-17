@@ -2158,8 +2158,9 @@ LessThanOrEqual(byte[] encA, byte[] encB)
    required, such as with a signature verification.  In situations where
    ASN.1 encodings are possibly being accepted from unknown third
    parties, a more sophisticated algorithm, such as a stable Dual-Pivot
-   Quicksort, should be utilized in order to avoid worse case situations
-   resulting high CPU and/or memory usage in sorting data in SETs.
+   Quicksort, should be utilized.  Doing so may avoid worst-case
+   situations resulting in high CPU and/or memory usage when producing
+   or verifying the sorted, distinguished encoded value for a SET type.
 
    Implementers of ASN.1 parsers and decoders are encouraged to use fuzz
    testing to identify security vulnerabilities and other flaws.
