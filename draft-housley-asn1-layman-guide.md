@@ -465,8 +465,8 @@ registration of an object identifier or integer value.
 The Basic Encoding Rules for ASN.1, abbreviated BER, give
 one or more ways to represent any ASN.1 value as an octet
 string. (There are certainly other ways to represent ASN.1
-values, but BER is the standard for interchanging such
-values in OSI.)
+values, and ASN.1 syntax itself does not dictate the encoding
+but BER is the standard for interchanging such values in OSI.)
 
 There are three methods to encode an ASN.1 value under BER,
 the choice of which depends on the type of value and whether
@@ -2477,7 +2477,7 @@ Security considerations are discussed throughout this memo.  Implementations tha
 and decoding data to avoid buffer overflows, denial of service through resource exhaustion, and arbitrary code execution. These
 considerations are not unique to ASN.1; they need to be considered by all data parsers and decoders.
 
-In relation to resource exhaustion, while ASN.1 allows for arbitrary nesting of constructed objects and very large lengths of individual data objects, we recommend that limits for both these are enforced appropriate for the use-case the parser, or decoder, is used for. Such limits can provide a useful early warning of corrupted data while also (usually) providing a recoverable situation for the parser, or decoder, encountering the issue.
+In relation to resource exhaustion, while ASN.1 allows for arbitrary nesting of constructed objects and very large lengths of individual data objects, we recommend that limits for both these are enforced appropriate for the use-case the parser, or decoder, is used for. Such limits can provide a useful early warning of corrupted data while also (usually) providing a recoverable situation for the parser, or decoder, encountering the issue. In addition to issues with nesting, the need to sort sets for DER can also cause issues if a large set is presented in a situation where DER encoding is required, such as with a signature verification. In situations where ASN.1 encodings are possibly being accepted from unknown third parties, a more sophisticated algorithm, such as a stable Dual-Pivot Quicksort, should be utilized. Doing so may avoid worst-case situations resulting in high CPU and/or memory usage when producing or verifying the sorted, distinguished encoded value for a SET type.
 
 Implementers of ASN.1 parsers and decoders are encouraged to use fuzz testing to identify security vulnerabilities and other flaws.
 
