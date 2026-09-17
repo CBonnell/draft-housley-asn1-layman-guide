@@ -2,7 +2,7 @@
 title: A Layman's Guide to a Subset of ASN.1, BER, and DER
 abbrev: Layman's Guide to ASN.1
 docname: draft-housley-asn1-layman-guide-latest
-date: 2026-04-10
+date: 2026-09-17
 submissiontype: independent
 category: info
 
@@ -143,6 +143,9 @@ Encoding Rules (BER), and Distinguished Encoding Rules
 background material sufficient for understanding and
 implementing standards that make use of ASN.1.
 
+This memo is not an IETF standard, and has not been shown to
+have IETF community consensus. This memo offers tutorial information.
+
 --- middle
 
 #Introduction {#intro}
@@ -192,18 +195,16 @@ BER and DER sufficient to understand and implement OSI-based
 applications, Public-Key Cryptography Standards (PKCS), and
 Internet protocols that make use of ASN.1. The features described include an
 overview of ASN.1, BER, and DER and an abridged list of
-ASN.1 types and their BER and DER encodings.
+ASN.1 types and their BER and DER encodings. Features which are not
+used in the specifications listed above are not described in this
+note. For information on the other features, and for more detail generally,
+the reader is referred to {{X680}} and {{X690}}, which define ASN.1, BER, and DER.
 
 Sections 2-4 give an overview of ASN.1, BER, and DER, in that order.
 Section 5 lists some ASN.1 types, giving their notation,
 specific encoding rules, examples, and comments about their
 application. Section 6 concludes with an example,
 X.500 {{X500}} distinguished names.
-
-Advanced features of ASN.1 are not
-described in this note. For information on the other
-features, and for more detail generally, the reader is referred to
-{{X680}} and {{X690}}, which define ASN.1, BER, and DER.
 
 ##Background
 
@@ -2552,4 +2553,4 @@ Implementers of ASN.1 parsers and decoders are encouraged to use fuzz testing to
 # Acknowledgments
 {:numbered="false"}
 
-TODO acknowledge.
+The authors thank Adrian Farrel, Carl Wallace, Daniel Van Geest, Eliot Lear, Mike StJohns, and Sean Turner for their reviews and insightful feedback which meaningfully improved this document.
