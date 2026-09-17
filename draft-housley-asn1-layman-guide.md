@@ -2553,4 +2553,4 @@ Implementers of ASN.1 parsers and decoders are encouraged to use fuzz testing to
 # Acknowledgments
 {:numbered="false"}
 
-TODO acknowledge.
+The authors thank Adrian Farrel, Daniel Van Geest, and Eliot Lear for their reviews and insightful feedback which meaningfully improved this document.
