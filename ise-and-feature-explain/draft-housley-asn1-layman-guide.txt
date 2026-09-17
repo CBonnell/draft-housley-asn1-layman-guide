@@ -2585,7 +2585,9 @@ countryName=US,commonName=Test User 1+organizationName=Example Organization
 
 Acknowledgments
 
-   TODO acknowledge.
+   The authors thank Adrian Farrel, Daniel Van Geest, and Eliot Lear for
+   their reviews and insightful feedback which meaningfully improved
+   this document.
 
 Authors' Addresses
 
