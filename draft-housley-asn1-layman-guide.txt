@@ -5,12 +5,12 @@
 Network Working Group                                         B. Kaliski
 Internet-Draft                                             Verisign Labs
 Intended status: Informational                                C. Bonnell
-Expires: 12 October 2026                            TurboLight Solutions
+Expires: 21 March 2027                              TurboLight Solutions
                                                                  D. Hook
                                                                Keyfactor
                                                               R. Housley
                                                           Vigil Security
-                                                           10 April 2026
+                                                       17 September 2026
 
 
           A Layman's Guide to a Subset of ASN.1, BER, and DER
@@ -23,6 +23,9 @@ Abstract
    Distinguished Encoding Rules (DER).  The purpose of this note is to
    provide background material sufficient for understanding and
    implementing standards that make use of ASN.1.
+
+   This memo is not an IETF standard, and has not been shown to have
+   IETF community consensus.  This memo offers tutorial information.
 
 Status of This Memo
 
@@ -39,7 +42,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 12 October 2026.
+   This Internet-Draft will expire on 21 March 2027.
 
 Copyright Notice
 
@@ -190,18 +193,16 @@ Table of Contents
    Public-Key Cryptography Standards (PKCS), and Internet protocols that
    make use of ASN.1.  The features described include an overview of
    ASN.1, BER, and DER and an abridged list of ASN.1 types and their BER
-   and DER encodings.
+   and DER encodings.  Features which are not used in the specifications
+   listed above are not described in this note.  For information on the
+   other features, and for more detail generally, the reader is referred
+   to [X680] and [X690], which define ASN.1, BER, and DER.
 
    Sections 2-4 give an overview of ASN.1, BER, and DER, in that order.
    Section 5 lists some ASN.1 types, giving their notation, specific
    encoding rules, examples, and comments about their application.
    Section 6 concludes with an example, X.500 [X500] distinguished
    names.
-
-   Advanced features of ASN.1 are not described in this note.  For
-   information on the other features, and for more detail generally, the
-   reader is referred to [X680] and [X690], which define ASN.1, BER, and
-   DER.
 
 1.1.  Background
 
@@ -2584,7 +2585,9 @@ countryName=US,commonName=Test User 1+organizationName=Example Organization
 
 Acknowledgments
 
-   TODO acknowledge.
+   The authors thank Adrian Farrel, Carl Wallace, Daniel Van Geest,
+   Eliot Lear, Mike StJohns, and Sean Turner for their reviews and
+   insightful feedback which meaningfully improved this document.
 
 Authors' Addresses
 
