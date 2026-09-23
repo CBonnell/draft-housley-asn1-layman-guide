@@ -2210,7 +2210,7 @@ Name ::= CHOICE {
 RDNSequence ::= SEQUENCE OF RelativeDistinguishedName
 
 RelativeDistinguishedName ::=
-  SET OF AttributeTypeAndValue
+  SET SIZE (1..MAX) OF AttributeTypeAndValue
 
 AttributeTypeAndValue ::= SEQUENCE {
    AttributeType,
@@ -2233,7 +2233,7 @@ consisting of zero or more occurrences of `RelativeDistinguishedName`.
 The `RelativeDistinguishedName` type gives a unique name to an
 object relative to the object superior to it in the
 directory tree. `RelativeDistinguishedName` is a `SET OF` type
-consisting of zero or more occurrences of
+consisting of one or more occurrences of
 `AttributeTypeAndValue`.
 
 The `AttributeTypeAndValue` type assigns a value to some
