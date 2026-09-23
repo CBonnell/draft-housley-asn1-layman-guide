@@ -352,16 +352,16 @@ Simple types are those not consisting of components; they
 are the "atomic" types. ASN.1 defines several; the types
 that are relevant to the PKCS standards are the following:
 
-> `BIT STRING`,
+> `BIT STRING`
 : an arbitrary string of bits (ones and zeroes).
 
-> `IA5String`,
+> `IA5String`
 : an arbitrary string of IA5 (ASCII) characters {{RFC0020}}.
 
-> `INTEGER`,
+> `INTEGER`
 : an arbitrary integer.
 
-> `NULL`,
+> `NULL`
 : a null value.
 
 > `OBJECT IDENTIFIER`
@@ -369,32 +369,32 @@ that are relevant to the PKCS standards are the following:
 sequence of integer components that identify an
 object such as an algorithm or attribute type.
 
-> `RELATIVE-OID`,
+> `RELATIVE-OID`
 : a relative object identifier, which is a
 sequence of integer components interpreted relative to
 some object identifier established by context.
 
-> `OCTET STRING`,
+> `OCTET STRING`
 : an arbitrary string of octets (eight-bit values).
 
-> `UTF8String`,
+> `UTF8String`
 : an arbitrary string of international characters using UTF-8 encoding.
 
-> `PrintableString`,
+> `PrintableString`
 : an arbitrary string of printable characters.  The allowable characters are listed in {{section-5-12}}.
 
-> `T61String`,
+> `T61String`
 : an arbitrary string of T.61 (eight-bit) characters.
 
-> `UTCTime`,
+> `UTCTime`
 : a "coordinated universal time" or Greenwich Mean Time (GMT) value.
 
-> `GeneralizedTime`,
+> `GeneralizedTime`
 : a time value in the local time zone, GMT, or the difference between local and GMT.
 
-Simple types fall into two categories: string types and non-
-string types. `BIT STRING`, `IA5String`, `OCTET STRING`,
-`PrintableString`, `T61String`, and `UTCTime` are string types.
+Simple types fall into two categories: string types and non-string
+types. `BIT STRING`, `IA5String`, `OCTET STRING`, `UTF8String`,
+`PrintableString`, `T61String`, `GeneralizedTime`, and `UTCTime` are string types.
 
 String types can be viewed, for the purposes of encoding, as
 consisting of components, where the components are
@@ -412,16 +412,16 @@ Structured types are those consisting of components. ASN.1
 defines four, all of which are relevant to the PKCS
 standards:
 
-> `SEQUENCE`,
+> `SEQUENCE`
 : an ordered collection of one or more types.
 
-> `SEQUENCE OF`,
+> `SEQUENCE OF`
 : an ordered collection of zero or more occurrences of a given type.
 
-> `SET`,
+> `SET`
 : an unordered collection of one or more types.
 
-> `SET OF`,
+> `SET OF`
 : an unordered collection of zero or more occurrences of a given type.
 
 The structured types can have optional components, possibly
@@ -1885,7 +1885,7 @@ form, the `SET` must have between `'size1'` and `'size2'` items present. In
 the `SET OF` form, the `SET` can have any number of items, including zero.
 
 Example: The `RelativeDistinguishedName` type {{RFC5280}} consists of
-one or more occurrences of the `AttributeValueAssertion` type, where
+one or more occurrences of the `AttributeTypeAndValue` type, where
 the order is unimportant:
 
 ~~~ asn.1
@@ -1975,7 +1975,7 @@ acute accent (') to the next character.
 Primitive. The contents octets are as for a
 primitive BER encoding.
 
-Example: The DER encoding of the `T61String` value "cl'es
+Example: The DER encoding of the `T61String` value "clés
 publiques" is
 
 ~~~
@@ -2066,9 +2066,9 @@ among others:
 These values have the following BER encodings, among others:
 
 ~~~
-17 0d 39 31 30 35 30 36 32 33 34 35 34 30 5a
-
 17 11 39 31 30 35 30 36 31 36 34 35 34 30 2D 30 37 30 30
+
+17 0d 39 31 30 35 30 36 32 33 34 35 34 30 5a
 ~~~
 
 ###DER Encoding
@@ -2103,7 +2103,7 @@ The `VisibleString` starts with a four-digit representation of the year, a
 two-digit representation of the month, and a two-digit representation of
 the day, without use of separators.
 
-The `VisibleString` continues with the time of day to an accuracy of one hour
+The `VisibleString` continues with the time of day to an accuracy of one hour,
 one minute, one second, or fractions of a second, using either comma or full
 stop as the decimal sign.
 
@@ -2210,9 +2210,9 @@ Name ::= CHOICE {
 RDNSequence ::= SEQUENCE OF RelativeDistinguishedName
 
 RelativeDistinguishedName ::=
-  SET OF AttributeValueAssertion
+  SET OF AttributeTypeAndValue
 
-AttributeValueAssertion ::= SEQUENCE {
+AttributeTypeAndValue ::= SEQUENCE {
    AttributeType,
    AttributeValue }
 
@@ -2234,11 +2234,11 @@ The `RelativeDistinguishedName` type gives a unique name to an
 object relative to the object superior to it in the
 directory tree. `RelativeDistinguishedName` is a `SET OF` type
 consisting of zero or more occurrences of
-`AttributeValueAssertion`.
+`AttributeTypeAndValue`.
 
-The `AttributeValueAssertion` type assigns a value to some
+The `AttributeTypeAndValue` type assigns a value to some
 attribute of a relative distinguished name, such as country
-name or common name. `AttributeValueAssertion` is a `SEQUENCE`
+name or common name. `AttributeTypeAndValue` is a `SEQUENCE`
 type consisting of two components, an `AttributeType` type and
 an `AttributeValue` type.
 
@@ -2266,7 +2266,7 @@ The name is that of User 1. The name is represented by the following path:
 
 Each level corresponds to one `RelativeDistinguishedName`
 value, each of which happens for this name to consist of one
-`AttributeValueAssertion` value. The `AttributeType` value is
+`AttributeTypeAndValue` value. The `AttributeType` value is
 before the equals sign, and the `AttributeValue` value (a
 printable string for the given attribute types) is after the
 equals sign.
@@ -2331,9 +2331,9 @@ is primitive. The length octets follow the short form, and
 the contents octets are the ASCII representation of the
 attribute value.
 
-###AttributeValueAssertion
+###AttributeTypeAndValue
 
-The three `AttributeValueAssertion` values are `SEQUENCE`
+The three `AttributeTypeAndValue` values are `SEQUENCE`
 values, so their DER encodings follow the constructed,
 definite-length method:
 
@@ -2383,7 +2383,7 @@ the tag for `SET OF`, 17 (decimal), is between 0 and 30. Bits
 class Bit 6 has value "1" since the encoding is constructed.
 The lengths octets follow the short form, and the contents
 octets are the DER encodings of the respective
-`AttributeValueAssertion` values, since there is only one
+`AttributeTypeAndValue` values, since there is only one
 value in each set.
 
 ###RDNSequence
@@ -2537,4 +2537,4 @@ Implementers of ASN.1 parsers and decoders are encouraged to use fuzz testing to
 # Acknowledgments
 {:numbered="false"}
 
-The authors thank Adrian Farrel, Carl Wallace, Daniel Van Geest, Eliot Lear, Mike StJohns, and Sean Turner for their reviews and insightful feedback which meaningfully improved this document.
+The authors thank Adrian Farrel, Carl Wallace, Daniel Van Geest, Eliot Lear, Lijun Liao, Mike StJohns, and Sean Turner for their reviews and insightful feedback which meaningfully improved this document.
