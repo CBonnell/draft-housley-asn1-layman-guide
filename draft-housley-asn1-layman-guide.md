@@ -1798,13 +1798,24 @@ ascending order by tag (care: the `CONSTRUCTED` bit is not part of the tag value
 A simple pseudo-code version of the sort (in-place) would look like:
 
 ~~~pseudocode
+// NOTE: every octet of an encoding is treated as an unsigned value in the
+// range 0..255, both when the tag octet is masked and when octets are
+// compared. Languages with signed byte types, such as Java and C#, must
+// mask each octet with 0xFF before comparing it, otherwise octets of 0x80
+// and above compare as negative and the resulting order is wrong.
+
 Sort(ASN1Object[] elements)
 {
+    if (Length(elements) < 2)
+    {
+        return;
+    }
+
     boolean swapped = true;
     while (swapped)
     {
         swapped = false;
-        for (var i = 0; i != Length(elements) - 1; i++)
+        for (var i = 0; i < Length(elements) - 1; i++)
         {
             if (!LessThanOrEqual(DER(elements[i]),
                                  DER(elements[i+1])))
@@ -1841,6 +1852,8 @@ LessThanOrEqual(byte[] encA, byte[] encB)
 {: #fig-set-sort title="Pseudo-code for sorting SET components for DER"}
 
 Where `Length()` returns the length of an array, `Min()` returns the mathematical minimum of two values and `DER()` returns the DER encoding of the `ASN1Object` passed to it, and the `~` operator provides the ones compliment of a value, as it does in languages like C, Java, and C#. Likewise for `&` - the bitwise AND.
+
+The comparison stops at the last octet the two encodings have in common. This is consistent with the padding described above because, for two definite-length DER encodings with the same tag, the length octets differ before the contents octets do, so one encoding can never be a strict prefix of the other.
 
 NOTE: As you can see from the `LessThanOrEqual()` function, `SET` elements in DER encodings are ordered first according to their tags (class and number), but the `CONSTRUCTED` bit is not part of the tag.
 
