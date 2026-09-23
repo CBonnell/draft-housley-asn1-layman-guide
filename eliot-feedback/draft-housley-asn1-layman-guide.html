@@ -3929,15 +3929,26 @@ ascending order by tag (care: the <code>CONSTRUCTED</code> bit is not part of th
 <p id="section-5.16.2-3">A simple pseudo-code version of the sort (in-place) would look like:<a href="#section-5.16.2-3" class="pilcrow">¶</a></p>
 <span id="name-pseudo-code-for-sorting-set"></span><div id="fig-set-sort">
 <figure id="figure-1">
-            <div class="lang-pseudocode sourcecode" id="section-5.16.2-4.1">
+            <div class="breakable lang-pseudocode sourcecode" id="section-5.16.2-4.1">
 <pre>
+// NOTE: every octet of an encoding is treated as an unsigned value in the
+// range 0..255, both when the tag octet is masked and when octets are
+// compared. Languages with signed byte types, such as Java and C#, must
+// mask each octet with 0xFF before comparing it, otherwise octets of 0x80
+// and above compare as negative and the resulting order is wrong.
+
 Sort(ASN1Object[] elements)
 {
+    if (Length(elements) &lt; 2)
+    {
+        return;
+    }
+
     boolean swapped = true;
     while (swapped)
     {
         swapped = false;
-        for (var i = 0; i != Length(elements) - 1; i++)
+        for (var i = 0; i &lt; Length(elements) - 1; i++)
         {
             if (!LessThanOrEqual(DER(elements[i]),
                                  DER(elements[i+1])))
@@ -3977,10 +3988,11 @@ LessThanOrEqual(byte[] encA, byte[] encB)
             </figcaption></figure>
 </div>
 <p id="section-5.16.2-5">Where <code>Length()</code> returns the length of an array, <code>Min()</code> returns the mathematical minimum of two values and <code>DER()</code> returns the DER encoding of the <code>ASN1Object</code> passed to it, and the <code>~</code> operator provides the ones compliment of a value, as it does in languages like C, Java, and C#. Likewise for <code>&amp;</code> - the bitwise AND.<a href="#section-5.16.2-5" class="pilcrow">¶</a></p>
-<p id="section-5.16.2-6">NOTE: As you can see from the <code>LessThanOrEqual()</code> function, <code>SET</code> elements in DER encodings are ordered first according to their tags (class and number), but the <code>CONSTRUCTED</code> bit is not part of the tag.<a href="#section-5.16.2-6" class="pilcrow">¶</a></p>
-<p id="section-5.16.2-7">Links to examples of different implementations of the DER <code>SET</code> sort can be found in <a href="#_section-7" class="auto internal xref">Section 7</a>.<a href="#section-5.16.2-7" class="pilcrow">¶</a></p>
-<p id="section-5.16.2-8">For <code>SET OF</code> (see below), this is unimportant. All elements have the same tag and DER requires them to either all be in constructed form or all in primitive form, according to that tag. The elements are effectively ordered according to their contents octets.<a href="#section-5.16.2-8" class="pilcrow">¶</a></p>
-<p id="section-5.16.2-9">For <code>SET</code>, the elements will have distinct tags, and each will be in constructed or primitive form accordingly. Failing to ignore the <code>CONSTRUCTED</code> bit could therefore lead to ordering inversions, so in general it is best to make sure it is not present in the encoding of the tag.<a href="#section-5.16.2-9" class="pilcrow">¶</a></p>
+<p id="section-5.16.2-6">The comparison stops at the last octet the two encodings have in common. This is consistent with the padding described above because, for two definite-length DER encodings with the same tag, the length octets differ before the contents octets do, so one encoding can never be a strict prefix of the other.<a href="#section-5.16.2-6" class="pilcrow">¶</a></p>
+<p id="section-5.16.2-7">NOTE: As you can see from the <code>LessThanOrEqual()</code> function, <code>SET</code> elements in DER encodings are ordered first according to their tags (class and number), but the <code>CONSTRUCTED</code> bit is not part of the tag.<a href="#section-5.16.2-7" class="pilcrow">¶</a></p>
+<p id="section-5.16.2-8">Links to examples of different implementations of the DER <code>SET</code> sort can be found in <a href="#_section-7" class="auto internal xref">Section 7</a>.<a href="#section-5.16.2-8" class="pilcrow">¶</a></p>
+<p id="section-5.16.2-9">For <code>SET OF</code> (see below), this is unimportant. All elements have the same tag and DER requires them to either all be in constructed form or all in primitive form, according to that tag. The elements are effectively ordered according to their contents octets.<a href="#section-5.16.2-9" class="pilcrow">¶</a></p>
+<p id="section-5.16.2-10">For <code>SET</code>, the elements will have distinct tags, and each will be in constructed or primitive form accordingly. Failing to ignore the <code>CONSTRUCTED</code> bit could therefore lead to ordering inversions, so in general it is best to make sure it is not present in the encoding of the tag.<a href="#section-5.16.2-10" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
