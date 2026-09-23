@@ -2,7 +2,7 @@
 title: A Layman's Guide to a Subset of ASN.1, BER, and DER
 abbrev: Layman's Guide to ASN.1
 docname: draft-housley-asn1-layman-guide-latest
-date: 2026-09-17
+date:
 submissiontype: independent
 category: info
 
