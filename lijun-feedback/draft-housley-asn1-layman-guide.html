@@ -4412,7 +4412,7 @@ Name ::= CHOICE {
 RDNSequence ::= SEQUENCE OF RelativeDistinguishedName
 
 RelativeDistinguishedName ::=
-  SET OF AttributeTypeAndValue
+  SET SIZE (1..MAX) OF AttributeTypeAndValue
 
 AttributeTypeAndValue ::= SEQUENCE {
    AttributeType,
@@ -4433,7 +4433,7 @@ consisting of zero or more occurrences of <code>RelativeDistinguishedName</code>
 <p id="section-6.1-5">The <code>RelativeDistinguishedName</code> type gives a unique name to an
 object relative to the object superior to it in the
 directory tree. <code>RelativeDistinguishedName</code> is a <code>SET OF</code> type
-consisting of zero or more occurrences of
+consisting of one or more occurrences of
 <code>AttributeTypeAndValue</code>.<a href="#section-6.1-5" class="pilcrow">¶</a></p>
 <p id="section-6.1-6">The <code>AttributeTypeAndValue</code> type assigns a value to some
 attribute of a relative distinguished name, such as country
