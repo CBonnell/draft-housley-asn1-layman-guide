@@ -26,7 +26,7 @@ author:
     uri: https://www.verisignlabs.com/
  -  name: Corey Bonnell
     ins: C. Bonnell
-    org: TurboLight Solutions
+    org: TurboLight Solutions, LLC
     country: US
     email: corey.bonnell@turbolightsolutions.com
  -  name: David Hook
