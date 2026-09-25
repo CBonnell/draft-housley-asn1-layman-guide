@@ -5,12 +5,12 @@
 Network Working Group                                         B. Kaliski
 Internet-Draft                                             Verisign Labs
 Intended status: Informational                                C. Bonnell
-Expires: 27 March 2027                              TurboLight Solutions
+Expires: 29 March 2027                         TurboLight Solutions, LLC
                                                                  D. Hook
                                                                Keyfactor
                                                               R. Housley
                                                           Vigil Security
-                                                       23 September 2026
+                                                       25 September 2026
 
 
           A Layman's Guide to a Subset of ASN.1, BER, and DER
@@ -42,7 +42,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 27 March 2027.
+   This Internet-Draft will expire on 29 March 2027.
 
 Copyright Notice
 
@@ -139,7 +139,7 @@ Table of Contents
      6.2.  DER encoding
        6.2.1.  AttributeType
        6.2.2.  AttributeValue
-       6.2.3.  AttributeValueAssertion
+       6.2.3.  AttributeTypeAndValue
        6.2.4.  RelativeDistinguishedName
        6.2.5.  RDNSequence
        6.2.6.  Name
@@ -396,42 +396,43 @@ Table of Contents
    "atomic" types.  ASN.1 defines several; the types that are relevant
    to the PKCS standards are the following:
 
-      BIT STRING,  an arbitrary string of bits (ones and zeroes).
+      BIT STRING  an arbitrary string of bits (ones and zeroes).
 
-      IA5String,  an arbitrary string of IA5 (ASCII) characters
+      IA5String  an arbitrary string of IA5 (ASCII) characters
          [RFC0020].
 
-      INTEGER,  an arbitrary integer.
+      INTEGER  an arbitrary integer.
 
-      NULL,  a null value.
+      NULL  a null value.
 
       OBJECT IDENTIFIER  an object identifier, which is a sequence of
          integer components that identify an object such as an algorithm
          or attribute type.
 
-      RELATIVE-OID,  a relative object identifier, which is a sequence
-         of integer components interpreted relative to some object
+      RELATIVE-OID  a relative object identifier, which is a sequence of
+         integer components interpreted relative to some object
          identifier established by context.
 
-      OCTET STRING,  an arbitrary string of octets (eight-bit values).
+      OCTET STRING  an arbitrary string of octets (eight-bit values).
 
-      UTF8String,  an arbitrary string of international characters using
+      UTF8String  an arbitrary string of international characters using
          UTF-8 encoding.
 
-      PrintableString,  an arbitrary string of printable characters.
-         The allowable characters are listed in Section 5.12.
+      PrintableString  an arbitrary string of printable characters.  The
+         allowable characters are listed in Section 5.12.
 
-      T61String,  an arbitrary string of T.61 (eight-bit) characters.
+      T61String  an arbitrary string of T.61 (eight-bit) characters.
 
-      UTCTime,  a "coordinated universal time" or Greenwich Mean Time
+      UTCTime  a "coordinated universal time" or Greenwich Mean Time
          (GMT) value.
 
-      GeneralizedTime,  a time value in the local time zone, GMT, or the
+      GeneralizedTime  a time value in the local time zone, GMT, or the
          difference between local and GMT.
 
-   Simple types fall into two categories: string types and non- string
-   types.  BIT STRING, IA5String, OCTET STRING, PrintableString,
-   T61String, and UTCTime are string types.
+   Simple types fall into two categories: string types and non-string
+   types.  BIT STRING, IA5String, OCTET STRING, UTF8String,
+   PrintableString, T61String, GeneralizedTime, and UTCTime are string
+   types.
 
    String types can be viewed, for the purposes of encoding, as
    consisting of components, where the components are substrings.  This
@@ -447,14 +448,14 @@ Table of Contents
    Structured types are those consisting of components.  ASN.1 defines
    four, all of which are relevant to the PKCS standards:
 
-      SEQUENCE,  an ordered collection of one or more types.
+      SEQUENCE  an ordered collection of one or more types.
 
-      SEQUENCE OF,  an ordered collection of zero or more occurrences of
+      SEQUENCE OF  an ordered collection of zero or more occurrences of
          a given type.
 
-      SET,  an unordered collection of one or more types.
+      SET  an unordered collection of one or more types.
 
-      SET OF,  an unordered collection of zero or more occurrences of a
+      SET OF  an unordered collection of zero or more occurrences of a
          given type.
 
    The structured types can have optional components, possibly with
@@ -1817,7 +1818,7 @@ Table of Contents
    SET OF form, the SET can have any number of items, including zero.
 
    Example: The RelativeDistinguishedName type [RFC5280] consists of one
-   or more occurrences of the AttributeValueAssertion type, where the
+   or more occurrences of the AttributeTypeAndValue type, where the
    order is unimportant:
 
    RelativeDistinguishedName ::=
@@ -1901,7 +1902,7 @@ Table of Contents
 
    Primitive.  The contents octets are as for a primitive BER encoding.
 
-   Example: The DER encoding of the T61String value "cl'es publiques" is
+   Example: The DER encoding of the T61String value "clés publiques" is
 
    14 0f 63 6c c2 65 73 20 70 75 62 6c 69 71 75 65 73
 
@@ -1970,9 +1971,9 @@ Table of Contents
 
    These values have the following BER encodings, among others:
 
-   17 0d 39 31 30 35 30 36 32 33 34 35 34 30 5a
-
    17 11 39 31 30 35 30 36 31 36 34 35 34 30 2D 30 37 30 30
+
+   17 0d 39 31 30 35 30 36 32 33 34 35 34 30 5a
 
 5.19.2.  DER Encoding
 
@@ -2010,7 +2011,7 @@ Table of Contents
    representation of the day, without use of separators.
 
    The VisibleString continues with the time of day to an accuracy of
-   one hour one minute, one second, or fractions of a second, using
+   one hour, one minute, one second, or fractions of a second, using
    either comma or full stop as the decimal sign.
 
    The VisibleString ends with upper-case letter Z to indicate a UTC
@@ -2105,9 +2106,9 @@ Table of Contents
    RDNSequence ::= SEQUENCE OF RelativeDistinguishedName
 
    RelativeDistinguishedName ::=
-     SET OF AttributeValueAssertion
+     SET SIZE (1..MAX) OF AttributeTypeAndValue
 
-   AttributeValueAssertion ::= SEQUENCE {
+   AttributeTypeAndValue ::= SEQUENCE {
       AttributeType,
       AttributeValue }
 
@@ -2125,12 +2126,12 @@ Table of Contents
 
    The RelativeDistinguishedName type gives a unique name to an object
    relative to the object superior to it in the directory tree.
-   RelativeDistinguishedName is a SET OF type consisting of zero or more
-   occurrences of AttributeValueAssertion.
+   RelativeDistinguishedName is a SET OF type consisting of one or more
+   occurrences of AttributeTypeAndValue.
 
-   The AttributeValueAssertion type assigns a value to some attribute of
-   a relative distinguished name, such as country name or common name.
-   AttributeValueAssertion is a SEQUENCE type consisting of two
+   The AttributeTypeAndValue type assigns a value to some attribute of a
+   relative distinguished name, such as country name or common name.
+   AttributeTypeAndValue is a SEQUENCE type consisting of two
    components, an AttributeType type and an AttributeValue type.
 
    The AttributeType type identifies an attribute by object identifier.
@@ -2156,7 +2157,7 @@ Table of Contents
 
    Each level corresponds to one RelativeDistinguishedName value, each
    of which happens for this name to consist of one
-   AttributeValueAssertion value.  The AttributeType value is before the
+   AttributeTypeAndValue value.  The AttributeType value is before the
    equals sign, and the AttributeValue value (a printable string for the
    given attribute types) is after the equals sign.
 
@@ -2211,10 +2212,10 @@ Table of Contents
    follow the short form, and the contents octets are the ASCII
    representation of the attribute value.
 
-6.2.3.  AttributeValueAssertion
+6.2.3.  AttributeTypeAndValue
 
-   The three AttributeValueAssertion values are SEQUENCE values, so
-   their DER encodings follow the constructed, definite-length method:
+   The three AttributeTypeAndValue values are SEQUENCE values, so their
+   DER encodings follow the constructed, definite-length method:
 
    30 09                                     countryName = "US"
       06 03 55 04 06
@@ -2254,7 +2255,7 @@ Table of Contents
    value "0" since SET OF is in the universal class Bit 6 has value "1"
    since the encoding is constructed.  The lengths octets follow the
    short form, and the contents octets are the DER encodings of the
-   respective AttributeValueAssertion values, since there is only one
+   respective AttributeTypeAndValue values, since there is only one
    value in each set.
 
 6.2.5.  RDNSequence
@@ -2556,8 +2557,9 @@ Table of Contents
 Acknowledgments
 
    The authors thank Adrian Farrel, Carl Wallace, Daniel Van Geest,
-   Eliot Lear, Mike StJohns, and Sean Turner for their reviews and
-   insightful feedback which meaningfully improved this document.
+   Eliot Lear, Lijun Liao, Mike StJohns, and Sean Turner for their
+   reviews and insightful feedback which meaningfully improved this
+   document.
 
 Authors' Addresses
 
@@ -2571,7 +2573,7 @@ Authors' Addresses
 
 
    Corey Bonnell
-   TurboLight Solutions
+   TurboLight Solutions, LLC
    United States of America
    Email: corey.bonnell@turbolightsolutions.com
 
