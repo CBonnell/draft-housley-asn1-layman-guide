@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-09-24T03:25:02.783409+00:00",
+  "timestamp": "2026-09-27T03:57:52.263153+00:00",
   "repo": "CBonnell/draft-housley-asn1-layman-guide",
   "labels": [
     {
@@ -1182,24 +1182,26 @@
       "id": "PR_kwDOOSVefs8AAAABExMR3w",
       "title": "Add Lijun's feedback",
       "url": "https://github.com/CBonnell/draft-housley-asn1-layman-guide/pull/18",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "CBonnell",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2026-09-23T14:45:52Z",
-      "updatedAt": "2026-09-23T19:40:43Z",
+      "updatedAt": "2026-09-25T12:46:34Z",
       "baseRepository": "CBonnell/draft-housley-asn1-layman-guide",
       "baseRefName": "main",
       "baseRefOid": "c1f130dc4af7856aad3c1175ba12cfbb36622a41",
       "headRepository": "CBonnell/draft-housley-asn1-layman-guide",
       "headRefName": "lijun-feedback",
-      "headRefOid": "9ad03bba8bcb36d15f2c5624ad7e4e4980b00bb9",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "fc8b611bdf855325f0ce1ffdf39cb5c69fd29ba3",
+      "closedAt": "2026-09-25T12:46:30Z",
+      "mergedAt": "2026-09-25T12:46:30Z",
+      "mergedBy": "CBonnell",
+      "mergeCommit": {
+        "oid": "d8b3a8d48b9957705d4eb2fdbb46f2ff3b8f0994"
+      },
       "comments": [],
       "reviews": [
         {
@@ -1213,6 +1215,19 @@
           "body": "Looks fine",
           "createdAt": "2026-09-23T16:05:13Z",
           "updatedAt": "2026-09-23T16:05:13Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOOSVefs8AAAABPHHjLw",
+          "commit": {
+            "abbreviatedOid": "fc8b611"
+          },
+          "author": "russhousley",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-09-24T19:17:56Z",
+          "updatedAt": "2026-09-24T19:17:56Z",
           "comments": []
         }
       ]
