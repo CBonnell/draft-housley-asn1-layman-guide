@@ -871,13 +871,13 @@ with an explicit, context-specific tag:
 
 ~~~ asn.1
 TBSCertificate ::= SEQUENCE {
-  version [0] EXPLICIT Version DEFAULT v1,
+  version [0] Version DEFAULT v1,
   ... }
 ~~~
 
-The ASN.1 module in {{RFC5280}} that defines the `TBSCertificate`
-type uses explicit tagging as its default tagging method, so the
-`EXPLICIT` keyword here is redundant but permitted.
+The tag is explicit because the default tagging method for
+the ASN.1 module in {{RFC5280}} that defines the `TBSCertificate`
+type is explicit tagging.
 
 ###BER Encoding
 Constructed. The contents octets are the BER
@@ -1240,7 +1240,7 @@ value of 0 for the version component:
 
 ~~~ asn.1
 TBSCertificate ::= SEQUENCE {
-  version [0] EXPLICIT Version DEFAULT v1,
+  version [0] Version DEFAULT v1,
   ... }
 ~~~
 
