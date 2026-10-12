@@ -2713,13 +2713,13 @@ with an explicit, context-specific tag:<a href="#section-5.2-12" class="pilcrow"
 <div class="lang-asn.1 sourcecode" id="section-5.2-13">
 <pre>
 TBSCertificate ::= SEQUENCE {
-  version [0] EXPLICIT Version DEFAULT v1,
+  version [0] Version DEFAULT v1,
   ... }
 </pre><a href="#section-5.2-13" class="pilcrow">¶</a>
 </div>
-<p id="section-5.2-14">The ASN.1 module in <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> that defines the <code>TBSCertificate</code>
-type uses explicit tagging as its default tagging method, so the
-<code>EXPLICIT</code> keyword here is redundant but permitted.<a href="#section-5.2-14" class="pilcrow">¶</a></p>
+<p id="section-5.2-14">The tag is explicit because the default tagging method for
+the ASN.1 module in <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> that defines the <code>TBSCertificate</code>
+type is explicit tagging.<a href="#section-5.2-14" class="pilcrow">¶</a></p>
 <div id="ber-encoding-1">
 <section id="section-5.2.1">
           <h4 id="name-ber-encoding-2">
@@ -3168,7 +3168,7 @@ value of 0 for the version component:<a href="#section-5.8-8" class="pilcrow">¶
 <div class="lang-asn.1 sourcecode" id="section-5.8-9">
 <pre>
 TBSCertificate ::= SEQUENCE {
-  version [0] EXPLICIT Version DEFAULT v1,
+  version [0] Version DEFAULT v1,
   ... }
 </pre><a href="#section-5.8-9" class="pilcrow">¶</a>
 </div>
