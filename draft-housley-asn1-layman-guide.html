@@ -24,18 +24,18 @@ have IETF community consensus. This memo offers tutorial information.
 <meta content="draft-housley-asn1-layman-guide-latest" name="ietf.draft">
 <!-- Generator version information:
   xml2rfc 3.34.1
-    Python 3.14.7
-    ConfigArgParse 1.7.7
+    Python 3.14.8
+    ConfigArgParse 1.8.0
     google-i18n-address 3.1.1
     intervaltree 3.2.1
     Jinja2 3.1.6
     lxml 6.1.1
     natsort 8.4.0
-    platformdirs 4.11.10
+    platformdirs 4.12.2
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.33.1
-    wcwidth 0.8.4
+    wcwidth 0.9.1
 -->
 <link href="draft-housley-asn1-layman-guide.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1051,11 +1051,11 @@ svg {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">Layman's Guide to ASN.1</td>
-<td class="right">September 2026</td>
+<td class="right">October 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Kaliski, et al.</td>
-<td class="center">Expires 29 March 2027</td>
+<td class="center">Expires 16 April 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1068,12 +1068,12 @@ svg {
 <dd class="internet-draft">draft-housley-asn1-layman-guide-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-09-25" class="published">25 September 2026</time>
+<time datetime="2026-10-13" class="published">13 October 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2027-03-29">29 March 2027</time></dd>
+<dd class="expires"><time datetime="2027-04-16">16 April 2027</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1126,7 +1126,7 @@ have IETF community consensus. This memo offers tutorial information.<a href="#s
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 29 March 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 16 April 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1696,47 +1696,51 @@ are derived from other types; and other types, which include
 the <code>CHOICE</code> type and the <code>ANY</code> type. Types and values can be
 given names with the ASN.1 assignment operator (::=) , and
 those names can be used in defining other types and values.<a href="#section-2-2" class="pilcrow">¶</a></p>
-<p id="section-2-3">Every ASN.1 type other than <code>CHOICE</code> and <code>ANY</code> has a tag, which
-consists of a class and a nonnegative tag number. ASN.1
-types are abstractly the same if and only if their tag
-numbers are the same. In other words, the name of an ASN.1
-type does not affect its abstract meaning, only the tag
-does. There are four classes of tag:<a href="#section-2-3" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlNewline" id="section-2-4">
-        <dt id="section-2-4.1">Universal:</dt>
-        <dd style="margin-left: 1.5em" id="section-2-4.2">
-          <p id="section-2-4.2.1">for types whose meaning is the same in all applications;
-these types are specified in <span>[<a href="#X680" class="cite xref">X680</a>]</span>.<a href="#section-2-4.2.1" class="pilcrow">¶</a></p>
+<p id="section-2-3">ASN.1 has two kinds of notation. Type notation describes a type,
+such as <code>INTEGER</code> or <code>SEQUENCE { ... }</code>. Value notation specifies a
+particular value of a type. For example, <code>{ 2 5 4 }</code> is
+value notation for a value of type <code>OBJECT IDENTIFIER</code>, and <code>TRUE</code> is
+value notation for a value of type <code>BOOLEAN</code>. A named value is
+defined with the assignment operator, as in
+<code>id-at OBJECT IDENTIFIER ::= { joint-iso-itu-t(2) ds(5) 4 }</code>.<a href="#section-2-3" class="pilcrow">¶</a></p>
+<p id="section-2-4">Every ASN.1 type other than <code>CHOICE</code> and <code>ANY</code> has a tag, which
+consists of a class and a nonnegative tag number. There are
+four classes of tag:<a href="#section-2-4" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlNewline" id="section-2-5">
+        <dt id="section-2-5.1">Universal:</dt>
+        <dd style="margin-left: 1.5em" id="section-2-5.2">
+          <p id="section-2-5.2.1">for types whose meaning is the same in all applications;
+these types are specified in <span>[<a href="#X680" class="cite xref">X680</a>]</span>.<a href="#section-2-5.2.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-2-4.3">Application:</dt>
-        <dd style="margin-left: 1.5em" id="section-2-4.4">
-          <p id="section-2-4.4.1">for types whose meaning is specific to an application, such as X.500
+<dt id="section-2-5.3">Application:</dt>
+        <dd style="margin-left: 1.5em" id="section-2-5.4">
+          <p id="section-2-5.4.1">for types whose meaning is specific to an application, such as X.500
 directory services; types in two different applications may have the same
-application-specific tag and different meanings.<a href="#section-2-4.4.1" class="pilcrow">¶</a></p>
+application-specific tag and different meanings.<a href="#section-2-5.4.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-2-4.5">Private:</dt>
-        <dd style="margin-left: 1.5em" id="section-2-4.6">
-          <p id="section-2-4.6.1">for types whose meaning is specific to a given enterprise.<a href="#section-2-4.6.1" class="pilcrow">¶</a></p>
+<dt id="section-2-5.5">Private:</dt>
+        <dd style="margin-left: 1.5em" id="section-2-5.6">
+          <p id="section-2-5.6.1">for types whose meaning is specific to a given enterprise.<a href="#section-2-5.6.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-2-4.7">Context-specific:</dt>
-        <dd style="margin-left: 1.5em" id="section-2-4.8">
-          <p id="section-2-4.8.1">for types whose meaning is specific to a given structured type;
+<dt id="section-2-5.7">Context-specific:</dt>
+        <dd style="margin-left: 1.5em" id="section-2-5.8">
+          <p id="section-2-5.8.1">for types whose meaning is specific to a given structured type;
 context-specific tags are used to distinguish between component types
 with the same underlying tag within the context of a given structured
 type, and component types in two different structured types may have the
-same tag and different meanings.<a href="#section-2-4.8.1" class="pilcrow">¶</a></p>
+same tag and different meanings.<a href="#section-2-5.8.1" class="pilcrow">¶</a></p>
 </dd>
       <dd class="break"></dd>
 </dl>
-<p id="section-2-5">The types with universal tags are defined in X.208, which
+<p id="section-2-6">The types with universal tags are defined in X.208, which
 also gives the types' universal tag numbers. Types with
 other tags are defined in many places, and are always
 obtained by implicit or explicit tagging (see Section 2.3).
 Table 1 lists some ASN.1 types and their universal-class
-tags.<a href="#section-2-5" class="pilcrow">¶</a></p>
+tags.<a href="#section-2-6" class="pilcrow">¶</a></p>
 <span id="name-some-types-and-their-univer"></span><table class="center" id="table-2">
         <caption>
 <a href="#table-2" class="selfRef">Table 2</a>:
@@ -1822,27 +1826,27 @@ tags.<a href="#section-2-5" class="pilcrow">¶</a></p>
           </tr>
         </tbody>
       </table>
-<p id="section-2-7">ASN.1 types and values are expressed in a flexible,
+<p id="section-2-8">ASN.1 types and values are expressed in a flexible,
 programming-language-like notation, with the following
-special rules:<a href="#section-2-7" class="pilcrow">¶</a></p>
+special rules:<a href="#section-2-8" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-2-8.1">
-          <p id="section-2-8.1.1">Layout is not significant; multiple spaces and line breaks can be considered as a single space.<a href="#section-2-8.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-2-9.1">
+          <p id="section-2-9.1.1">Layout is not significant; multiple spaces and line breaks can be considered as a single space.<a href="#section-2-9.1.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-2-8.2">
-          <p id="section-2-8.2.1">Comments begin with a pair of hyphens (<code>--</code>), and comments end with another pair of hyphens or a line break.<a href="#section-2-8.2.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-2-9.2">
+          <p id="section-2-9.2.1">Comments take one of two forms. A comment begins with a pair of hyphens (<code>--</code>) and ends with another pair of hyphens or a line break, so it is always contained on a single line. A comment can also begin with <code>/*</code> and end with <code>*/</code>; this form can span multiple lines.<a href="#section-2-9.2.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-2-8.3">
-          <p id="section-2-8.3.1">Identifiers (names of values and fields) and type references (names of types) consist of upper- and
+        <li class="normal" id="section-2-9.3">
+          <p id="section-2-9.3.1">Identifiers (names of values and fields) and type references (names of types) consist of upper- and
 lower-case letters, digits, hyphens, and spaces;
 identifiers begin with lower-case letters; type
-references begin with upper-case letters.<a href="#section-2-8.3.1" class="pilcrow">¶</a></p>
+references begin with upper-case letters.<a href="#section-2-9.3.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-2-9">The following four subsections give an overview of simple
+<p id="section-2-10">The following four subsections give an overview of simple
 types, structured types, implicitly and explicitly tagged
 types, and other types. Section 5 describes specific types
-in more detail.<a href="#section-2-9" class="pilcrow">¶</a></p>
+in more detail.<a href="#section-2-10" class="pilcrow">¶</a></p>
 <div id="_section-2-1">
 <section id="section-2.1">
         <h3 id="name-simple-types">
@@ -1988,8 +1992,11 @@ some object identifier established by context.<a href="#section-2.1-7.1.1.2.1" c
 </li>
         </ul>
 <p id="section-2.1-14">Simple types fall into two categories: string types and non-string
-types. <code>BIT STRING</code>, <code>IA5String</code>, <code>OCTET STRING</code>, <code>UTF8String</code>,
-<code>PrintableString</code>, <code>T61String</code>, <code>GeneralizedTime</code>, and <code>UTCTime</code> are string types.<a href="#section-2.1-14" class="pilcrow">¶</a></p>
+types. The character string types (<code>IA5String</code>, <code>PrintableString</code>,
+<code>T61String</code>, and <code>UTF8String</code>) and the time types (<code>GeneralizedTime</code>
+and <code>UTCTime</code>) are string types because their values are sequences of
+characters. <code>BIT STRING</code> and <code>OCTET STRING</code> are also string types,
+although their values are sequences of bits and octets rather than characters.<a href="#section-2.1-14" class="pilcrow">¶</a></p>
 <p id="section-2.1-15">String types can be viewed, for the purposes of encoding, as
 consisting of components, where the components are
 substrings. This view allows one to encode a value whose
@@ -2162,7 +2169,8 @@ indicate that the length is indefinite.<a href="#section-3-5.1.1.2.1" class="pil
             <dd style="margin-left: 1.5em" id="section-3-6.1.1.2">
               <p id="section-3-6.1.1.2.1">For the primitive, definite-length
 method, these give a concrete representation of
-the  value. For the constructed methods, these
+the  value. (For a <code>BIT STRING</code>, the first contents octet is the
+"unused bits" octet; see <a href="#_section-5-4" class="auto internal xref">Section 5.4</a>.) For the constructed methods, these
 give the concatenation of the BER encodings of the
 components of the value.<a href="#section-3-6.1.1.2.1" class="pilcrow">¶</a></p>
 </dd>
@@ -2567,8 +2575,8 @@ DER encoding. The focus of the encodings is primarily on the
 contents octets; the tag and length octets follow Sections 3
 and 4. The descriptions also explain where each type is used
 in PKCS and related standards. ASN.1 notation is generally
-only for types, although for the type <code>OBJECT IDENTIFIER</code>,
-value notation is given as well.<a href="#section-5-3" class="pilcrow">¶</a></p>
+only for types, although for the types <code>OBJECT IDENTIFIER</code> and
+<code>RELATIVE-OID</code>, value notation is given as well.<a href="#section-5-3" class="pilcrow">¶</a></p>
 <div id="_section-5-1">
 <section id="section-5.1">
         <h3 id="name-implicitly-tagged-types">
@@ -2625,10 +2633,8 @@ of the underlying value.<a href="#section-5.1.1-1" class="pilcrow">¶</a></p>
 <li class="normal ulEmpty" id="section-5.1.1-3.1">
               <ul class="normal">
 <li class="normal" id="section-5.1.1-3.1.1.1">
-                  <p id="section-5.1.1-3.1.1.1.1">the identifier octets are <code>80</code> if the underlying
-<code>Attributes</code> value has a primitive BER encoding and
-<code>a0</code> if the underlying <code>Attributes</code> value has a
-constructed BER encoding<a href="#section-5.1.1-3.1.1.1.1" class="pilcrow">¶</a></p>
+                  <p id="section-5.1.1-3.1.1.1.1">the identifier octets are <code>a0</code>, because <code>Attributes</code> is a
+<code>SET OF</code> type and its BER encoding is therefore always constructed<a href="#section-5.1.1-3.1.1.1.1" class="pilcrow">¶</a></p>
 </li>
               </ul>
 </li>
@@ -2667,7 +2673,7 @@ of the underlying value.<a href="#section-5.1.2-1" class="pilcrow">¶</a></p>
 adding an outer tag to the underlying type.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
 <p id="section-5.2-2">Explicit tagging is used for optional <code>SEQUENCE</code> components
 with underlying type <code>ANY</code> throughout in many protocols, including
-the version component of the <code>Certificate</code> type <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>.<a href="#section-5.2-2" class="pilcrow">¶</a></p>
+the version component of the <code>TBSCertificate</code> type <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>.<a href="#section-5.2-2" class="pilcrow">¶</a></p>
 <p id="section-5.2-3">Implicit tagging is used for optional <code>SEQUENCE</code> components
 with underlying type other than <code>ANY</code>.<a href="#section-5.2-3" class="pilcrow">¶</a></p>
 <p id="section-5.2-4">ASN.1 notation:<a href="#section-5.2-4" class="pilcrow">¶</a></p>
@@ -2702,18 +2708,17 @@ ContentInfo ::= SEQUENCE {
 <p id="section-5.2-11">Here the underlying type is <code>ANY DEFINED BY contentType</code>, the
 class is absent (i.e., context-specific), and the tag number
 within the class is 0.<a href="#section-5.2-11" class="pilcrow">¶</a></p>
-<p id="section-5.2-12">Example 2: the <code>Certificate</code> type <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> has a version component
-with an explicit, context-specific tag, where the <code>EXPLICIT</code>
-keyword is omitted:<a href="#section-5.2-12" class="pilcrow">¶</a></p>
+<p id="section-5.2-12">Example 2: the <code>TBSCertificate</code> type <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> has a version component
+with an explicit, context-specific tag:<a href="#section-5.2-12" class="pilcrow">¶</a></p>
 <div class="lang-asn.1 sourcecode" id="section-5.2-13">
 <pre>
-Certificate ::= ...
-  version [0] Version DEFAULT v1988,
-   ...
+TBSCertificate ::= SEQUENCE {
+  version [0] Version DEFAULT v1,
+  ... }
 </pre><a href="#section-5.2-13" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-14">The tag is explicit because the default tagging method for
-the ASN.1 module in <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> that defines the <code>Certificate</code>
+the ASN.1 module in <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> that defines the <code>TBSCertificate</code>
 type is explicit tagging.<a href="#section-5.2-14" class="pilcrow">¶</a></p>
 <div id="ber-encoding-1">
 <section id="section-5.2.1">
@@ -3158,13 +3163,13 @@ Version ::= INTEGER  { v1(0), v2(1), v3(2) }
 </pre><a href="#section-5.8-7" class="pilcrow">¶</a>
 </div>
 <p id="section-5.8-8">The identifier v1 is associated with the value 0. The
-<code>Certificate</code> type <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> uses the identifier v1 to give a default
+<code>TBSCertificate</code> type <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> uses the identifier v1 to give a default
 value of 0 for the version component:<a href="#section-5.8-8" class="pilcrow">¶</a></p>
 <div class="lang-asn.1 sourcecode" id="section-5.8-9">
 <pre>
-Certificate ::= ...
-  version Version DEFAULT v1,
-  ...
+TBSCertificate ::= SEQUENCE {
+  version [0] Version DEFAULT v1,
+  ... }
 </pre><a href="#section-5.8-9" class="pilcrow">¶</a>
 </div>
 <div id="ber-encoding-7">
