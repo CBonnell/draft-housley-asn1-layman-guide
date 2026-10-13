@@ -276,12 +276,17 @@ the `CHOICE` type and the `ANY` type. Types and values can be
 given names with the ASN.1 assignment operator (::=) , and
 those names can be used in defining other types and values.
 
+ASN.1 has two kinds of notation. Type notation describes a type,
+such as `INTEGER` or `SEQUENCE { ... }`. Value notation specifies a
+particular value of a type. For example, `{ 2 5 4 }` is
+value notation for a value of type `OBJECT IDENTIFIER`, and `TRUE` is
+value notation for a value of type `BOOLEAN`. A named value is
+defined with the assignment operator, as in
+`id-at OBJECT IDENTIFIER ::= { joint-iso-itu-t(2) ds(5) 4 }`.
+
 Every ASN.1 type other than `CHOICE` and `ANY` has a tag, which
-consists of a class and a nonnegative tag number. ASN.1
-types are abstractly the same if and only if their tag
-numbers are the same. In other words, the name of an ASN.1
-type does not affect its abstract meaning, only the tag
-does. There are four classes of tag:
+consists of a class and a nonnegative tag number. There are
+four classes of tag:
 
 {: vspace="0"}
 Universal:
@@ -334,7 +339,7 @@ special rules:
 
 * Layout is not significant; multiple spaces and line breaks can be considered as a single space.
 
-* Comments begin with a pair of hyphens (`--`), and comments end with another pair of hyphens or a line break.
+* Comments take one of two forms. A comment begins with a pair of hyphens (`--`) and ends with another pair of hyphens or a line break, so it is always contained on a single line. A comment can also begin with `/*` and end with `*/`; this form can span multiple lines.
 
 * Identifiers (names of values and fields) and type references (names of types) consist of upper- and
 lower-case letters, digits, hyphens, and spaces;
@@ -393,8 +398,11 @@ some object identifier established by context.
 : a time value in the local time zone, GMT, or the difference between local and GMT.
 
 Simple types fall into two categories: string types and non-string
-types. `BIT STRING`, `IA5String`, `OCTET STRING`, `UTF8String`,
-`PrintableString`, `T61String`, `GeneralizedTime`, and `UTCTime` are string types.
+types. The character string types (`IA5String`, `PrintableString`,
+`T61String`, and `UTF8String`) and the time types (`GeneralizedTime`
+and `UTCTime`) are string types because their values are sequences of
+characters. `BIT STRING` and `OCTET STRING` are also string types,
+although their values are sequences of bits and octets rather than characters.
 
 String types can be viewed, for the purposes of encoding, as
 consisting of components, where the components are
@@ -508,7 +516,8 @@ indicate that the length is indefinite.
 > contents octets.
 : For the primitive, definite-length
 method, these give a concrete representation of
-the  value. For the constructed methods, these
+the  value. (For a `BIT STRING`, the first contents octet is the
+"unused bits" octet; see {{section-5-4}}.) For the constructed methods, these
 give the concatenation of the BER encodings of the
 components of the value.
 
@@ -739,8 +748,8 @@ DER encoding. The focus of the encodings is primarily on the
 contents octets; the tag and length octets follow Sections 3
 and 4. The descriptions also explain where each type is used
 in PKCS and related standards. ASN.1 notation is generally
-only for types, although for the type `OBJECT IDENTIFIER`,
-value notation is given as well.
+only for types, although for the types `OBJECT IDENTIFIER` and
+`RELATIVE-OID`, value notation is given as well.
 
 ##Implicitly tagged types  {#section-5-1}
 
@@ -796,10 +805,8 @@ Example: The BER encoding of the `attributes` component of a
 `PrivateKeyInfo` value is as follows:
 
 >
-* the identifier octets are `80` if the underlying
-`Attributes` value has a primitive BER encoding and
-`a0` if the underlying `Attributes` value has a
-constructed BER encoding
+* the identifier octets are `a0`, because `Attributes` is a
+`SET OF` type and its BER encoding is therefore always constructed
 
 >
 * the length and contents octets are the same as the
@@ -818,7 +825,7 @@ adding an outer tag to the underlying type.
 
 Explicit tagging is used for optional `SEQUENCE` components
 with underlying type `ANY` throughout in many protocols, including
-the version component of the `Certificate` type {{RFC5280}}.
+the version component of the `TBSCertificate` type {{RFC5280}}.
 
 Implicit tagging is used for optional `SEQUENCE` components
 with underlying type other than `ANY`.
@@ -859,18 +866,17 @@ Here the underlying type is `ANY DEFINED BY contentType`, the
 class is absent (i.e., context-specific), and the tag number
 within the class is 0.
 
-Example 2: the `Certificate` type {{RFC5280}} has a version component
-with an explicit, context-specific tag, where the `EXPLICIT`
-keyword is omitted:
+Example 2: the `TBSCertificate` type {{RFC5280}} has a version component
+with an explicit, context-specific tag:
 
 ~~~ asn.1
-Certificate ::= ...
-  version [0] Version DEFAULT v1988,
-   ...
+TBSCertificate ::= SEQUENCE {
+  version [0] Version DEFAULT v1,
+  ... }
 ~~~
 
 The tag is explicit because the default tagging method for
-the ASN.1 module in {{RFC5280}} that defines the `Certificate`
+the ASN.1 module in {{RFC5280}} that defines the `TBSCertificate`
 type is explicit tagging.
 
 ###BER Encoding
@@ -1229,13 +1235,13 @@ Version ::= INTEGER  { v1(0), v2(1), v3(2) }
 ~~~
 
 The identifier v1 is associated with the value 0. The
-`Certificate` type {{RFC5280}} uses the identifier v1 to give a default
+`TBSCertificate` type {{RFC5280}} uses the identifier v1 to give a default
 value of 0 for the version component:
 
 ~~~ asn.1
-Certificate ::= ...
-  version Version DEFAULT v1,
-  ...
+TBSCertificate ::= SEQUENCE {
+  version [0] Version DEFAULT v1,
+  ... }
 ~~~
 
 ###BER Encoding
