@@ -5,12 +5,12 @@
 Network Working Group                                         B. Kaliski
 Internet-Draft                                             Verisign Labs
 Intended status: Informational                                C. Bonnell
-Expires: 16 April 2027                         TurboLight Solutions, LLC
+Expires: 17 April 2027                         TurboLight Solutions, LLC
                                                                  D. Hook
                                                                Keyfactor
                                                               R. Housley
                                                           Vigil Security
-                                                         13 October 2026
+                                                         14 October 2026
 
 
           A Layman's Guide to a Subset of ASN.1, BER, and DER
@@ -42,7 +42,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 16 April 2027.
+   This Internet-Draft will expire on 17 April 2027.
 
 Copyright Notice
 
@@ -635,7 +635,7 @@ Table of Contents
             }
         }
 
-   can be recomposed as a series of contents octets preceeded by one of
+   can be recomposed as a series of contents octets preceded by one of
    the following prefixes and breakdowns:
 
           +========+=============+=============================+
@@ -661,8 +661,8 @@ Table of Contents
    The three-octet lengths for expandedKey and both start with 0x82 and
    indicate that the real length of the contents octets is two octets
    long.  In the case both CHOICE item, the contents octets will contain
-   the the prefixes given in the first two rows, as they appear at the
-   start of the encodings of each of the elements in the SEQUENCE.
+   the prefixes given in the first two rows, as they appear at the start
+   of the encodings of each of the elements in the SEQUENCE.
 
 3.2.  Constructed, definite-length method
 
