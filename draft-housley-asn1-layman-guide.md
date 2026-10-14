@@ -610,7 +610,7 @@ ML-DSA-44-PrivateKey ::= CHOICE {
      }
 ~~~
 
-can be recomposed as a series of contents octets preceeded by one of
+can be recomposed as a series of contents octets preceded by one of
 the following prefixes and
 breakdowns:
 
@@ -628,7 +628,7 @@ ML-DSA-44 private key value.
 The three-octet lengths for `expandedKey` and `both` start with 0x82
 and indicate that the real length of the contents octets is two
 octets long.  In the case `both` `CHOICE` item, the contents octets
-will contain the the prefixes given in the first two rows, as they
+will contain the prefixes given in the first two rows, as they
 appear at the start of the encodings of each of the elements in the
 `SEQUENCE`.
 
