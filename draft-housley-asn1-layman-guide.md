@@ -2543,4 +2543,4 @@ Implementers of ASN.1 parsers and decoders are encouraged to use fuzz testing to
 # Acknowledgments
 {:numbered="false"}
 
-The authors thank Adrian Farrel, Carl Wallace, Daniel Van Geest, Eliot Lear, Joe Mandel, Lijun Liao, Mike StJohns, and Sean Turner for their reviews and insightful feedback which meaningfully improved this document.
+The authors thank Adrian Farrel, Carl Wallace, Daniel Van Geest, Eliot Lear, Joe Mandel, Lijun Liao, Mike StJohns, Sean Turner, and Zaid AlBanna for their reviews and insightful feedback which meaningfully improved this document.
