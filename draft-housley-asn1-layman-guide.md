@@ -187,7 +187,7 @@ others. BER describes how to represent or encode values of
 each ASN.1 type as a string of eight-bit octets. There is
 generally more than one way to BER-encode a given value.
 Another set of rules, DER (Distinguished Encoding
-Rules {{X690}}, which is a subset of BER, gives a unique
+Rules) {{X690}}, which is a subset of BER, gives a unique
 encoding to each ASN.1 value.
 
 The purpose of this note is to describe a subset of ASN.1,
@@ -308,7 +308,7 @@ with the same underlying tag within the context of a given structured
 type, and component types in two different structured types may have the
 same tag and different meanings.
 
-The types with universal tags are defined in X.208, which
+The types with universal tags are defined in {{X680}}, which
 also gives the types' universal tag numbers. Types with
 other tags are defined in many places, and are always
 obtained by implicit or explicit tagging (see Section 2.3).
@@ -408,8 +408,8 @@ String types can be viewed, for the purposes of encoding, as
 consisting of components, where the components are
 substrings. This view allows one to encode a value whose
 length is not known in advance (e.g., an octet string value
-input from a file stream) with a constructed, indefinite-
-length encoding (see Section 3).
+input from a file stream) with a constructed, indefinite-length
+encoding (see Section 3).
 
 The string types can be given size constraints limiting the
 length of values.
@@ -774,7 +774,7 @@ integer.
 
 In ASN.1 modules whose default tagging method is implicit
 tagging, the notation `[[class] number] Type` is also
-acceptable, and the keyword `IMPLICIT` is implied. (See {{section-2-3}}.) For
+acceptable, and the keyword `IMPLICIT` is implied (see {{section-2-3}}). For
 definitions stated outside a module, the explicit inclusion of the keyword
 `IMPLICIT` is preferable to prevent ambiguity.
 
@@ -842,14 +842,14 @@ where `'Type'` is a type, `'class'` is an optional class name, and
 `'number'` is the tag number within the class, a nonnegative
 integer.
 
-If the class name is absent, then the tag is context-
-specific. Context-specific tags can only appear in a
+If the class name is absent, then the tag is
+context-specific. Context-specific tags can only appear in a
 component of a `SEQUENCE`, `SET` or `CHOICE` type.
 
 In ASN.1 "modules" whose default tagging method is explicit
 tagging, the notation `[[class] number ] Type` is also
-acceptable, and the keyword `EXPLICIT` is implied. (See
-{{section-2-3}}.) For definitions stated outside a module, the
+acceptable, and the keyword `EXPLICIT` is implied (see
+{{section-2-3}}). For definitions stated outside a module, the
 explicit inclusion of the keyword `EXPLICIT` is preferable to
 prevent ambiguity.
 
@@ -2543,4 +2543,4 @@ Implementers of ASN.1 parsers and decoders are encouraged to use fuzz testing to
 # Acknowledgments
 {:numbered="false"}
 
-The authors thank Adrian Farrel, Carl Wallace, Daniel Van Geest, Eliot Lear, Lijun Liao, Mike StJohns, and Sean Turner for their reviews and insightful feedback which meaningfully improved this document.
+The authors thank Adrian Farrel, Carl Wallace, Daniel Van Geest, Eliot Lear, Joe Mandel, Lijun Liao, Mike StJohns, and Sean Turner for their reviews and insightful feedback which meaningfully improved this document.
