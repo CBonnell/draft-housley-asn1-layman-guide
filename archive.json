@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-10-15T03:26:55.185285+00:00",
+  "timestamp": "2026-10-18T03:16:26.625455+00:00",
   "repo": "CBonnell/draft-housley-asn1-layman-guide",
   "labels": [
     {
@@ -1283,6 +1283,59 @@
           "body": "Looks good. The clarification on OCTET/BIT STRING is a good add as well.",
           "createdAt": "2026-10-13T05:46:41Z",
           "updatedAt": "2026-10-13T05:46:41Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 20,
+      "id": "PR_kwDOOSVefs8AAAABI3jl5A",
+      "title": "Incorporate Joe's feedback",
+      "url": "https://github.com/CBonnell/draft-housley-asn1-layman-guide/pull/20",
+      "state": "OPEN",
+      "author": "CBonnell",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-10-16T14:50:39Z",
+      "updatedAt": "2026-10-17T13:26:03Z",
+      "baseRepository": "CBonnell/draft-housley-asn1-layman-guide",
+      "baseRefName": "main",
+      "baseRefOid": "2f65d5909bbdb517647f1ea7adc209e74ed89763",
+      "headRepository": "CBonnell/draft-housley-asn1-layman-guide",
+      "headRefName": "joe-fixes",
+      "headRefOid": "682a601829e03a69a34aa1f97027edf3f44c9d1f",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOOSVefs8AAAABSvJBWw",
+          "commit": {
+            "abbreviatedOid": "682a601"
+          },
+          "author": "russhousley",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Looks good.",
+          "createdAt": "2026-10-16T18:54:41Z",
+          "updatedAt": "2026-10-16T18:54:41Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOOSVefs8AAAABS0eH3w",
+          "commit": {
+            "abbreviatedOid": "682a601"
+          },
+          "author": "dghgit",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Looks good!",
+          "createdAt": "2026-10-17T13:26:03Z",
+          "updatedAt": "2026-10-17T13:26:03Z",
           "comments": []
         }
       ]
