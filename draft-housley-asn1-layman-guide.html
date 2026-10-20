@@ -31,11 +31,11 @@ have IETF community consensus. This memo offers tutorial information.
     Jinja2 3.1.6
     lxml 6.1.1
     natsort 8.4.0
-    platformdirs 4.12.2
+    platformdirs 4.13.4
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.33.1
-    wcwidth 0.9.1
+    wcwidth 0.9.2
 -->
 <link href="draft-housley-asn1-layman-guide.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1055,7 +1055,7 @@ svg {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Kaliski, et al.</td>
-<td class="center">Expires 17 April 2027</td>
+<td class="center">Expires 23 April 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1068,12 +1068,12 @@ svg {
 <dd class="internet-draft">draft-housley-asn1-layman-guide-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-10-14" class="published">14 October 2026</time>
+<time datetime="2026-10-20" class="published">20 October 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2027-04-17">17 April 2027</time></dd>
+<dd class="expires"><time datetime="2027-04-23">23 April 2027</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1126,7 +1126,7 @@ have IETF community consensus. This memo offers tutorial information.<a href="#s
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 17 April 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 23 April 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1536,7 +1536,7 @@ others. BER describes how to represent or encode values of
 each ASN.1 type as a string of eight-bit octets. There is
 generally more than one way to BER-encode a given value.
 Another set of rules, DER (Distinguished Encoding
-Rules <span>[<a href="#X690" class="cite xref">X690</a>]</span>, which is a subset of BER, gives a unique
+Rules) <span>[<a href="#X690" class="cite xref">X690</a>]</span>, which is a subset of BER, gives a unique
 encoding to each ASN.1 value.<a href="#section-1-3" class="pilcrow">¶</a></p>
 <p id="section-1-4">The purpose of this note is to describe a subset of ASN.1,
 BER and DER sufficient to understand and implement OSI-based
@@ -1735,7 +1735,7 @@ same tag and different meanings.<a href="#section-2-5.8.1" class="pilcrow">¶</a
 </dd>
       <dd class="break"></dd>
 </dl>
-<p id="section-2-6">The types with universal tags are defined in X.208, which
+<p id="section-2-6">The types with universal tags are defined in <span>[<a href="#X680" class="cite xref">X680</a>]</span>, which
 also gives the types' universal tag numbers. Types with
 other tags are defined in many places, and are always
 obtained by implicit or explicit tagging (see Section 2.3).
@@ -2001,8 +2001,8 @@ although their values are sequences of bits and octets rather than characters.<a
 consisting of components, where the components are
 substrings. This view allows one to encode a value whose
 length is not known in advance (e.g., an octet string value
-input from a file stream) with a constructed, indefinite-
-length encoding (see Section 3).<a href="#section-2.1-15" class="pilcrow">¶</a></p>
+input from a file stream) with a constructed, indefinite-length
+encoding (see Section 3).<a href="#section-2.1-15" class="pilcrow">¶</a></p>
 <p id="section-2.1-16">The string types can be given size constraints limiting the
 length of values.<a href="#section-2.1-16" class="pilcrow">¶</a></p>
 </section>
@@ -2600,7 +2600,7 @@ class = UNIVERSAL | APPLICATION | PRIVATE
 integer.<a href="#section-5.1-5" class="pilcrow">¶</a></p>
 <p id="section-5.1-6">In ASN.1 modules whose default tagging method is implicit
 tagging, the notation <code>[[class] number] Type</code> is also
-acceptable, and the keyword <code>IMPLICIT</code> is implied. (See <a href="#_section-2-3" class="auto internal xref">Section 2.3</a>.) For
+acceptable, and the keyword <code>IMPLICIT</code> is implied (see <a href="#_section-2-3" class="auto internal xref">Section 2.3</a>). For
 definitions stated outside a module, the explicit inclusion of the keyword
 <code>IMPLICIT</code> is preferable to prevent ambiguity.<a href="#section-5.1-6" class="pilcrow">¶</a></p>
 <p id="section-5.1-7">If the class name is absent, then the tag is context-specific. Context-specific
@@ -2687,13 +2687,13 @@ class = UNIVERSAL | APPLICATION | PRIVATE
 <p id="section-5.2-6">where <code>'Type'</code> is a type, <code>'class'</code> is an optional class name, and
 <code>'number'</code> is the tag number within the class, a nonnegative
 integer.<a href="#section-5.2-6" class="pilcrow">¶</a></p>
-<p id="section-5.2-7">If the class name is absent, then the tag is context-
-specific. Context-specific tags can only appear in a
+<p id="section-5.2-7">If the class name is absent, then the tag is
+context-specific. Context-specific tags can only appear in a
 component of a <code>SEQUENCE</code>, <code>SET</code> or <code>CHOICE</code> type.<a href="#section-5.2-7" class="pilcrow">¶</a></p>
 <p id="section-5.2-8">In ASN.1 "modules" whose default tagging method is explicit
 tagging, the notation <code>[[class] number ] Type</code> is also
-acceptable, and the keyword <code>EXPLICIT</code> is implied. (See
-<a href="#_section-2-3" class="auto internal xref">Section 2.3</a>.) For definitions stated outside a module, the
+acceptable, and the keyword <code>EXPLICIT</code> is implied (see
+<a href="#_section-2-3" class="auto internal xref">Section 2.3</a>). For definitions stated outside a module, the
 explicit inclusion of the keyword <code>EXPLICIT</code> is preferable to
 prevent ambiguity.<a href="#section-5.2-8" class="pilcrow">¶</a></p>
 <p id="section-5.2-9">Example 1: The CMS <code>ContentInfo</code> type <span>[<a href="#RFC5652" class="cite xref">RFC5652</a>]</span> has an optional
@@ -4928,7 +4928,7 @@ considerations are not unique to ASN.1; they need to be considered by all data p
       <h2 id="name-acknowledgments">
 <a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
-<p id="appendix-A-1">The authors thank Adrian Farrel, Carl Wallace, Daniel Van Geest, Eliot Lear, Lijun Liao, Mike StJohns, and Sean Turner for their reviews and insightful feedback which meaningfully improved this document.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+<p id="appendix-A-1">The authors thank Adrian Farrel, Carl Wallace, Daniel Van Geest, Eliot Lear, Joe Mandel, Lijun Liao, Mike StJohns, Sean Turner, and Zaid AlBanna for their reviews and insightful feedback which meaningfully improved this document.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authors-addresses">
