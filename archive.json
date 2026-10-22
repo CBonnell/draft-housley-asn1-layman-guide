@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-10-20T03:38:59.100366+00:00",
+  "timestamp": "2026-10-22T03:31:11.591704+00:00",
   "repo": "CBonnell/draft-housley-asn1-layman-guide",
   "labels": [
     {
@@ -1292,24 +1292,26 @@
       "id": "PR_kwDOOSVefs8AAAABI3jl5A",
       "title": "Incorporate Joe's feedback",
       "url": "https://github.com/CBonnell/draft-housley-asn1-layman-guide/pull/20",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "CBonnell",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2026-10-16T14:50:39Z",
-      "updatedAt": "2026-10-17T13:26:03Z",
+      "updatedAt": "2026-10-20T20:42:26Z",
       "baseRepository": "CBonnell/draft-housley-asn1-layman-guide",
       "baseRefName": "main",
       "baseRefOid": "2f65d5909bbdb517647f1ea7adc209e74ed89763",
       "headRepository": "CBonnell/draft-housley-asn1-layman-guide",
       "headRefName": "joe-fixes",
       "headRefOid": "682a601829e03a69a34aa1f97027edf3f44c9d1f",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-10-20T20:42:22Z",
+      "mergedAt": "2026-10-20T20:42:22Z",
+      "mergedBy": "CBonnell",
+      "mergeCommit": {
+        "oid": "a4e9fee10a0dcccf88c212c66e02ab42d2415c80"
+      },
       "comments": [],
       "reviews": [
         {
