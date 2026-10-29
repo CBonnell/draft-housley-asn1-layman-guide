@@ -1714,7 +1714,7 @@ defined with the assignment operator, as in
 <p id="section-2-4">Every ASN.1 type other than <code>CHOICE</code> and <code>ANY</code> has a tag, which
 consists of a class and a nonnegative tag number. An encoding carries
 its tag instead of a type name, so a decoder uses the tag to learn what
-kind of value it is looking at. <a href="#_section-2-3" class="auto internal xref">Section 2.3</a> explains how tags
+kind of value it is. <a href="#_section-2-3" class="auto internal xref">Section 2.3</a> explains how tags
 distinguish the components of a structured type, and <a href="#_section-3" class="auto internal xref">Section 3</a>
 shows how a tag is encoded. There are four classes of tag:<a href="#section-2-4" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlNewline" id="section-2-5">
@@ -2429,8 +2429,8 @@ ML-DSA-44 private key value.<a href="#section-3.1.1-6" class="pilcrow">¶</a></p
 <p id="section-3.1.1-7">The three-octet lengths for <code>expandedKey</code> and <code>both</code> start with 0x82
 and indicate that the real length of the contents octets is two
 octets long.<a href="#section-3.1.1-7" class="pilcrow">¶</a></p>
-<p id="section-3.1.1-8">In the case of the <code>both</code> <code>CHOICE</code> item, the contents octets are the
-encodings of the two elements of the <code>SEQUENCE</code>. These elements have no
+<p id="section-3.1.1-8">Consider the <code>both</code> item within the <code>CHOICE</code>, where the contents octets
+are the encodings of the two elements of the <code>SEQUENCE</code>. These elements have no
 context-specific tags. The <code>seed</code> inside the <code>SEQUENCE</code> is a plain
 <code>OCTET STRING</code>, so its prefix is <code>04 20</code>. It is not
 the <code>80 20</code> prefix of the <code>seed</code> <code>CHOICE</code> item, which carries the <code>[0]</code>
@@ -2710,7 +2710,7 @@ adding an outer tag to the underlying type.<a href="#section-5.2-1" class="pilcr
 with underlying type <code>ANY</code> in many protocols, including
 the content component of the <code>ContentInfo</code> type <span>[<a href="#RFC5652" class="cite xref">RFC5652</a>]</span>.
 It is also used for components of any underlying type when the
-ASN.1 module's default tagging method is explicit, as is the case for
+default tagging for an ASN.1 module is explicit, as is the case for
 the version component of the <code>TBSCertificate</code> type <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>.<a href="#section-5.2-2" class="pilcrow">¶</a></p>
 <p id="section-5.2-3">ASN.1 notation:<a href="#section-5.2-3" class="pilcrow">¶</a></p>
 <div class="lang-asn.1 sourcecode" id="section-5.2-4">
@@ -3990,8 +3990,8 @@ ascending order by tag (care: the <code>CONSTRUCTED</code> bit is not part of th
 // range 0..255, both when the tag octet is masked and when octets are
 // compared. Languages with signed byte types, such as Java, or C# if
 // sbyte is used, must mask each octet with 0xFF before comparing it,
-// otherwise octets of 0x80 and above compare as negative and the
-// resulting order is wrong.
+// otherwise octets of 0x80 and above compare as negative and
+// produce incorrect ordering.
 
 // Bit 6 of the identifier octet, which indicates a constructed encoding.
 CONSTRUCTED = 0x20
