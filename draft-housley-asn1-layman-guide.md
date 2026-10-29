@@ -293,7 +293,7 @@ defined with the assignment operator, as in
 Every ASN.1 type other than `CHOICE` and `ANY` has a tag, which
 consists of a class and a nonnegative tag number. An encoding carries
 its tag instead of a type name, so a decoder uses the tag to learn what
-kind of value it is looking at. {{section-2-3}} explains how tags
+kind of value it is. {{section-2-3}} explains how tags
 distinguish the components of a structured type, and {{section-3}}
 shows how a tag is encoded. There are four classes of tag:
 
@@ -644,8 +644,8 @@ The three-octet lengths for `expandedKey` and `both` start with 0x82
 and indicate that the real length of the contents octets is two
 octets long.
 
-In the case of the `both` `CHOICE` item, the contents octets are the
-encodings of the two elements of the `SEQUENCE`. These elements have no
+Consider the `both` item within the `CHOICE`, where the contents octets
+are the encodings of the two elements of the `SEQUENCE`. These elements have no
 context-specific tags. The `seed` inside the `SEQUENCE` is a plain
 `OCTET STRING`, so its prefix is `04 20`. It is not
 the `80 20` prefix of the `seed` `CHOICE` item, which carries the `[0]`
@@ -849,7 +849,7 @@ Explicit tagging is used for optional `SEQUENCE` components
 with underlying type `ANY` in many protocols, including
 the content component of the `ContentInfo` type {{RFC5652}}.
 It is also used for components of any underlying type when the
-ASN.1 module's default tagging method is explicit, as is the case for
+default tagging for an ASN.1 module is explicit, as is the case for
 the version component of the `TBSCertificate` type {{RFC5280}}.
 
 ASN.1 notation:
@@ -1863,8 +1863,8 @@ A simple pseudo-code version of the sort (in-place) would look like:
 // range 0..255, both when the tag octet is masked and when octets are
 // compared. Languages with signed byte types, such as Java, or C# if
 // sbyte is used, must mask each octet with 0xFF before comparing it,
-// otherwise octets of 0x80 and above compare as negative and the
-// resulting order is wrong.
+// otherwise octets of 0x80 and above compare as negative and
+// produce incorrect ordering.
 
 // Bit 6 of the identifier octet, which indicates a constructed encoding.
 CONSTRUCTED = 0x20
