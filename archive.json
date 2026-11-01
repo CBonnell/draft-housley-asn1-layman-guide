@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-10-29T04:37:33.168678+00:00",
+  "timestamp": "2026-11-01T04:40:15.857817+00:00",
   "repo": "CBonnell/draft-housley-asn1-layman-guide",
   "labels": [
     {
@@ -1339,6 +1339,73 @@
           "createdAt": "2026-10-17T13:26:03Z",
           "updatedAt": "2026-10-17T13:26:03Z",
           "comments": []
+        }
+      ]
+    },
+    {
+      "number": 21,
+      "id": "PR_kwDOOSVefs8AAAABLiiLpQ",
+      "title": "Alex's review",
+      "url": "https://github.com/CBonnell/draft-housley-asn1-layman-guide/pull/21",
+      "state": "MERGED",
+      "author": "CBonnell",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-10-29T13:59:26Z",
+      "updatedAt": "2026-10-30T15:40:44Z",
+      "baseRepository": "CBonnell/draft-housley-asn1-layman-guide",
+      "baseRefName": "main",
+      "baseRefOid": "a4e9fee10a0dcccf88c212c66e02ab42d2415c80",
+      "headRepository": "CBonnell/draft-housley-asn1-layman-guide",
+      "headRefName": "alex-review",
+      "headRefOid": "7bb7f5a6b65cc007f516293f65fec0adaa7bb1ff",
+      "closedAt": "2026-10-30T15:40:40Z",
+      "mergedAt": "2026-10-30T15:40:40Z",
+      "mergedBy": "CBonnell",
+      "mergeCommit": {
+        "oid": "283d3a9d112ad4694d0ab3bbc6fc523c7feb91d2"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOOSVefs8AAAABU8XoxA",
+          "commit": {
+            "abbreviatedOid": "ed0f076"
+          },
+          "author": "russhousley",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2026-10-29T15:32:51Z",
+          "updatedAt": "2026-10-29T15:41:23Z",
+          "comments": [
+            {
+              "originalPosition": 37,
+              "body": "s/is looking at//",
+              "createdAt": "2026-10-29T15:32:51Z",
+              "updatedAt": "2026-10-29T15:41:23Z"
+            },
+            {
+              "originalPosition": 118,
+              "body": "Consider the `both` item withing the `CHOICE`. where the contents octets are the ....",
+              "createdAt": "2026-10-29T15:35:28Z",
+              "updatedAt": "2026-10-29T15:41:23Z"
+            },
+            {
+              "originalPosition": 156,
+              "body": "... the default tagging for an ASN.1 module is explicit, ...",
+              "createdAt": "2026-10-29T15:37:03Z",
+              "updatedAt": "2026-10-29T15:41:23Z"
+            },
+            {
+              "originalPosition": 393,
+              "body": "// produce incorrect ordering.",
+              "createdAt": "2026-10-29T15:40:19Z",
+              "updatedAt": "2026-10-29T15:41:23Z"
+            }
+          ]
         }
       ]
     }
