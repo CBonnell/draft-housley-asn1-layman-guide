@@ -27,6 +27,7 @@ author:
  -  name: Corey Bonnell
     ins: C. Bonnell
     org: TurboLight Solutions, LLC
+    abbrev: TurboLight Solutions
     country: US
     email: corey.bonnell@turbolightsolutions.com
  -  name: David Hook
@@ -47,6 +48,7 @@ informative:
   RFC3629:
   RFC4055:
   RFC5035:
+  RFC5208:
   RFC5280:
   RFC5652:
   RFC5958:
@@ -68,7 +70,7 @@ informative:
     target: https://www.itu.int/rec/T-REC-X.200
     title: >
       Information technology --
-      Open Systems Interconnection -=
+      Open Systems Interconnection --
       Basic Reference Model:
       The basic model
     author:
@@ -104,7 +106,7 @@ informative:
     author:
     - org: Bouncy Castle
   RUSTCRYPTO-DER-SET:
-    target: https://github.com/RustCrypto/formats/blob/master/der/src/asn1/set_of.rs#L456
+    target: https://github.com/RustCrypto/formats/blob/b57933293b86/der/src/asn1/set_of.rs#L762
     title: "RustCrypto: DER SET encoding sort implementation (set_of.rs)"
     author:
     - org: RustCrypto
@@ -163,7 +165,7 @@ in another, higher-level part. Abstraction is the hallmark
 of most modern software specifications.
 
 The Open Systems Interconnection (OSI) {{X200}} series of
-standards involve a great deal of abstraction. OSI is an
+standards involves a great deal of abstraction. OSI is an
 internationally standardized architecture for the
 interconnection of computers from the physical layer up to
 the user application layer. Objects at higher layers are
@@ -171,7 +173,7 @@ defined abstractly and intended to be implemented with
 objects at lower layers. For instance, a service at one
 layer may require transfer of certain abstract objects
 between computers; a lower layer may provide transfer
-services for strings of ones and zeroes, using encoding
+services for strings of ones and zeros, using encoding
 rules to transform the abstract objects into such strings.
 OSI is called an open system because it supports many
 different implementations of the services at each layer.
@@ -232,7 +234,7 @@ This document is the fourth version, and the first under the transfer
 of change control.  The changes from the third version include:
 
 * Discussion of `CLASS` was added as the replacement for `ANY` following the modern ASN.1 specification;
-* Discussion of `UTF8String`, `GeneralizedTime`, and `RELATIVE-OID` were added;
+* Discussion of `UTF8String`, `GeneralizedTime`, and `RELATIVE-OID` was added;
 * The use of `T61String` is discouraged;
 * Clarified the allowable numbers in the first and second values of an `OBJECT IDENTIFIER`; and
 * References were updated, and PKCS documents are now referenced by their RFC number.
@@ -258,13 +260,12 @@ ASN.1 notation figures and accompanying text:
 |`n1` | lowercase denotes a variable, identifier, or value. In explanatory text the variable is surrounded by single quotes, e.g. `'n1'` |
 |`Type1` | Initial-caps denotes a type. In explanatory text the type is surrounded by single quotes, e.g. `'Type1'` |
 |`[]` | brackets indicate that a term is optional |
+| `"[" ... "]"` | the brackets are part of the syntax, not indicating optional terms as above |
 |`{}` | braces group related terms |
-|`|` | vertical bar delimits alternatives with a group |
+|`|` | vertical bar delimits alternatives within a group |
 |`...` | ellipsis indicates repeated occurrences |
 |`=` | equals sign expresses terms as subterms |
 {: title="ASN.1 notation meta-syntax."}
-
-{::boilerplate bcp14-tagged}
 
 #Abstract Syntax Notation One  {#section-2}
 
@@ -279,7 +280,7 @@ simple types, which are "atomic" and have no components;
 structured types, which have components; tagged types, which
 are derived from other types; and other types, which include
 the `CHOICE` type and the `ANY` type. Types and values can be
-given names with the ASN.1 assignment operator (::=) , and
+given names with the ASN.1 assignment operator (::=), and
 those names can be used in defining other types and values.
 
 ASN.1 has two kinds of notation. Type notation describes a type,
@@ -321,7 +322,7 @@ The types with universal tags are defined in {{X680}}, which
 also gives the types' universal tag numbers. Types with
 other tags are defined in many places, and are always
 obtained by implicit or explicit tagging (see Section 2.3).
-Table 1 lists some ASN.1 types and their universal-class
+The following table lists some ASN.1 types and their universal-class
 tags.
 
 |Type                    |Decimal Tag Number | Hexadecimal Tag Number |
@@ -370,7 +371,7 @@ are the "atomic" types. ASN.1 defines several; the types
 that are relevant to the PKCS standards are the following:
 
 > `BIT STRING`
-: an arbitrary string of bits (ones and zeroes).
+: an arbitrary string of bits (ones and zeros).
 
 > `BOOLEAN`
 : a Boolean value, either true or false.
@@ -407,10 +408,10 @@ some object identifier established by context.
 : an arbitrary string of T.61 (eight-bit) characters.
 
 > `UTCTime`
-: a "coordinated universal time" or Greenwich Mean Time (GMT) value.
+: a "coordinated universal time" (UTC) value.
 
 > `GeneralizedTime`
-: a time value in the local time zone, GMT, or the difference between local and GMT.
+: a time value in the local time zone, UTC, or the difference between local and UTC.
 
 Simple types fall into two categories: string types and non-string
 types. The character string types (`IA5String`, `PrintableString`,
@@ -481,9 +482,9 @@ considered the same as the underlying type, except that the
 tag is different. An explicitly tagged type is considered
 like a structured type with one component, the underlying
 type. Implicit tags result in shorter encodings, but
-explicit tags may be necessary to avoid ambiguity if the tag
-of the underlying type is indeterminate (e.g., the
-underlying type is `CHOICE` or `ANY`).
+explicit tags are required avoid ambiguity if the tag of
+the underlying type is indeterminate (e.g., the underlying
+type is `CHOICE` or `ANY`).
 
 ##Other types  {#section-2-4}
 
@@ -498,7 +499,7 @@ registration of an object identifier or integer value.
 The Basic Encoding Rules for ASN.1, abbreviated BER, give
 one or more ways to represent any ASN.1 value as an octet
 string. (There are certainly other ways to represent ASN.1
-values, and ASN.1 syntax itself does not dictate the encoding
+values, and ASN.1 syntax itself does not dictate the encoding,
 but BER is the standard for interchanging such values in OSI.)
 
 There are three methods to encode an ASN.1 value under BER,
@@ -568,7 +569,7 @@ is as in low-tag-number form, except that bits 5-1
 all have value "1". Second and following octets
 give the tag number, base 128, most significant
 digit first, with as few digits as possible, and
-with the bit 8 of each octet except the last set
+with bit 8 of each octet, except the last, set
 to "1".
 
 |Class            |Bit 8 |Bit 7 |
@@ -581,13 +582,14 @@ to "1".
 
 length octets.
 : There are two forms: short (for lengths
-between 0 and 127), and long definite (for lengths between 0
+between 0 and 127), and long (for lengths between 0
 and 2^1008 - 1).
 
 > short form.
 : One octet. Bit 8 has value "0" and bits 7-1
-give the length. For example, the length for an encoding that has 32 contents octets would
-encode simply as `20`.
+give the length. For example, the length for an
+encoding that has 32 contents octets would
+encode as `20`.
 
 > long form.
 : Two to 127 octets. Bit 8 of first octet has
@@ -595,9 +597,8 @@ value "1" and bits 7-1 give the number of
 additional length octets. Second and following
 octets give the length, base 256, most significant
 digit first. For example, the length for an encoding that has 3200 contents octets would
-encode simply as `82 0c 80`, the first octet indicating that the length is in the
-following 2 octets and the next two octets give the value of the
-length.
+encode as `82 0c 80`, the first octet indicating that the length is in the
+following 2 octets give the value of the length.
 
 contents octets.
 : These give a concrete representation of the
@@ -607,49 +608,49 @@ are given in {{section-5}}.
 
 ###Prefixes and Magic Numbers {#section-3-1-1}
 
-It is worth noting that definite-length encodings, by their nature, are
+It is worth noting that DER encoding always uses definite-length encoding
+with the fewest possible octets for the length. As a result, DER is often
 simple enough to parse without the need for a complete ASN.1 decoder
 and prefixes to the contents octets can often be treated like magic
-numbers in order to recognise the contents octets that are following.
+numbers in order to recognize the contents octets that are following.
 
-For example, the private key field of an encoded ML-DSA-44 private key, which is defined in {{RFC9881}} as a `CHOICE` item with the following structure:
+For example, consider the private key field of an encoded ML-DSA-44 private key,
+which is defined in {{RFC9881}} as a `CHOICE` item with the following structure:
 
 ~~~ asn.1
 ML-DSA-44-PrivateKey ::= CHOICE {
-     seed [0] OCTET STRING (SIZE (32)),
-     expandedKey OCTET STRING (SIZE (2560)),
-     both SEQUENCE {
-         seed OCTET STRING (SIZE (32)),
-         expandedKey OCTET STRING (SIZE (2560))
-         }
-     }
+  seed [0] OCTET STRING (SIZE(32)),
+  expandedKey OCTET STRING (SIZE(2560)),
+  both SEQUENCE {
+    seed OCTET STRING (SIZE(32)),
+    expandedKey OCTET STRING (SIZE(2560))
+  }
+}
 ~~~
 
-can be recomposed as a series of contents octets preceded by one of
-the following prefixes and
-breakdowns:
+The ML-DSA-44-PrivateKey can be recomposed as a series of contents octets
+preceded by one of the following prefixes and breakdowns:
 
 | Prefix        | CHOICE Item  | Breakdown                                |
 |---------------|--------------|------------------------------------------|
-| `80 20`       | `seed`       | tag `0x80`, short form, length 1 octet, value 32 |
-| `04 82 0a 00` | `expandedKey`| tag `0x04`, long form, length 3 octets, value 2560 |
-| `30 82 0a 26` | `both`       | tag `0x30`, long form, length 3 octets, value 2598 |
+| `80 20`       | `seed`       | hex tag `80`, short form, length 1 octet, value 32 |
+| `04 82 0A 00` | `expandedKey`| hex tag `04`, long form, length 3 octets, value 2560 |
+| `30 82 0A 26` | `both`       | hex tag `30`, long form, length 3 octets, value 2598 |
 {: title="Prefixes for an ML-DSA private key CHOICE item."}
 
 As can be seen from the table, the first octet of each prefix can be
 used to distinguish the `CHOICE` item that has been used to describe the
 ML-DSA-44 private key value.
 
-The three-octet lengths for `expandedKey` and `both` start with 0x82
-and indicate that the real length of the contents octets is two
-octets long.
+The three-octet lengths for `expandedKey` and `both` start with a hex tag of `82`
+and indicate that the real length of the contents octets is two octets long.
 
 Consider the `both` item within the `CHOICE`, where the contents octets
 are the encodings of the two elements of the `SEQUENCE`. These elements have no
 context-specific tags. The `seed` inside the `SEQUENCE` is a plain
 `OCTET STRING`, so its prefix is `04 20`. It is not
 the `80 20` prefix of the `seed` `CHOICE` item, which carries the `[0]`
-tag. The `expandedKey` inside the `SEQUENCE` has the same `04 82 0a 00`
+tag. The `expandedKey` inside the `SEQUENCE` has the same `04 82 0A 00`
 prefix as the second row. The contents octets of `both` are therefore
 the 34 octets of the `seed` encoding followed by the 2564 octets of the
 `expandedKey` encoding, 2598 octets in total.
@@ -694,7 +695,7 @@ Details for particular types are given in {{section-5}}.
 ##Constructed, indefinite-length method  {#section-3-3}
 
 This method applies to simple string types, structured
-types, types derived simple string types and structured
+types, types derived from simple string types and structured
 types by implicit tagging, and types derived from anything
 by explicit tagging. It does not require that the length of
 the value be known in advance. The parts of the BER encoding
@@ -715,11 +716,12 @@ end-of-contents octets.
 Since the end-of-contents octets appear where an ordinary
 BER encoding might be expected (e.g., in the contents octets
 of a sequence value), the `00` and `00` appear as identifier and
-length octets, respectively. Thus the end-of-contents octets
-is really the primitive, definite-length encoding of a value
+length octets, respectively. Thus, the end-of-contents octets
+are really the primitive, definite-length encoding of a value
 with universal class, tag number 0, and length 0.
 
-Considering our previous example of an 8 byte `OCTET STRING` in constructed form with 4 byte elements, the indefinite length
+Considering our previous example of an 8-octet `OCTET STRING` in
+constructed form with 4-octet elements, the indefinite length
 encoding would produce: `24 80 04 04 00000000 04 04 00000000 0000`.
 
 #Distinguished Encoding Rules  {#section-4}
@@ -735,7 +737,7 @@ DER adds the following restrictions to the rules given in
 {{section-3}}:
 
 1. When the length is between 0 and 127, the short
-form of length must be used
+form of length must be used.
 
 2. When the length is 128 or greater, the long form
 of length must be used, and the length must be
@@ -785,7 +787,7 @@ with underlying type other than `ANY` in many protocols, including
 ASN.1 notation:
 
 ~~~ asn.1
-[[class] number] IMPLICIT Type
+"["[class] number"]" IMPLICIT Type
 
 class = UNIVERSAL | APPLICATION | PRIVATE
 ~~~
@@ -795,7 +797,7 @@ where `'Type'` is a type, `'class'` is an optional class name, and
 integer.
 
 In ASN.1 modules whose default tagging method is implicit
-tagging, the notation `[[class] number] Type` is also
+tagging, the notation `"["[class] number"]" Type` is also
 acceptable, and the keyword `IMPLICIT` is implied (see {{section-2-3}}). For
 definitions stated outside a module, the explicit inclusion of the keyword
 `IMPLICIT` is preferable to prevent ambiguity.
@@ -803,7 +805,7 @@ definitions stated outside a module, the explicit inclusion of the keyword
 If the class name is absent, then the tag is context-specific. Context-specific
 tags can only appear in a component of a structured or `CHOICE` type.
 
-Example: PKCS #8 `PrivateKeyInfo` type {{RFC5958}} has an optional
+Example: PKCS #8 `PrivateKeyInfo` type {{RFC5208}} has an optional
 `attributes` component with an implicit, context-specific tag:
 
 ~~~ asn.1
@@ -855,7 +857,7 @@ the version component of the `TBSCertificate` type {{RFC5280}}.
 ASN.1 notation:
 
 ~~~ asn.1
-[[class] number] EXPLICIT Type
+"["[class] number"]" EXPLICIT Type
 
 class = UNIVERSAL | APPLICATION | PRIVATE
 ~~~
@@ -869,7 +871,7 @@ context-specific. Context-specific tags can only appear in a
 component of a `SEQUENCE`, `SET` or `CHOICE` type.
 
 In ASN.1 "modules" whose default tagging method is explicit
-tagging, the notation `[[class] number ] Type` is also
+tagging, the notation `"["[class] number"]"` is also
 acceptable, and the keyword `EXPLICIT` is implied (see
 {{section-2-3}}). For definitions stated outside a module, the
 explicit inclusion of the keyword `EXPLICIT` is preferable to
@@ -881,7 +883,7 @@ content component with an explicit, context-specific tag:
 ~~~ asn.1
 ContentInfo ::= SEQUENCE {
   contentType ContentType,
-  content [0] EXPLICIT ANY DEFINED BY contentType OPTIONAL }
+  content [0] EXPLICIT ANY DEFINED BY contentType }
 ~~~
 
 Here the underlying type is `ANY DEFINED BY contentType`, the
@@ -992,7 +994,7 @@ below, which is a simplification of the definition in {{RFC5912}}:
 ~~~ asn.1
 ALGORITHM ::= CLASS {
   &id OBJECT IDENTIFIER UNIQUE,
-  &Params OPTIONAL,
+  &Params OPTIONAL
 } WITH SYNTAX {
   IDENTIFIER &id
   [PARAMS [TYPE &Params]]
@@ -1006,14 +1008,14 @@ AlgorithmIdentifier{ALGORITHM:AlgorithmSet} ::= SEQUENCE {
 
 Of course, the BER and DER encoding are unchanged.
 
-The `AlgorithmSet` makes it easier for implementers to determine all
+The `AlgorithmSet` makes it easier for implementors to determine all
 of the algorithm identifiers and the associated type for parameters, if
 any are defined.
 
 ##BIT STRING  {#section-5-4}
 
 The `BIT STRING` type denotes an arbitrary string of bits
-(ones and zeroes). A `BIT STRING` value can have any length,
+(ones and zeros). A `BIT STRING` value can have any length,
 including zero. This type is a string type.
 
 The `BIT STRING` type is used for digital signatures on
@@ -1026,13 +1028,13 @@ ASN.1 notation:
 BIT STRING
 ~~~
 
-Example: `SubjectPublicKeyInfo` type {{RFC5280}} has a component
+Example: The `SubjectPublicKeyInfo` type {{RFC5280}} has a component
 of type `BIT STRING`:
 
 ~~~ asn.1
 SubjectPublicKeyInfo ::= SEQUENCE {
   algorithm AlgorithmIdentifier,
-  publicKey BIT STRING }
+  subjectPublicKey BIT STRING }
 ~~~
 
 ###BER Encoding
@@ -1076,15 +1078,15 @@ length octets, and whether the encoding is primitive or
 constructed:
 
 ~~~
-03 04 06 6e 5d c0                               DER encoding
+03 04 06 6E 5D C0                               DER encoding
 
-03 04 06 6e 5d e0                       padded with "100000"
+03 04 06 6E 5D E0                       padded with "100000"
 
-03 81 04 06 6e 5d c0              long form of length octets
+03 81 04 06 6E 5D C0              long form of length octets
 
 23 09        constructed encoding: "0110111001011101" + "11"
-   03 03 00 6e 5d
-   03 02 06 c0
+   03 03 00 6E 5D
+   03 02 06 C0
 ~~~
 
 ###DER Encoding
@@ -1099,7 +1101,7 @@ Example: The DER encoding of the `BIT STRING` value
 "011011100101110111" is:
 
 ~~~
-03 04 06 6e 5d c0
+03 04 06 6E 5D C0
 ~~~
 
 Example: The DER encoding of a Key Usage certificate extension value,
@@ -1126,13 +1128,14 @@ BOOLEAN
 The ASN.1 value notation is `TRUE` or `FALSE`.
 
 ###BER Encoding
-Primitive. A single octet in length, for `FALSE` the octet is set to zero, for `TRUE`, the octet is non-zero.
+Primitive. The contents are a single octet. For `FALSE`, the octet is set
+to zero. For `TRUE`, the octet is non-zero.
 
 ###DER Encoding
-Primitive. A single octet in length, for `FALSE` the octet is set to zero, for `TRUE`, the octet is set to 0xFF.
+Primitive. The contents are a single octet. For `FALSE`, the octet is set
+to zero. For `TRUE`, the octet is set to hexadecimal `FF`.
 
-Example: The DER encoding of the `BOOLEAN` value
-`TRUE` is:
+Example: The DER encoding of the `BOOLEAN` value `TRUE` is:
 
 ~~~
 01 01 FF
@@ -1150,12 +1153,12 @@ ASN.1 notation:
 
 ~~~ asn.1
 CHOICE {
-  [identifier1] Type1,
+  identifier1 Type1,
   ...,
-  [identifierN] TypeN }
+  identifierN TypeN }
 ~~~
 
-where `'identifier1'`, ..., `'identifierN'` are optional, distinct
+where `'identifier1'`, ..., `'identifierN'` are distinct
 identifiers for the alternatives, and `'Type1'`, ..., `'TypeN'` are
 the types of the alternatives. The identifiers are primarily
 for documentation; they do not affect values of the type or
@@ -1165,18 +1168,18 @@ The types must have distinct tags. This requirement is
 typically satisfied with explicit or implicit tagging on
 some of the alternatives.
 
-Example: In {{RFC5652}}, the `ExtendedCertificateOrCertificate` type is
+Example: In {{RFC5652}}, the `RecipientIdentifier` type is
 a `CHOICE` type:
 
 ~~~ asn.1
-ExtendedCertificateOrCertificate ::= CHOICE {
-  certificate Certificate, -- X.509
-  extendedCertificate [0] IMPLICIT ExtendedCertificate }
+RecipientIdentifier ::= CHOICE {
+  issuerAndSerialNumber IssuerAndSerialNumber,
+  subjectKeyIdentifier [0] IssuerAndSerialNumber }
 ~~~
 
-Here the identifiers for the alternatives are `certificate`
-and `extendedCertificate`, and the types of the alternatives
-are `Certificate` and \[0\] `IMPLICIT ExtendedCertificate`.
+Here the identifiers for the alternatives are `issuerAndSerialNumber`
+and `subjectKeyIdentifier`, and the types of the alternatives
+are `IssuerAndSerialNumber` and \[0\] `IssuerAndSerialNumber`.
 
 ###BER Encoding
 Same as the BER encoding of the chosen
@@ -1201,8 +1204,7 @@ control characters. An `IA5String` value can have any
 length, including zero. This type is a string type.
 
 The `IA5String` type is used in the PKCS #9 {{RFC2985}} electronic-mail
-address, unstructured-name, and unstructured-address
-attributes.
+address attribute.
 
 ASN.1 notation:
 
@@ -1224,15 +1226,15 @@ encoding is primitive or constructed:
 
 ~~~
 16 11                                           DER encoding
-   74 65 73 74 31 40 65 78 61 6d 70 6c 65 2e 63 6f 6d
+   74 65 73 74 31 40 65 78 61 6D 70 6C 65 2E 63 6F 6D
 
 16 81 11                       long form of length octets
-   74 65 73 74 31 40 65 78 61 6d 70 6c 65 2e 63 6f 6d
+   74 65 73 74 31 40 65 78 61 6D 70 6C 65 2E 63 6F 6D
 
 36 17     constructed encoding: "test1" + "@" + "example.com"
    16 05 74 65 73 74 31
    16 01 40
-   16 0B 65 78 61 6d 70 6c 65 2e 63 6f 6d
+   16 0B 65 78 61 6D 70 6C 65 2E 63 6F 6D
 ~~~
 
 ###DER Encoding
@@ -1240,10 +1242,10 @@ Primitive. The contents octets are as for a
 primitive BER encoding.
 
 Example: The DER encoding of the `IA5String` value
-"test1@example.com" is
+"test1@example.com" is:
 
 ~~~
-16 11 74 65 73 74 31 40 65 78 61 6d 70 6c 65 2e 63 6f 6d
+16 11 74 65 73 74 31 40 65 78 61 6D 70 6C 65 2E 63 6F 6D
 ~~~
 
 ##INTEGER  {#section-5-8}
@@ -1262,13 +1264,13 @@ in PKCS #5 `PBEParameter` type {{RFC8018}}.
 ASN.1 notation:
 
 ~~~ asn.1
-INTEGER [{ identifier1(value1) ... identifierN(valueN) }]
+INTEGER [{ identifier1(value1), ... identifierN(valueN) }]
 ~~~
 
-where `'identifier1'`, ..., `'identifierN'` are optional distinct
-identifiers and `'value1'`, ..., `'valueN'` are optional integer
-values. The identifiers, when present, are associated with
-values of the type. `INTEGER` is always signed.
+where `'identifier1'`, ..., `'identifierN'` are distinct
+identifiers and `'value1'`, ..., `'valueN'` are integer
+values. The identifiers and associated values, when present, are
+values of the `INTEGER`type. `INTEGER` is always signed.
 
 Example: `Version` type {{RFC5280}} is an `INTEGER` type with
 identified values:
@@ -1359,7 +1361,7 @@ registration authorities, or for particular types of object.
 There are always at least two components.
 
 The `OBJECT IDENTIFIER` type is used to identify content in
-`ContentInfo` type {{RFC5652}}, to identify algorithms in
+`ContentInfo` type {{RFC5652}} to identify algorithms in
 `AlgorithmIdentifier` type {{RFC5280}} and {{RFC5652}}.
 
 ASN.1 notation:
@@ -1368,7 +1370,7 @@ ASN.1 notation:
 OBJECT IDENTIFIER
 ~~~
 
-The ASN.1 notation for values of the `OBJECT IDENTIFIER` type is
+The ASN.1 notation for values of the `OBJECT IDENTIFIER` type is:
 
 ~~~ asn.1
 { [identifier] component1 ... componentN }
@@ -1408,7 +1410,7 @@ meanings.
 |{ 1 2 }                 |ISO member bodies            |
 |{ 1 2 840 }             |US (ANSI)                    |
 |{ 1 2 840 113549 }      |RSA Data Security, Inc.      |
-|{ 1 2 840 113549 1}     |RSA Data Security, Inc. PKCS |
+|{ 1 2 840 113549 1 }    |RSA Data Security, Inc. PKCS |
 |{ 2 5 }                 |directory services (X.500)   |
 |{ 2 5 8 }               |directory services-algorithms|
 {: title="Some object identifier values and their meanings."}
@@ -1423,10 +1425,10 @@ as a single value 40 * `'value1'` + `'value2'`, then encoded using
 the same base-128, most-significant-digit-first scheme
 described in step 2. When `'value1'` is 0 or 1, `'value2'` is
 limited to the range 0 to 39, so this combined value fits
-in a single octet (This is unambiguous, since `'value1'` is
+in a single octet. (This is unambiguous, since `'value1'` is
 limited to values 0, 1, and 2; `'value2'` is limited to the range
 0 to 39 when `'value1'` is 0 or 1; and, according to
-{{X680}}, `N` is always at least 2.). When `'value1'` is 2, `'value2'`
+{{X680}}, `N` is always at least 2.) When `'value1'` is 2, `'value2'`
 is unbounded, so `'value1'` and `'value2'` may require multiple octets.
 
 2. The following octets, if any, encode `'value3'`, ...,
@@ -1436,21 +1438,20 @@ possible, and the most significant bit of each
 octet except the last in the value's encoding set
 to "1". As a consequence of encoding each component with as few
 digits as possible, the first octet of a component's encoding is never
-0x80 (128 decimal).
+`80` (128 decimal).
 
 Example: The first octet of the BER encoding of RSA Data
 Security, Inc.'s object identifier is 40 * 1 + 2 = 42 =
-`2a` (hexadecimal). The encoding of 840 = 6 * 128 + `48` (hexadecimal) is `86 48` and the
-encoding of 113549 = 6 * 128^2 + `77` (hexadecimal) * 128 + `d` (hexadecimal) is `86 f7
-0d`. This leads to the following BER encoding:
+`2A` (hexadecimal). The encoding of 840 = 6 * 128 + `48` (hexadecimal) is `86 48` and the
+encoding of 113549 = 6 * 128^2 + `77` (hexadecimal) * 128 + `D` (hexadecimal) is `86 F7
+0D`. This leads to the following BER encoding:
 
 ~~~
-06 06 2a 86 48 86 f7 0d
+06 06 2A 86 48 86 F7 0D
 ~~~
 
 ###DER Encoding
-Primitive. The contents octets are as for a
-primitive BER encoding.
+Primitive. The contents octets are as for a primitive BER encoding.
 
 ##OCTET STRING  {#section-5-11}
 
@@ -1467,7 +1468,7 @@ encrypted private keys in PKCS #8 {{RFC5958}}.
 ASN.1 notation:
 
 ~~~ asn.1
-OCTET STRING [SIZE ({size | size1..size2})]
+OCTET STRING [(SIZE ({size | size1..size2}))]
 ~~~
 
 where `'size'`, `'size1'`, and `'size2'` are optional size constraints.
@@ -1482,7 +1483,7 @@ Example: The `PBEParameter` type in {{RFC8018}} has a component of type
 
 ~~~ asn.1
 PBEParameter ::= SEQUENCE {
-  salt OCTET STRING SIZE(8),
+  salt OCTET STRING (SIZE(8)),
   iterationCount INTEGER }
 ~~~
 
@@ -1496,18 +1497,18 @@ encoding, the contents octets give the concatenation of the
 BER encodings of substrings of the `OCTET STRING` value.
 
 Example: The BER encoding of the `OCTET STRING` value `01 23 45
-67 89 ab cd ef` can be any of the following, among others,
+67 89 AB CD EF` can be any of the following, among others,
 depending on the form of length octets and whether the
 encoding is primitive or constructed:
 
 ~~~
-04 08 01 23 45 67 89 ab cd ef                   DER encoding
+04 08 01 23 45 67 89 AB CD EF                   DER encoding
 
-04 81 08 01 23 45 67 89 ab cd ef  long form of length octets
+04 81 08 01 23 45 67 89 AB CD EF  long form of length octets
 
-24 0c            constructed encoding: 01 ... 67 + 89 ... ef
+24 0C            constructed encoding: 01 ... 67 + 89 ... EF
    04 04 01 23 45 67
-   04 04 89 ab cd ef
+   04 04 89 AB CD EF
 ~~~
 
 ###DER Encoding
@@ -1515,7 +1516,7 @@ Primitive. The contents octets are as for a
 primitive BER encoding.
 
 Example: The DER encoding of the `OCTET STRING` value `01 23 45
-67 89 ab cd ef` is
+67 89 AB CD EF` is
 
 ~~~
 04 08 01 23 45 67 89 ab cd ef
@@ -1537,7 +1538,7 @@ This type is a string type.
 
 The `PrintableString` type is used in PKCS #9 {{RFC2985}}
 challenge-password and unstructured-address attributes, and in several
-distinguished names attributes {{RFC5280}}.
+distinguished name attributes {{RFC5280}}.
 
 ASN.1 notation:
 
@@ -1558,12 +1559,12 @@ on the form of length octets and whether the encoding is
 primitive or constructed:
 
 ~~~
-13 0b 54 65 73 74 20 55 73 65 72 20 31          DER encoding
+13 0B 54 65 73 74 20 55 73 65 72 20 31          DER encoding
 
-13 81 0b                          long form of length octets
+13 81 0B                          long form of length octets
    54 65 73 74 20 55 73 65 72 20 31
 
-33 0f               constructed encoding: "Test " + "User 1"
+33 0F               constructed encoding: "Test " + "User 1"
    13 05 54 65 73 74 20
    13 06 55 73 65 72 20 31
 ~~~
@@ -1572,10 +1573,10 @@ primitive or constructed:
 Primitive. The contents octets are as for a
 primitive BER encoding.
 
-Example: The DER encoding of the `PrintableString` value "Test User 1" is
+Example: The DER encoding of the `PrintableString` value "Test User 1" is:
 
 ~~~
-13 0b 54 65 73 74 20 55 73 65 72 20 31
+13 0B 54 65 73 74 20 55 73 65 72 20 31
 ~~~
 
 ##RELATIVE-OID  {#section-5-13}
@@ -1600,7 +1601,7 @@ ASN.1 notation:
 RELATIVE-OID
 ~~~
 
-The ASN.1 notation for values of the `RELATIVE-OID` type is
+The ASN.1 notation for values of the `RELATIVE-OID` type is:
 
 ~~~ asn.1
 { component1 ... componentN }
@@ -1694,11 +1695,11 @@ components:
 
 ~~~ asn.1
 Validity ::= SEQUENCE {
-  start Time,
-  end Time }
+  notBefore Time,
+  notAfter Time }
 ~~~
 
-Here the identifiers for the components are `start` and `end`,
+Here the identifiers for the components are `notBefore` and `notAfter`,
 and the types of the components are both `Time`.
 
 ###BER Encoding
@@ -1854,19 +1855,23 @@ qualifier is the default value, the encoding of
 that component is not included.
 
 2. There is an order to the components, namely
-ascending order by tag (care: the `CONSTRUCTED` bit is not part of the tag value, see below). By ascending order, imagine every set element's encoding is padded with zeroes so that every encoding is the same length and then each padded encoding is treated as an `INTEGER` with the smallest encodings sorted to the start of the `SET`.
+ascending order by tag (care: the `CONSTRUCTED` bit is
+not part of the tag value, see below). By ascending order,
+imagine the encoding of every set element is padded to the
+same length with zeroes, treated as an unsigned integer,
+and the smallest encodings sorted to the start of the `SET`.
 
-A simple pseudo-code version of the sort (in-place) would look like:
+A simple pseudo-code version of the (in-place) sort would look like:
 
 ~~~pseudocode
-// NOTE: every octet of an encoding is treated as an unsigned value in the
-// range 0..255, both when the tag octet is masked and when octets are
-// compared. Languages with signed byte types, such as Java, or C# if
-// sbyte is used, must mask each octet with 0xFF before comparing it,
-// otherwise octets of 0x80 and above compare as negative and
-// produce incorrect ordering.
+// NOTE: every octet of an encoding is treated as an unsigned value
+// in the range 0..255, both when the tag octet is masked and when
+// octets are compared. Languages with signed byte types, such as
+// Java, or C# if sbyte is used, must mask each octet with 0xFF
+// before comparing it, otherwise octets of 0x80 and above compare
+// as negative and produce incorrect ordering.
 
-// Bit 6 of the identifier octet, which indicates a constructed encoding.
+// Bit 6 of the identifier octet indicates a constructed encoding.
 CONSTRUCTED = 0x20
 
 Sort(ASN1Object[] elements)
@@ -1916,7 +1921,19 @@ LessThanOrEqual(byte[] encA, byte[] encB)
 ~~~
 {: #fig-set-sort title="Pseudo-code for sorting SET components for DER"}
 
-`CONSTRUCTED` is the constructed-encoding bit of the identifier octet (see {{section-3-2}}). `Length()` returns the length of an array, `Min()` returns the mathematical minimum of two values and `DER()` returns the DER encoding of the `ASN1Object` passed to it, and the `~` operator provides the one's complement of a value, as it does in languages like C, Java, and C#. Likewise for `&` - the bitwise AND.
+In the pseudocode, these functions an operators are used:
+
+* `CONSTRUCTED` is the constructed-encoding bit of the identifier octet (see {{section-3-2}}).
+
+* `Length()` returns the length of an array.
+
+* `Min()` returns the mathematical minimum of two values.
+
+* `DER()` returns the DER encoding of the `ASN1Object` passed to it.
+
+* The `~` operator provides the one's complement of a value, as it does in languages like C, Java, and C#.
+
+* The `&` operator provides the bitwise AND, as it does in languages like C, Java, and C#.
 
 The comparison stops at the last octet the two encodings have in common. This is consistent with the padding described above because, for two definite-length DER encodings with the same tag, the length octets differ before the contents octets do, so one encoding can never be a strict prefix of the other.
 
@@ -1924,7 +1941,7 @@ NOTE: As you can see from the `LessThanOrEqual()` function, `SET` elements in DE
 
 Links to examples of different implementations of the DER `SET` sort can be found in {{section-7}}.
 
-For `SET OF` (see below), this is unimportant. All elements have the same tag and DER requires them to either all be in constructed form or all in primitive form, according to that tag. The elements are effectively ordered according to their contents octets.
+For `SET OF` (see below), this is unimportant. In many cases, all of the elements have the same tag, therefore DER-encoding requires sorting of the encoded form of the set elements. When the tags ae the same, the elements are effectively ordered according to their length and contents octets.
 
 For `SET`, the elements will have distinct tags, and each will be in constructed or primitive form accordingly. Failing to ignore the `CONSTRUCTED` bit could therefore lead to ordering inversions, so in general it is best to make sure it is not present in the encoding of the tag.
 
@@ -1975,8 +1992,8 @@ occurrences in the collection, in any order.
 
 ###DER Encoding
 Constructed. The contents octets are the same as
-for the BER encoding, except that there is an order, namely
-ascending lexicographic order of BER encoding. Lexicographic
+for the BER encoding, except that there is an order
+of elements imposed on the DER encoding. Lexicographic
 comparison of two different BER encodings is done as
 follows: Logically pad the shorter BER encoding after the
 last octet with dummy octets that are smaller in value than
@@ -2021,7 +2038,7 @@ T61String
 ###BER Encoding
 Primitive or constructed. In a primitive
 encoding, the contents octets give the characters in the
-T.61 string, encoded in ASCII. In a constructed encoding,
+T.61 string, encoded in T.61. In a constructed encoding,
 the contents octets give the concatenation of the BER
 encodings of consecutive substrings of the T.61 string.
 
@@ -2031,16 +2048,16 @@ following, among others, depending on the form of length
 octets and whether the encoding is primitive or constructed:
 
 ~~~
-14 0f                                           DER encoding
-   63 6c c2 65 73 20 70 75 62 6c 69 71 75 65 73
+14 0F                                           DER encoding
+   63 6C C2 65 73 20 70 75 62 6C 69 71 75 65 73
 
-14 81 0f                          long form of length octets
-   63 6c c2 65 73 20 70 75 62 6c 69 71 75 65 73
+14 81 0F                          long form of length octets
+   63 6C C2 65 73 20 70 75 62 6C 69 71 75 65 73
 
 34 15      constructed encoding: "clés" + " " + "publiques"
-   14 05 63 6c c2 65 73
+   14 05 63 6C C2 65 73
    14 01 20
-   14 09 70 75 62 6c 69 71 75 65 73
+   14 09 70 75 62 6C 69 71 75 65 73
 ~~~
 
 The eight-bit character `c2` is a T.61 prefix that adds an
@@ -2051,19 +2068,18 @@ Primitive. The contents octets are as for a
 primitive BER encoding.
 
 Example: The DER encoding of the `T61String` value "clés
-publiques" is
+publiques" is:
 
 ~~~
-14 0f 63 6c c2 65 73 20 70 75 62 6c 69 71 75 65 73
+14 0F 63 6C C2 65 73 20 70 75 62 6C 69 71 75 65 73
 ~~~
 
 ##UTCTime  {#section-5-19}
 
-The `UTCTime` type denotes a "coordinated universal time" or
-Greenwich Mean Time (GMT) value. A `UTCTime` value includes
-the local time precise to either minutes or seconds, and an
-offset from GMT in hours and minutes. It takes any of the
-following forms:
+The `UTCTime` type denotes a "coordinated universal time" (UTC)
+value. A `UTCTime` value includes the local time precise to either
+minutes or seconds, and an offset from UTC in hours and minutes. It
+takes any of the following forms:
 
 ~~~
 YYMMDDhhmmZ
@@ -2095,21 +2111,24 @@ where:
 `ss` are the seconds (00 to 59)
 
 >
-`Z` indicates that local time is GMT,
-`+` indicates that local time is later than GMT, and
-`-` indicates that local time is earlier than GMT
+`Z` indicates that local time is UTC,
+`+` indicates that local time is later than UTC, and
+`-` indicates that local time is earlier than UTC
 
 >
-`hh'` is the absolute value of the offset from GMT in hours
+`hh'` is the absolute value of the offset from UTC in hours
 
 >
-`mm'` is the absolute value of the offset from GMT in minutes
+`mm'` is the absolute value of the offset from UTC in minutes
 
 This type is a string type.
 
 The `UTCTime` type is used for signing times in PKCS #9 signing-time
 attribute {{RFC2985}} and for certificate validity periods
 in `Validity` type {{RFC5280}}.
+
+The limitations imposed by the two-digit year is a pitfall for using
+this type. In most cases, GeneralizedTime is a more desirable alternative.
 
 ASN.1 notation:
 
@@ -2143,13 +2162,13 @@ These values have the following BER encodings, among others:
 ~~~
 17 11 39 31 30 35 30 36 31 36 34 35 34 30 2D 30 37 30 30
 
-17 0d 39 31 30 35 30 36 32 33 34 35 34 30 5a
+17 0D 39 31 30 35 30 36 32 33 34 35 34 30 5A
 ~~~
 
 ###DER Encoding
 Primitive. The contents octets are as for a
 primitive BER encoding, except that the optional parts of the BER forms
-are fixed. The time is always in GMT, so the string always ends with `Z`,
+are fixed. The time is always in UTC, so the string always ends with `Z`,
 and the seconds are always present. The only DER form is therefore:
 
 ~~~
@@ -2158,10 +2177,10 @@ YYMMDDhhmmssZ
 
 Midnight is encoded as `YYMMDD000000Z`.
 
-Example: The DER encoding of the `UTCTime` value "910506234540Z" is
+Example: The DER encoding of the `UTCTime` value "910506234540Z" is:
 
 ~~~
-17 0d 39 31 30 35 30 36 32 33 34 35 34 30 5a
+17 0D 39 31 30 35 30 36 32 33 34 35 34 30 5A
 ~~~
 
 ##GeneralizedTime  {#section-5-20}
@@ -2204,8 +2223,8 @@ the signed difference (a plus or minus sign followed by hours and minutes),
 with the minutes component optionally omitted if the difference is an integral
 number of hours.
 
-All possible forms of `GeneralizedTime` cannot be enumerated, but it is worth noting
-that {{RFC5280}} requires that dates in 2050 and later be encoded as
+The possible forms of `GeneralizedTime` are too numerous to list, but it is
+worth noting that {{RFC5280}} requires that dates in 2050 and later be encoded as
 `GeneralizedTime` using the following form, which is the `UTCTime` form with
 a four-digit year:
 
@@ -2225,14 +2244,14 @@ GeneralizedTime
 ###BER Encoding
 Primitive or constructed. In a primitive
 encoding, the contents octets give the characters in the
-string, encoded in `VisibleString`. In a constructed encoding, the
+string, using the `VisibleString` character set. In a constructed encoding, the
 contents octets give the concatenation of the BER encodings
 of consecutive substrings of the string. (The constructed
 encoding is not particularly interesting, since `GeneralizedTime`
 values are usually very short, but the constructed encoding is
 permitted.)
 
-Example: Local time 6 minutes, 27.3 seconds after 9 pm on 6 November 2050.
+Example: The local time is 6 minutes, 27.3 seconds after 9 pm on 6 November 2050.
 
 ~~~
 "20501106210627.3"
@@ -2241,7 +2260,7 @@ Example: Local time 6 minutes, 27.3 seconds after 9 pm on 6 November 2050.
 This value has the following BER encoding, among others:
 
 ~~~
-18 10 32 30 35 30 31 31 30 36 32 31 30 36 32 37 2e 33
+18 10 32 30 35 30 31 31 30 36 32 31 30 36 32 37 2E 33
 ~~~
 
 ###DER Encoding
@@ -2270,13 +2289,13 @@ to indicate that a certificate has no well-defined expiration date.
 This value has the following DER encoding:
 
 ~~~
-18 0f 39 39 39 39 31 32 33 31 32 33 35 39 35 39 5a
+18 0F 39 39 39 39 31 32 33 31 32 33 35 39 35 39 5A
 ~~~
 
 ##UTF8String  {#section-5-21}
 
 The `UTF8String` type supports the encoding of character sets which
-covers most of the world's writing systems; see {{RFC3629}}.  This
+cover most of the world's writing systems; see {{RFC3629}}.  This
 type is a string type.
 
 The `UTF8String` type is used with many naming attributes in {{RFC5280}}.
@@ -2299,23 +2318,23 @@ meaning "the Korean language") is encoded in UTF-8, and then this value
 has the following BER encodings, among others:
 
 ~~~
-0c 09 ed 95 9c ea b5 ad ec 96 b4                DER encoding
+0C 09 ED 95 9C EA B5 AD EC 96 B4                DER encoding
 
-0c 81 09 ed 95 9c ea b5 ad ec 96 b4   long form of length octets
+0C 81 09 ED 95 9C EA B5 AD EC 96 B4   long form of length octets
 
-2c 0d                  constructed encoding: U+D55C + U+AD6D U+C5B4
-   0c 03 ed 95 9c
-   0c 06 ea b5 ad ec 96 b4
+2C 0D                  constructed encoding: U+D55C + U+AD6D U+C5B4
+   0C 03 ED 95 9C
+   0C 06 EA B5 AD EC 96 B4
 ~~~
 
 ###DER Encoding
 Primitive. The contents octets are as for a
 primitive BER encoding.
 
-Example: The DER encoding of the `UTF8String` value U+D55C U+AD6D U+C5B4 is
+Example: The DER encoding of the `UTF8String` value U+D55C U+AD6D U+C5B4 is:
 
 ~~~
-0c 09 ed 95 9c ea b5 ad ec 96 b4
+0C 09 ED 95 9C EA B5 AD EC 96 B4
 ~~~
 
 #An example  {#section-6}
@@ -2329,7 +2348,7 @@ This section gives the ASN.1 notation for the `Name` type {{RFC5280}}.
 
 ~~~ asn.1
 Name ::= CHOICE {
-  RDNSequence }
+  rdnSequence RDNSequence }
 
 RDNSequence ::= SEQUENCE OF RelativeDistinguishedName
 
@@ -2337,8 +2356,8 @@ RelativeDistinguishedName ::=
   SET SIZE (1..MAX) OF AttributeTypeAndValue
 
 AttributeTypeAndValue ::= SEQUENCE {
-   AttributeType,
-   AttributeValue }
+  type AttributeType,
+  value AttributeValue }
 
 AttributeType ::= OBJECT IDENTIFIER
 
@@ -2376,7 +2395,7 @@ determined by the attribute type.
 This section gives an example of a DER encoding of a value
 of type `Name`, working from the bottom up.
 
-The name is that of User 1. The name is represented by the following path:
+The name for "User 1" is represented by the following path:
 
 ~~~
                        (root)
@@ -2399,16 +2418,17 @@ The `countryName`, `organizationName`, and `commonName` are
 attribute types defined in {{RFC5280}} as:
 
 ~~~ asn.1
-attributeType OBJECT IDENTIFIER ::= { joint-iso-ccitt(2) ds(5) 4 }
+id-at OBJECT IDENTIFIER ::= { joint-iso-ccitt(2) ds(5) 4 }
 
-countryName OBJECT IDENTIFIER ::= { attributeType 6 }
+id-at-countryName AttributeType ::= { id-at 6 }
 
-organizationName OBJECT IDENTIFIER ::= { attributeType 10 }
+id-at-organizationName AttributeType ::= { id-at 10 }
 
-commonName OBJECT IDENTIFIER ::= { attributeType 3 }
+id-at-commonName AttributeType ::= { id-at 3 }
 ~~~
 
-Note: `joint-iso-ccitt` and `joint-iso-itu-t` are interchangeable for (2).
+Note: `joint-iso-ccitt` and `joint-iso-itu-t` are interchangeable
+identifiers for (2).
 
 ###AttributeType
 
@@ -2419,14 +2439,14 @@ method:
 ~~~
 06 03 55 04 06                                   countryName
 
-06 03 55 04 0a                              organizationName
+06 03 55 04 0A                              organizationName
 
 06 03 55 04 03                                    commonName
 ~~~
 
 The identifier octets follow the low-tag form, since the tag
-is 6 for `OBJECT IDENTIFIER`. Bits 8 and 7 have value "0,"
-indicating universal class, and bit 6 has value "0,"
+is 6 for `OBJECT IDENTIFIER`. Bits 8 and 7 have value "0",
+indicating universal class, and bit 6 has value "0",
 indicating that the encoding is primitive. The length octets
 follow the short form. The contents octets are the
 concatenation of three octet strings derived from
@@ -2442,7 +2462,7 @@ method:
 ~~~
 13 02 55 53                                             "US"
 
-13 0c 45 78 61 6d 70 6c 65 20 49 6e 63 2e     "Example Inc."
+13 0C 45 78 61 6D 70 6C 65 20 49 6E 63 2E     "Example Inc."
 
 13 06 55 73 65 72 20 31                             "User 1"
 ~~~
@@ -2467,8 +2487,8 @@ definite-length method:
    13 02 55 53
 
 30 13                     organizationName = "Example Inc."
-   06 03 55 04 0a
-   13 0c ... 63 2e
+   06 03 55 04 0A
+   13 0C ... 63 2E
 
 30 0d                                  commonName = "User 1"
    06 03 55 04 03
@@ -2495,10 +2515,10 @@ definite-length method:
    30 09 ... 55 53
 
 31 15
-   30 13 ... 63 2e
+   30 13 ... 63 2E
 
 31 0f
-   30 0d ... 20 31
+   30 0D ... 20 31
 ~~~
 
 The identifier octets follow the low-tag-number form, since
@@ -2517,9 +2537,9 @@ encoding follows the constructed, definite-length method:
 
 ~~~
 30 35
-   31 0b ... 55 53
-   31 15 ... 63 2e
-   31 0f ... 20 31
+   31 0B ... 55 53
+   31 15 ... 63 2E
+   31 0F ... 20 31
 ~~~
 
 The identifier octets follow the low-tag-number form, since
@@ -2538,17 +2558,17 @@ same as that of the `RDNSequence` value:
 
 ~~~
 30 35
-   31 0b
+   31 0B
       30 09
          06 03 55 04 06          attributeType = countryName
          13 02 55 53                   attributeValue = "US"
    31 15
       30 13
          06 03 55 04 0a     attributeType = organizationName
-         13 0c               attributeValue = "Example Inc."
-            45 78 61 6d 70 6c 65 20 49 6e 63 2e
-   31 0f
-      30 0d
+         13 0C               attributeValue = "Example Inc."
+            45 78 61 6D 70 6C 65 20 49 6E 63 2E
+   31 0F
+      30 0D
          06 03 55 04 03           attributeType = commonName
          13 06                     attributeValue = "User 1"
             55 73 65 72 20 31
@@ -2560,51 +2580,51 @@ If pretty-printed in strict order, this would provide an X.500 `Name` that looke
 countryName=US,organizationName=Example Inc.,commonName=User 1
 ~~~
 
-Occasionally, just occasionally you will also come across a '+' syntax in X.500 Names so instead the name might look like:
+Occasionally, you will also come across a '+' syntax in X.500 Names so instead the name might look like:
 
 ~~~
 countryName=US,organizationName=Example Inc.+commonName=User 1
 ~~~
 
-This case is interesting, the reason for this being that the '+' means the last two attribute value pairs
-end up in the same RDN, or more specifically the same `SET` as can be seen in
+This case is interesting because the '+' means the last two attribute value pairs
+are part of the same RDN. More specifically, the same `SET` as can be seen in
 the encoding below.
 
 ~~~
 30 33
-   31 0b
+   31 0B
       30 09
          06 03 55 04 06
          13 02 55 53
    31 24
       30 13
-         06 03 55 04 0a
-         13 0c
-            45 78 61 6d 70 6c 65 20 49 6e 63 2e
-      30 0d
+         06 03 55 04 0A
+         13 0C
+            45 78 61 6D 70 6C 65 20 49 6E 63 2E
+      30 0D
          06 03 55 04 03
          13 06
             55 73 65 72 20 31
 ~~~
 
-While the above is a correct definite-length encoding of this X.500 name,
-it is not the correct DER encoding, which looks like:
+While the above is a correct BER encoding (using definite-length encoding)
+of this X.500 name, it is not the correct DER encoding, which looks like:
 
 ~~~
 30 33
-   31 0b
+   31 0B
       30 09
          06 03 55 04 06
          13 02 55 53
    31 24
-      30 0d
+      30 0D
          06 03 55 04 03
          13 06
             55 73 65 72 20 31
       30 13
-         06 03 55 04 0a
-         13 0c
-            45 78 61 6d 70 6c 65 20 49 6e 63 2e
+         06 03 55 04 0A
+         13 0C
+            45 78 61 6D 70 6C 65 20 49 6E 63 2E
 ~~~
 
 If pretty-printed directly, this would give:
@@ -2613,18 +2633,16 @@ If pretty-printed directly, this would give:
 countryName=US,commonName=User 1+organizationName=Example Inc.
 ~~~
 
-The difference between the two encodings being that the `SET` has been correctly sorted for DER encoding
+Note that the `SET` has been correctly sorted for DER encoding
 in the final encoding.
 
-There are a few morals to this particular tale. As you can imagine '+' in an X.500 name is best
-avoided as sometimes people forget about the sorting or insist on definite-length encoding to preserve order
-requiring DER encoding to be done every time for signature generation and verification. Ideally if you have to include a '+' (it really does happen) it
-is also better to write out the X.500 name in DER format at the start, so anyone else trying to verify
-a signature that might be associated with the use of the name will always get a correct result. Where it
-is not possible to write out the X.500 name in DER format, so anyone checking the subsequent encoding will
-be presented with a definite-length encoding instead, special care must be taken to calculate and evaluate
-any signatures or MACs based on the name using the DER encoding, rather than the definite-length encoding,
-otherwise recipients will not be able to verify the data.
+There are a few morals to this particular tale. As you can imagine, the '+' in an X.500 name is best
+avoided. Sometimes people forget about the need for sorting or insist on definite-length encoding to preserve order,
+which requires DER encoding for signature generation and every verification. When the use of '+' is unavoidable,
+it is also better to write out the X.500 name in DER format at the start, so anyone else trying to verify
+a signature that might be associated with the name will always get a correct result. Where that is not
+possible, special care is needed to calculate and evaluate signatures or message authentication codes based on
+the DER-encoded name, rather than the definite-length encoding, otherwise recipients will not be able to verify the data.
 
 One final note, as `Name` is of type `CHOICE`, whenever it is tagged it will always encode as explicitly tagged, even if it's in a module that starts with a definitions block reading `DEFINITIONS IMPLICIT TAGS ::=`. This convention is followed as `CHOICE` encodings need to maintain the original encoding of the ASN.1 primitive, or structure, making up the `CHOICE`. Overwriting the tag by following the implicit tagging rule could change the meaning of the `CHOICE` item completely!
 
@@ -2652,9 +2670,9 @@ Security considerations are discussed throughout this memo.  Implementations tha
 and decoding data to avoid buffer overflows, denial of service through resource exhaustion, and arbitrary code execution. These
 considerations are not unique to ASN.1; they need to be considered by all data parsers and decoders.
 
-In relation to resource exhaustion, while ASN.1 allows for arbitrary nesting of constructed objects and very large lengths of individual data objects, we recommend that limits for both these are enforced appropriate for the use-case the parser, or decoder, is used for. Such limits can provide a useful early warning of corrupted data while also (usually) providing a recoverable situation for the parser, or decoder, encountering the issue. In addition to issues with nesting, the need to sort sets for DER can also cause issues if a large set is presented in a situation where DER encoding is required, such as with a signature verification. In situations where ASN.1 encodings are possibly being accepted from unknown third parties, a more sophisticated algorithm, such as a stable Dual-Pivot Quicksort, should be utilized. Doing so may avoid worst-case situations resulting in high CPU and/or memory usage when producing or verifying the sorted, distinguished encoded value for a SET type.
+In relation to resource exhaustion, while ASN.1 allows for arbitrary nesting of constructed objects and very large lengths of individual data objects, we recommend that limits for both of these are enforced by the parser or decoder. Such limits can provide a useful early warning of corrupted data while also (usually) providing a recoverable situation for the parser or decoder. In addition to issues with nesting, the need to sort sets as part of DER can also cause issues when presented with a large set. In situations where ASN.1 encodings are possibly being accepted from unknown third parties, the set sorting algorithm should avoid worst-case situations that result in high CPU and/or memory usage when producing or verifying the sorted, DER-encoded value for a SET type.
 
-Implementers of ASN.1 parsers and decoders are encouraged to use fuzz testing to identify security vulnerabilities and other flaws.
+Implementors of ASN.1 parsers and decoders are encouraged to use fuzz testing to identify security vulnerabilities and other flaws.
 
 --- back
 
