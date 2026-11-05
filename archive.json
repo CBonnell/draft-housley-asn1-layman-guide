@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-11-03T05:32:54.182555+00:00",
+  "timestamp": "2026-11-05T05:24:02.400767+00:00",
   "repo": "CBonnell/draft-housley-asn1-layman-guide",
   "labels": [
     {
@@ -1408,6 +1408,32 @@
           ]
         }
       ]
+    },
+    {
+      "number": 22,
+      "id": "PR_kwDOOSVefs8AAAABM4p5aQ",
+      "title": "Eliot's comments",
+      "url": "https://github.com/CBonnell/draft-housley-asn1-layman-guide/pull/22",
+      "state": "OPEN",
+      "author": "russhousley",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Left the \"reduncancies\" because many people will read only the section about a type they want to use.",
+      "createdAt": "2026-11-04T18:43:16Z",
+      "updatedAt": "2026-11-04T18:43:16Z",
+      "baseRepository": "CBonnell/draft-housley-asn1-layman-guide",
+      "baseRefName": "main",
+      "baseRefOid": "283d3a9d112ad4694d0ab3bbc6fc523c7feb91d2",
+      "headRepository": "russhousley/draft-housley-asn1-layman-guide",
+      "headRefName": "ise-review",
+      "headRefOid": "e0b951de12699fa059c4a9e21ebb6ce8fbbb5230",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
