@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-11-05T05:24:02.400767+00:00",
+  "timestamp": "2026-11-08T04:43:35.342566+00:00",
   "repo": "CBonnell/draft-housley-asn1-layman-guide",
   "labels": [
     {
@@ -1421,7 +1421,7 @@
       "labels": [],
       "body": "Left the \"reduncancies\" because many people will read only the section about a type they want to use.",
       "createdAt": "2026-11-04T18:43:16Z",
-      "updatedAt": "2026-11-04T18:43:16Z",
+      "updatedAt": "2026-11-07T16:43:06Z",
       "baseRepository": "CBonnell/draft-housley-asn1-layman-guide",
       "baseRefName": "main",
       "baseRefOid": "283d3a9d112ad4694d0ab3bbc6fc523c7feb91d2",
@@ -1433,7 +1433,34 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOOSVefs8AAAABWoMHqQ",
+          "commit": {
+            "abbreviatedOid": "e0b951d"
+          },
+          "author": "CBonnell",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-11-07T16:11:11Z",
+          "updatedAt": "2026-11-07T16:42:53Z",
+          "comments": [
+            {
+              "originalPosition": 125,
+              "body": "```suggestion\nexplicit tags are required to avoid ambiguity if the tag of\n```",
+              "createdAt": "2026-11-07T16:11:11Z",
+              "updatedAt": "2026-11-07T16:42:53Z"
+            },
+            {
+              "originalPosition": 772,
+              "body": "```suggestion\nFor `SET OF` (see below), this is unimportant. In many cases, all of the elements have the same tag, therefore DER encoding requires sorting of the encoded form of the set elements. When the tags are the same, the elements are effectively ordered according to their length and contents octets.\n```",
+              "createdAt": "2026-11-07T16:39:30Z",
+              "updatedAt": "2026-11-07T16:42:53Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
