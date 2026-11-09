@@ -482,7 +482,7 @@ considered the same as the underlying type, except that the
 tag is different. An explicitly tagged type is considered
 like a structured type with one component, the underlying
 type. Implicit tags result in shorter encodings, but
-explicit tags are required avoid ambiguity if the tag of
+explicit tags are required to avoid ambiguity if the tag of
 the underlying type is indeterminate (e.g., the underlying
 type is `CHOICE` or `ANY`).
 
