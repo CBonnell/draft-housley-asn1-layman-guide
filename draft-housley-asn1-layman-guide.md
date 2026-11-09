@@ -1941,7 +1941,7 @@ NOTE: As you can see from the `LessThanOrEqual()` function, `SET` elements in DE
 
 Links to examples of different implementations of the DER `SET` sort can be found in {{section-7}}.
 
-For `SET OF` (see below), this is unimportant. In many cases, all of the elements have the same tag, therefore DER-encoding requires sorting of the encoded form of the set elements. When the tags ae the same, the elements are effectively ordered according to their length and contents octets.
+For `SET OF` (see below), this is unimportant. In many cases, all of the elements have the same tag, therefore DER encoding requires sorting of the encoded form of the set elements. When the tags are the same, the elements are effectively ordered according to their length and contents octets.
 
 For `SET`, the elements will have distinct tags, and each will be in constructed or primitive form accordingly. Failing to ignore the `CONSTRUCTED` bit could therefore lead to ordering inversions, so in general it is best to make sure it is not present in the encoding of the tag.
 
