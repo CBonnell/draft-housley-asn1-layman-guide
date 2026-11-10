@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-11-08T04:43:35.342566+00:00",
+  "timestamp": "2026-11-10T06:08:25.362200+00:00",
   "repo": "CBonnell/draft-housley-asn1-layman-guide",
   "labels": [
     {
@@ -49,7 +49,24 @@
       "color": "ffffff"
     }
   ],
-  "issues": [],
+  "issues": [
+    {
+      "number": 23,
+      "id": "I_kwDOOSVefs8AAAABdqR9JA",
+      "title": "Discrepancy in constructed string encoding?",
+      "url": "https://github.com/CBonnell/draft-housley-asn1-layman-guide/issues/23",
+      "state": "OPEN",
+      "author": "mathman1618",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "There seems to be a difference in constructed encoding of text string types between this document and X.690.\n\nIn X.690 (2021) section 8.23.5, an example of constructed encoding for a `VisibleString` value is given:\n```\nWith the ASN.1 type definition:\n\n  Name ::= VisibleString\n\na value:\n\n  \"Jones\"\n\ncan be encoded (primitive form) as:\n\n  VisibleString  Length  Contents\n  1A             05      4A6F6E6573\n\nor (constructor form, definite length) as:\n\n  VisibleString  Length  Contents\n  3A16           09\n                         OctetString  Length  Contents\n                         04           03      4A6F6E\n                         OctetString  Length  Contents\n                         04           02      6573\n\nor (constructor form, indefinite length) as:\n\n  VisibleString  Length  Contents\n  3A             80\n                         OctetString  Length  Contents\n                         04           03      4A6F6E\n                         OctetString  Length  Contents\n                         04           02      6573\n                         EOC          Length\n                         00           00\n```\nThis example, together with the text in section 8.23.3\n```\nEach character string type shall be encoded as if it had been declared:\n[UNIVERSAL x] IMPLICIT OCTET STRING\nwhere x is the number of the universal class tag assigned to the character string type in Rec. ITU-T X.680 | ISO/IEC 8824-1.\nThe value of the octet string is specified in 8.23.4 and 8.23.5.\n```\nimplies that the segments in a constructed encoding of a text string value should always have tag type `04` (OCTET STRING).\n\nHowever, the examples in this document, such as the example of a constructed encoding of an IA5String in section 5.7.1:\n```\n   36 17     constructed encoding: \"test1\" + \"@\" + \"example.com\"\n      16 05 74 65 73 74 31\n      16 01 40\n      16 0B 65 78 61 6d 70 6c 65 2e 63 6f 6d\n```\nimplies that segments should retain the tag type of the string (`16` for IA5String, in this case).\n\nIs this a disagreement, or am I misunderstanding something?",
+      "createdAt": "2026-11-09T11:47:48Z",
+      "updatedAt": "2026-11-09T11:47:48Z",
+      "closedAt": null,
+      "comments": []
+    }
+  ],
   "pulls": [
     {
       "number": 1,
@@ -1421,13 +1438,13 @@
       "labels": [],
       "body": "Left the \"reduncancies\" because many people will read only the section about a type they want to use.",
       "createdAt": "2026-11-04T18:43:16Z",
-      "updatedAt": "2026-11-07T16:43:06Z",
+      "updatedAt": "2026-11-09T15:44:43Z",
       "baseRepository": "CBonnell/draft-housley-asn1-layman-guide",
       "baseRefName": "main",
       "baseRefOid": "283d3a9d112ad4694d0ab3bbc6fc523c7feb91d2",
       "headRepository": "russhousley/draft-housley-asn1-layman-guide",
       "headRefName": "ise-review",
-      "headRefOid": "e0b951de12699fa059c4a9e21ebb6ce8fbbb5230",
+      "headRefOid": "2887e21d6e724fad7bf5fc25bf719ffe1f02330f",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -1459,6 +1476,19 @@
               "updatedAt": "2026-11-07T16:42:53Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOOSVefs8AAAABWrMgbw",
+          "commit": {
+            "abbreviatedOid": "e0b951d"
+          },
+          "author": "dghgit",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "I think the use of \"[\" for literal as opposed to optional is about the best you can do.\n\nLooks good, apologies for the British spellings, I'm pretty sure more than a few of them were mine... Old habits...",
+          "createdAt": "2026-11-08T04:49:42Z",
+          "updatedAt": "2026-11-08T04:49:42Z",
+          "comments": []
         }
       ]
     }
