@@ -1230,9 +1230,15 @@ encoding is primitive or constructed:
    74 65 73 74 31 40 65 78 61 6d 70 6c 65 2e 63 6f 6d
 
 36 17     constructed encoding: "test1" + "@" + "example.com"
-   16 05 74 65 73 74 31
-   16 01 40
-   16 0B 65 78 61 6d 70 6c 65 2e 63 6f 6d
+   04 05 74 65 73 74 31
+   04 01 40
+   04 0b 65 78 61 6d 70 6c 65 2e 63 6f 6d
+
+36 80     constructed indefinite-length encoding (as above)
+   04 05 74 65 73 74 31
+   04 01 40
+   04 0b 65 78 61 6d 70 6c 65 2e 63 6f 6d
+   00 00
 ~~~
 
 ###DER Encoding
@@ -1564,8 +1570,13 @@ primitive or constructed:
    54 65 73 74 20 55 73 65 72 20 31
 
 33 0f               constructed encoding: "Test " + "User 1"
-   13 05 54 65 73 74 20
-   13 06 55 73 65 72 20 31
+   04 05 54 65 73 74 20
+   04 06 55 73 65 72 20 31
+
+33 80               constructed indefinite-length encoding (as above)
+   04 05 54 65 73 74 20
+   04 06 55 73 65 72 20 31
+   00 00
 ~~~
 
 ###DER Encoding
@@ -2038,9 +2049,9 @@ octets and whether the encoding is primitive or constructed:
    63 6c c2 65 73 20 70 75 62 6c 69 71 75 65 73
 
 34 15      constructed encoding: "clés" + " " + "publiques"
-   14 05 63 6c c2 65 73
-   14 01 20
-   14 09 70 75 62 6c 69 71 75 65 73
+   04 05 63 6c c2 65 73
+   04 01 20
+   04 09 70 75 62 6c 69 71 75 65 73
 ~~~
 
 The eight-bit character `c2` is a T.61 prefix that adds an
@@ -2304,8 +2315,13 @@ has the following BER encodings, among others:
 0c 81 09 ed 95 9c ea b5 ad ec 96 b4   long form of length octets
 
 2c 0d                  constructed encoding: U+D55C + U+AD6D U+C5B4
-   0c 03 ed 95 9c
-   0c 06 ea b5 ad ec 96 b4
+   04 03 ed 95 9c
+   04 06 ea b5 ad ec 96 b4
+
+2c 80                  constructed indefinite-length encoding (as above)
+   04 03 ed 95 9c
+   04 06 ea b5 ad ec 96 b4
+   00 00
 ~~~
 
 ###DER Encoding
