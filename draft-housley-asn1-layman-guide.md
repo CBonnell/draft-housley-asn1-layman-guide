@@ -259,7 +259,7 @@ ASN.1 notation figures and accompanying text:
 |`Type1` | Initial-caps denotes a type. In explanatory text the type is surrounded by single quotes, e.g. `'Type1'` |
 |`[]` | brackets indicate that a term is optional |
 |`{}` | braces group related terms |
-|`|` | vertical bar delimits alternatives with a group |
+|`|` | vertical bar delimits alternatives within a group |
 |`...` | ellipsis indicates repeated occurrences |
 |`=` | equals sign expresses terms as subterms |
 {: title="ASN.1 notation meta-syntax."}
@@ -694,7 +694,7 @@ Details for particular types are given in {{section-5}}.
 ##Constructed, indefinite-length method  {#section-3-3}
 
 This method applies to simple string types, structured
-types, types derived simple string types and structured
+types, types derived from simple string types and structured
 types by implicit tagging, and types derived from anything
 by explicit tagging. It does not require that the length of
 the value be known in advance. The parts of the BER encoding
@@ -967,7 +967,7 @@ AlgorithmIdentifier ::= SEQUENCE {
   parameters ANY DEFINED BY algorithm OPTIONAL }
 ~~~
 
-Here the actual type of the `parameter` component depends on
+Here the actual type of the `parameters` component depends on
 the value of the `algorithm` component. The actual type would
 be defined in the registration of object identifier values
 for the `algorithm` component.
@@ -992,7 +992,7 @@ below, which is a simplification of the definition in {{RFC5912}}:
 ~~~ asn.1
 ALGORITHM ::= CLASS {
   &id OBJECT IDENTIFIER UNIQUE,
-  &Params OPTIONAL,
+  &Params OPTIONAL
 } WITH SYNTAX {
   IDENTIFIER &id
   [PARAMS [TYPE &Params]]
@@ -1135,7 +1135,7 @@ Example: The DER encoding of the `BOOLEAN` value
 `TRUE` is:
 
 ~~~
-01 01 FF
+01 01 ff
 ~~~
 
 ##CHOICE  {#section-5-6}
@@ -1201,8 +1201,7 @@ control characters. An `IA5String` value can have any
 length, including zero. This type is a string type.
 
 The `IA5String` type is used in the PKCS #9 {{RFC2985}} electronic-mail
-address, unstructured-name, and unstructured-address
-attributes.
+address and unstructured-name attributes.
 
 ASN.1 notation:
 
@@ -1305,11 +1304,11 @@ encodings) are given in Table 3.
 | Integer value | BER encoding |
 |---------------|--------------|
 | 0             | `02 01 00`   |
-| 127           | `02 01 7F`   |
+| 127           | `02 01 7f`   |
 | 128           | `02 02 00 80` |
 | 256           | `02 02 01 00` |
 | -128          | `02 01 80`   |
-| -129          | `02 02 FF 7F` |
+| -129          | `02 02 ff 7f` |
 {: title="Example BER encodings of INTEGER values."}
 
 ###DER Encoding
@@ -1473,12 +1472,12 @@ encrypted private keys in PKCS #8 {{RFC5958}}.
 ASN.1 notation:
 
 ~~~ asn.1
-OCTET STRING [SIZE ({size | size1..size2})]
+OCTET STRING [(SIZE ({size | size1..size2}))]
 ~~~
 
 where `'size'`, `'size1'`, and `'size2'` are optional size constraints.
-In the `OCTET STRING SIZE (size)` form, the octet string must
-have `'size'` octets. In the `OCTET STRING SIZE (size1..size2)`
+In the `OCTET STRING (SIZE (size))` form, the octet string must
+have `'size'` octets. In the `OCTET STRING (SIZE (size1..size2))`
 form, the octet string must have between `'size1'` and `'size2'`
 octets. In the `OCTET STRING` form, the octet string can have
 any size.
@@ -1488,7 +1487,7 @@ Example: The `PBEParameter` type in {{RFC8018}} has a component of type
 
 ~~~ asn.1
 PBEParameter ::= SEQUENCE {
-  salt OCTET STRING SIZE(8),
+  salt OCTET STRING (SIZE(8)),
   iterationCount INTEGER }
 ~~~
 
@@ -1705,11 +1704,11 @@ components:
 
 ~~~ asn.1
 Validity ::= SEQUENCE {
-  start Time,
-  end Time }
+  notBefore Time,
+  notAfter Time }
 ~~~
 
-Here the identifiers for the components are `start` and `end`,
+Here the identifiers for the components are `notBefore` and `notAfter`,
 and the types of the components are both `Time`.
 
 ###BER Encoding
@@ -1799,7 +1798,7 @@ occurrences in the collection, in order of occurrence.
 ##SET  {#section-5-16}
 
 The `SET` type denotes an unordered collection of one or more
-types.  The `SET` type is used in the `ESSSecurityLabel` type {{RFC5035}}.
+types.
 
 ASN.1 notation:
 
@@ -1827,7 +1826,7 @@ The types must have distinct tags. This requirement is
 typically satisfied with explicit or implicit tagging on
 some of the components.
 
-Example. The `SET` type is used in the `ESSSecurityLabel` type {{RFC5035}}.
+Example. The `SET` type is used for the `ESSSecurityLabel` type {{RFC5035}}.
 
 ~~~ asn.1
 ESSSecurityLabel ::= SET {
@@ -1937,7 +1936,7 @@ Links to examples of different implementations of the DER `SET` sort can be foun
 
 For `SET OF` (see below), this is unimportant. All elements have the same tag and DER requires them to either all be in constructed form or all in primitive form, according to that tag. The elements are effectively ordered according to their contents octets.
 
-For `SET`, the elements will have distinct tags, and each will be in constructed or primitive form accordingly. Failing to ignore the `CONSTRUCTED` bit could therefore lead to ordering inversions, so in general it is best to make sure it is not present in the encoding of the tag.
+For `SET`, the elements will have distinct tags, and each will be in constructed or primitive form accordingly. Failing to ignore the `CONSTRUCTED` bit could therefore lead to ordering inversions, so in general it is best to make sure it is not present in the encoding of the tag on comparison.
 
 ##SET OF  {#section-5-17}
 
@@ -1986,13 +1985,14 @@ occurrences in the collection, in any order.
 
 ###DER Encoding
 Constructed. The contents octets are the same as
-for the BER encoding, except that there is an order, namely
-ascending lexicographic order of BER encoding. Lexicographic
-comparison of two different BER encodings is done as
-follows: Logically pad the shorter BER encoding after the
+for the BER encoding, except that each occurrence is DER encoded,
+and there is an order, namely
+ascending lexicographic order of the DER encodings. Lexicographic
+comparison of two different DER encodings is done as
+follows: Logically pad the shorter DER encoding after the
 last octet with dummy octets that are smaller in value than
-any normal octet. Scan the BER encodings from left to right
-until a difference is found. The smaller-valued BER encoding
+any normal octet. Scan the DER encodings from left to right
+until a difference is found. The smaller-valued DER encoding
 is the one with the smaller-valued octet at the point of
 difference.
 
@@ -2152,7 +2152,7 @@ among others:
 These values have the following BER encodings, among others:
 
 ~~~
-17 11 39 31 30 35 30 36 31 36 34 35 34 30 2D 30 37 30 30
+17 11 39 31 30 35 30 36 31 36 34 35 34 30 2d 30 37 30 30
 
 17 0d 39 31 30 35 30 36 32 33 34 35 34 30 5a
 ~~~
@@ -2345,7 +2345,7 @@ This section gives the ASN.1 notation for the `Name` type {{RFC5280}}.
 
 ~~~ asn.1
 Name ::= CHOICE {
-  RDNSequence }
+  rdnSequence RDNSequence }
 
 RDNSequence ::= SEQUENCE OF RelativeDistinguishedName
 
@@ -2353,8 +2353,8 @@ RelativeDistinguishedName ::=
   SET SIZE (1..MAX) OF AttributeTypeAndValue
 
 AttributeTypeAndValue ::= SEQUENCE {
-   AttributeType,
-   AttributeValue }
+   type AttributeType,
+   value AttributeValue }
 
 AttributeType ::= OBJECT IDENTIFIER
 
@@ -2497,7 +2497,7 @@ Bits 8 and 7 have value "0" since `SEQUENCE` is in the
 universal class. Bit 6 has value "1" since the encoding is
 constructed. The length octets follow the short form, and
 the contents octets are the concatenation of the DER
-encodings of the attributeType and attributeValue
+encodings of the type and value
 components.
 
 ###RelativeDistinguishedName
@@ -2668,7 +2668,7 @@ Security considerations are discussed throughout this memo.  Implementations tha
 and decoding data to avoid buffer overflows, denial of service through resource exhaustion, and arbitrary code execution. These
 considerations are not unique to ASN.1; they need to be considered by all data parsers and decoders.
 
-In relation to resource exhaustion, while ASN.1 allows for arbitrary nesting of constructed objects and very large lengths of individual data objects, we recommend that limits for both these are enforced appropriate for the use-case the parser, or decoder, is used for. Such limits can provide a useful early warning of corrupted data while also (usually) providing a recoverable situation for the parser, or decoder, encountering the issue. In addition to issues with nesting, the need to sort sets for DER can also cause issues if a large set is presented in a situation where DER encoding is required, such as with a signature verification. In situations where ASN.1 encodings are possibly being accepted from unknown third parties, a more sophisticated algorithm, such as a stable Dual-Pivot Quicksort, should be utilized. Doing so may avoid worst-case situations resulting in high CPU and/or memory usage when producing or verifying the sorted, distinguished encoded value for a SET type.
+In relation to resource exhaustion, while ASN.1 allows for arbitrary nesting of constructed objects and very large lengths of individual data objects, we recommend that limits for both these are enforced appropriate for the use-case the parser, or decoder, is used for. Such limits can provide a useful early warning of corrupted data while also (usually) providing a recoverable situation for the parser, or decoder, encountering the issue. In addition to issues with nesting, the need to sort sets for DER can also cause issues if a large set is presented in a situation where DER encoding is required, such as with a signature verification. In situations where ASN.1 encodings are possibly being accepted from unknown third parties, a more sophisticated algorithm with an O(n log n) worst case, such as merge sort or heap sort, should be utilized. Doing so may avoid worst-case situations resulting in high CPU and/or memory usage when producing or verifying the sorted, distinguished encoded value for a SET type.
 
 Implementers of ASN.1 parsers and decoders are encouraged to use fuzz testing to identify security vulnerabilities and other flaws.
 
