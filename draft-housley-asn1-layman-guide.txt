@@ -5,12 +5,12 @@
 Network Working Group                                         B. Kaliski
 Internet-Draft                                             Verisign Labs
 Intended status: Informational                                C. Bonnell
-Expires: 17 May 2027                                TurboLight Solutions
+Expires: 18 May 2027                                TurboLight Solutions
                                                                  D. Hook
                                                                Keyfactor
                                                               R. Housley
                                                           Vigil Security
-                                                        13 November 2026
+                                                        14 November 2026
 
 
           A Layman's Guide to a Subset of ASN.1, BER, and DER
@@ -42,7 +42,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 17 May 2027.
+   This Internet-Draft will expire on 18 May 2027.
 
 Copyright Notice
 
@@ -2703,9 +2703,9 @@ Table of Contents
 Acknowledgments
 
    The authors thank Adrian Farrel, Alex Railean, Carl Wallace, Daniel
-   Van Geest, Eliot Lear, Joe Mandel, Lijun Liao, Mike StJohns, Sean
-   Turner, and Zaid AlBanna for their reviews and insightful feedback
-   which meaningfully improved this document.
+   Van Geest, Eliot Lear, Joe Mandel, Justin Young, Lijun Liao, Mike
+   StJohns, Sean Turner, and Zaid AlBanna for their reviews and
+   insightful feedback which meaningfully improved this document.
 
 Authors' Addresses
 
