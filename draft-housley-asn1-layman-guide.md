@@ -2006,11 +2006,11 @@ Constructed. The contents octets are the same as
 for the BER encoding, except that each occurrence is DER encoded,
 and there is an order, namely
 ascending lexicographic order of the DER encodings. Lexicographic
-comparison of two different DER encodings is done as
-follows: Logically pad the shorter DER encoding after the
+comparison of two different BER encodings is done as
+follows: Logically pad the shorter BER encoding after the
 last octet with dummy octets that are smaller in value than
-any normal octet. Scan the DER encodings from left to right
-until a difference is found. The smaller-valued DER encoding
+any normal octet. Scan the BER encodings from left to right
+until a difference is found. The smaller-valued BER encoding
 is the one with the smaller-valued octet at the point of
 difference.
 
@@ -2373,8 +2373,8 @@ RelativeDistinguishedName ::=
   SET SIZE (1..MAX) OF AttributeTypeAndValue
 
 AttributeTypeAndValue ::= SEQUENCE {
-   type AttributeType,
-   value AttributeValue }
+  type AttributeType,
+  value AttributeValue }
 
 AttributeType ::= OBJECT IDENTIFIER
 
