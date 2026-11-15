@@ -969,7 +969,7 @@ AlgorithmIdentifier ::= SEQUENCE {
   parameters ANY DEFINED BY algorithm OPTIONAL }
 ~~~
 
-Here the actual type of the `parameter` component depends on
+Here the actual type of the `parameters` component depends on
 the value of the `algorithm` component. The actual type would
 be defined in the registration of object identifier values
 for the `algorithm` component.
@@ -977,7 +977,7 @@ for the `algorithm` component.
 ###BER Encoding
 Same as the BER encoding of the actual value.
 
-Example: The BER encoding of the value of the `parameter`
+Example: The BER encoding of the value of the `parameters`
 component is the BER encoding of the value of the actual
 type as defined in the registration of object identifier
 values for the `algorithm` component.
@@ -1009,7 +1009,7 @@ AlgorithmIdentifier{ALGORITHM:AlgorithmSet} ::= SEQUENCE {
 Of course, the BER and DER encoding are unchanged.
 
 The `AlgorithmSet` makes it easier for implementors to determine all
-of the algorithm identifiers and the associated type for parameters, if
+of the algorithm identifiers and the associated type for `parameters`, if
 any are defined.
 
 ##BIT STRING  {#section-5-4}
@@ -1478,8 +1478,8 @@ OCTET STRING [(SIZE ({size | size1..size2}))]
 ~~~
 
 where `'size'`, `'size1'`, and `'size2'` are optional size constraints.
-In the `OCTET STRING SIZE (size)` form, the octet string must
-have `'size'` octets. In the `OCTET STRING SIZE (size1..size2)`
+In the `OCTET STRING (SIZE (size))` form, the octet string must
+have `'size'` octets. In the `OCTET STRING (SIZE (size1..size2))`
 form, the octet string must have between `'size1'` and `'size2'`
 octets. In the `OCTET STRING` form, the octet string can have
 any size.
@@ -1800,7 +1800,7 @@ occurrences in the collection, in order of occurrence.
 ##SET  {#section-5-16}
 
 The `SET` type denotes an unordered collection of one or more
-types.  The `SET` type is used in the `ESSSecurityLabel` type {{RFC5035}}.
+types.
 
 ASN.1 notation:
 
@@ -1828,7 +1828,7 @@ The types must have distinct tags. This requirement is
 typically satisfied with explicit or implicit tagging on
 some of the components.
 
-Example. The `SET` type is used in the `ESSSecurityLabel` type {{RFC5035}}.
+Example. The `SET` type is used for the `ESSSecurityLabel` type {{RFC5035}}.
 
 ~~~ asn.1
 ESSSecurityLabel ::= SET {
@@ -1952,9 +1952,9 @@ NOTE: As you can see from the `LessThanOrEqual()` function, `SET` elements in DE
 
 Links to examples of different implementations of the DER `SET` sort can be found in {{section-7}}.
 
-For `SET OF` (see below), this is unimportant. In many cases, all of the elements have the same tag, therefore DER encoding requires sorting of the encoded form of the set elements. When the tags are the same, the elements are effectively ordered according to their length and contents octets.
+For `SET OF` (see below), this is unimportant. All elements have the same tag and DER requires them to either all be in constructed form or all in primitive form, according to that tag. The elements are effectively ordered according to their contents octets.
 
-For `SET`, the elements will have distinct tags, and each will be in constructed or primitive form accordingly. Failing to ignore the `CONSTRUCTED` bit could therefore lead to ordering inversions, so in general it is best to make sure it is not present in the encoding of the tag.
+For `SET`, the elements will have distinct tags, and each will be in constructed or primitive form accordingly. Failing to ignore the `CONSTRUCTED` bit could therefore lead to ordering inversions, so in general it is best to make sure it is not present in the encoding of the tag on comparison.
 
 ##SET OF  {#section-5-17}
 
@@ -2003,8 +2003,9 @@ occurrences in the collection, in any order.
 
 ###DER Encoding
 Constructed. The contents octets are the same as
-for the BER encoding, except that there is an order
-of elements imposed on the DER encoding. Lexicographic
+for the BER encoding, except that each occurrence is DER encoded,
+and there is an order, namely
+ascending lexicographic order of the DER encodings. Lexicographic
 comparison of two different BER encodings is done as
 follows: Logically pad the shorter BER encoding after the
 last octet with dummy octets that are smaller in value than
@@ -2517,7 +2518,7 @@ Bits 8 and 7 have value "0" since `SEQUENCE` is in the
 universal class. Bit 6 has value "1" since the encoding is
 constructed. The length octets follow the short form, and
 the contents octets are the concatenation of the DER
-encodings of the attributeType and attributeValue
+encodings of the type and value
 components.
 
 ###RelativeDistinguishedName
